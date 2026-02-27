@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function Product() {
   const [openSection, setOpenSection] = useState<string | null>("logistics");
@@ -40,7 +41,11 @@ export default function Product() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
-          <div className="product-gallery flex flex-col-reverse lg:flex-row gap-4">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="product-gallery flex flex-col-reverse lg:flex-row gap-4">
             <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto lg:w-24 lg:h-[600px] scrollbar-hide py-1">
               <button className="flex-shrink-0 w-20 h-20 lg:w-full lg:h-24 rounded-lg border-2 border-primary overflow-hidden bg-white">
                 <img alt="Refrigerator Front View" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChIGtYQDwQt_jmwzYJSL3NfoZPZoYCmtnZuC2DZuJJhVYWs8c0I0K8UWzA74dj3sBzf4W3Z0-7CZQ-7cQv9TdSjcATl1Gl_glTDlQHg55i5csWfGpcQMHxibT49a02rC1A-DPfuoMDu3dZIuKOtT04I4SYbhS2cvUdI1qyh1ONo-Re_j_RxhjturC_UelBOvxfDJjRyXyxMIX7IVeQGEOrLHBBTZAPZAGHs79jNTtOPOu7LteYSjWXFO1YYcDm0dR9UA5V9pqUhXmf" />
@@ -66,8 +71,12 @@ export default function Product() {
                 <span className="material-icons-outlined">zoom_in</span>
               </div>
             </div>
-          </div>
-          <div className="mt-10 px-2 sm:px-0 sm:mt-16 lg:mt-0">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-10 px-2 sm:px-0 sm:mt-16 lg:mt-0">
             <div className="mb-6">
               <h1 className="text-3xl md:text-4xl font-display font-bold text-[#0b1121] dark:text-white tracking-tight mb-2">
                 FrostGuard™ Elite Series <br />Smart Refrigerator
@@ -174,10 +183,15 @@ export default function Product() {
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
         
-        <div className="mt-20 border-t border-gray-200 dark:border-gray-800 pt-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="mt-20 border-t border-gray-200 dark:border-gray-800 pt-10">
           <h2 className="text-2xl font-display font-bold text-[#0b1121] dark:text-white mb-8">Related Products from Catalogue 2026</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="group relative bg-white dark:bg-card-dark rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300">
@@ -241,7 +255,7 @@ export default function Product() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </main>
     </>
   );

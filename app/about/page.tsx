@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function About() {
@@ -14,19 +16,28 @@ export default function About() {
         <div className="absolute inset-0 bg-secondary/40 mix-blend-multiply"></div>
         <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-tr from-primary/80 to-transparent transform -skew-y-12 translate-y-20 origin-bottom-left mix-blend-overlay hidden lg:block"></div>
         <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-16 z-10">
-          <div className="mb-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mb-8">
             <h2 className="text-primary font-display font-bold text-5xl lg:text-7xl leading-tight mb-2">
               GLOBAL<br />REACH
             </h2>
             <p className="text-gray-300 font-light text-lg lg:text-xl max-w-md border-l-4 border-primary pl-4">
               Connecting markets through reliable logistics and premium sourcing.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
       <div className="w-full lg:w-7/12 xl:w-1/2 bg-background-light dark:bg-background-dark text-text-dark dark:text-text-light p-8 pt-24 lg:p-20 flex flex-col justify-center overflow-y-auto">
         <div className="max-w-2xl mx-auto">
-          <div className="mb-12">
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-12">
             <h3 className="text-primary font-display font-bold text-2xl uppercase tracking-widest mb-2">
               About
             </h3>
@@ -46,8 +57,13 @@ export default function About() {
               Wide Range Of Products: Household Appliances, Pottery, Fruits, Dates,
               Everyday Consumer Goods, And Various Merchandise.
             </p>
-          </div>
-          <div className="mb-10">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-10">
             <h3 className="text-secondary dark:text-white font-display font-bold text-xl uppercase mb-3">
               Our Mission
             </h3>
@@ -56,17 +72,27 @@ export default function About() {
               Carefully Selected Products, While Ensuring Smooth Logistics And
               High-quality Service.
             </p>
-          </div>
-          <div className="mb-12">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mb-12">
             <h3 className="text-secondary dark:text-white font-display font-bold text-xl uppercase mb-3">
               Our Values
             </h3>
             <p className="text-gray-600 dark:text-gray-400 font-body leading-relaxed">
               Quality • Reliability • Performance • Commitment • Innovation
             </p>
-          </div>
+          </motion.div>
           <div className="grid gap-8 py-8 border-t border-gray-200 dark:border-gray-800">
-            <div className="flex items-center space-x-6 group">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex items-center space-x-6 group">
               <div className="flex-shrink-0 w-16 h-16 rounded-full border-2 border-primary/30 flex items-center justify-center bg-white dark:bg-secondary-light shadow-sm group-hover:border-primary transition-colors">
                 <span className="material-icons text-primary text-3xl">
                   verified_user
@@ -80,8 +106,13 @@ export default function About() {
                   Uncompromising standards in every product.
                 </p>
               </div>
-            </div>
-            <div className="flex items-center space-x-6 group">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex items-center space-x-6 group">
               <div className="flex-shrink-0 w-16 h-16 rounded-full border-2 border-primary/30 flex items-center justify-center bg-white dark:bg-secondary-light shadow-sm group-hover:border-primary transition-colors">
                 <span className="material-icons text-primary text-3xl">
                   handshake
@@ -95,8 +126,13 @@ export default function About() {
                   Trust built through consistent delivery.
                 </p>
               </div>
-            </div>
-            <div className="flex items-center space-x-6 group">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex items-center space-x-6 group">
               <div className="flex-shrink-0 w-16 h-16 rounded-full border-2 border-primary/30 flex items-center justify-center bg-white dark:bg-secondary-light shadow-sm group-hover:border-primary transition-colors">
                 <span className="material-icons text-primary text-3xl">
                   public
@@ -110,7 +146,7 @@ export default function About() {
                   Extensive global connections.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
           <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
             <Link

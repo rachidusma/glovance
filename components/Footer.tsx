@@ -1,10 +1,17 @@
+"use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
     <footer className="bg-[#0b1221] border-t border-gray-800 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="material-icons text-primary text-3xl">public</span>
@@ -64,8 +71,13 @@ export default function Footer() {
               </button>
             </div>
           </div>
-        </div>
-        <div className="border-t border-gray-800 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center">
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="border-t border-gray-800 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
             © 2026 Glovance Trading. All rights reserved. Designed for Excellence.
           </p>
@@ -83,7 +95,7 @@ export default function Footer() {
               Reliability
             </span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

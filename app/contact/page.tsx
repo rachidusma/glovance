@@ -1,3 +1,6 @@
+"use client";
+import { motion } from "framer-motion";
+
 export default function Contact() {
   return (
     <>
@@ -17,18 +20,30 @@ export default function Contact() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A] via-[#0D1B2A]/90 to-transparent"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4">
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4">
             Let's Build <span className="text-primary">Bridges</span>
-          </h1>
-          <p className="mt-4 max-w-2xl text-xl text-gray-300">
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-4 max-w-2xl text-xl text-gray-300">
             Connecting Qatar to the world. Reach out to our team for import, export, and distribution inquiries.
-          </p>
+          </motion.p>
         </div>
       </div>
       <div className="relative -mt-12 z-10 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white dark:bg-card-dark rounded-xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
-            <div className="lg:w-2/5 bg-[#0D1B2A] text-white p-10 lg:p-12 relative overflow-hidden">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="lg:w-2/5 bg-[#0D1B2A] text-white p-10 lg:p-12 relative overflow-hidden">
               <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-primary rounded-full opacity-10 pointer-events-none"></div>
               <div className="absolute top-10 right-10 w-20 h-20 border-4 border-primary/20 rounded-full pointer-events-none"></div>
               <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
@@ -81,8 +96,12 @@ export default function Contact() {
                   </a>
                 </div>
               </div>
-            </div>
-            <div className="lg:w-3/5 p-10 lg:p-12 bg-white dark:bg-card-dark">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="lg:w-3/5 p-10 lg:p-12 bg-white dark:bg-card-dark">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send us a Message</h3>
               <form action="#" className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -126,17 +145,27 @@ export default function Contact() {
                   </button>
                 </div>
               </form>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
       <section className="py-10 bg-background-light dark:bg-background-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Our Location</h3>
             <div className="h-1 w-16 bg-primary mx-auto mt-2 rounded"></div>
-          </div>
-          <div className="w-full h-96 bg-gray-300 dark:bg-gray-800 rounded-xl overflow-hidden shadow-inner map-container relative">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="w-full h-96 bg-gray-300 dark:bg-gray-800 rounded-xl overflow-hidden shadow-inner map-container relative">
             <iframe allowFullScreen height="100%" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115408.0970347856!2d51.4429994625!3d25.285447299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45c534ffdce87f%3A0x4419e918974a67af!2sDoha%2C%20Qatar!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus" style={{ border: 0 }} width="100%">
             </iframe>
             <div className="absolute top-4 right-4 bg-white dark:bg-card-dark p-4 rounded shadow-lg max-w-xs hidden sm:block">
@@ -144,7 +173,7 @@ export default function Contact() {
               <p className="text-sm font-semibold text-gray-900 dark:text-white mt-1">Sun - Thu: 08:00 - 17:00</p>
               <p className="text-sm text-gray-600 dark:text-gray-400">Closed on Fridays</p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </>

@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function Products() {
@@ -19,7 +21,11 @@ export default function Products() {
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent z-0 skew-x-12 origin-top"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 md:py-24">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
               <div className="inline-block bg-primary/20 text-primary px-3 py-1 rounded text-sm font-bold tracking-wider mb-4 uppercase">
                 Import - Export - Distribution
               </div>
@@ -39,8 +45,12 @@ export default function Products() {
                   Our Mission
                 </button>
               </div>
-            </div>
-            <div className="relative hidden md:block h-[500px]">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative hidden md:block h-[500px]">
               <div className="absolute top-0 right-0 w-3/4 h-3/4 overflow-hidden rounded-bl-[80px] border-4 border-[#112240] shadow-2xl z-10">
                 <img alt="Logistics and shipping" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsz4v-WzAzxabfJukcL7CJAU2CN5eVTbGzXxT3s58g2VJIPDeRqlpkUPWjn52uRe5NYRWEbD56uY0r8__cR12Fi-lpDJhvhWrblv8B__EAvgMMMoamLhSKH_9OnVI5x3L0oOT9wJnuLrZ0hPG8T1dcc0p4fGO7Sht8yyM5c9k5BeoinYRMs9C7IpkcEz_02cX8WSCEqNabOKiWQXS11gqC7V4fXiRGRPxzhxW8QmjfiPCp4LvqbHUuSt_pfhFRYjXyhmD15aS12ItI" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f]/80 to-transparent"></div>
@@ -56,7 +66,7 @@ export default function Products() {
                 </div>
               </div>
               <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-primary/20 blur-2xl rounded-full z-0"></div>
-            </div>
+            </motion.div>
           </div>
         </div>
         <div className="absolute bottom-0 left-0 w-full h-16 bg-background-light dark:bg-background-dark" style={{ clipPath: "polygon(100% 100%, 0 100%, 100% 0)" }}></div>
@@ -129,7 +139,12 @@ export default function Products() {
               <div className="text-sm text-gray-500 dark:text-gray-400">Showing 4 major categories</div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <article className="group relative bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
+              <motion.article 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="group relative bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
                 <div className="relative h-64 overflow-hidden">
                   <div className="absolute top-0 right-0 z-10 w-24 h-full bg-primary/90 skew-x-[-20deg] translate-x-32 group-hover:translate-x-12 transition-transform duration-500 opacity-80"></div>
                   <img alt="Household Appliances" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxVRllRF0kNVkYGzdDl32VE_adFsZZjUyywwT3Uk-cDYuID2jen3X0bfWNQYaToNSE34Jzy5_SLjKS1WeRqu_QS2DN-sVc2ssgDzA6UTSAMnEiwZz6r8neZ8AOWRZ704VP8hWw5YFZwLc6DhCP-zPiLU7jc2veASl66F2aPMXksiRQfPnAL-rWCHypoKgeb8dHPU9fUbf7m42SwoYDO0KT5hkZRRkl_luqUcnNVdPZuTQCuatVduuN-uN8cWmuwcg5JCVRL5SnS3Tt" />
@@ -148,8 +163,13 @@ export default function Products() {
                     </Link>
                   </div>
                 </div>
-              </article>
-              <article className="group relative bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
+              </motion.article>
+              <motion.article 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="group relative bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
                 <div className="relative h-64 overflow-hidden">
                   <div className="absolute top-0 right-0 z-10 w-24 h-full bg-primary/90 skew-x-[-20deg] translate-x-32 group-hover:translate-x-12 transition-transform duration-500 opacity-80"></div>
                   <img alt="Premium Dates" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXiu53qLQtwuKU6122tVo-ManGTy_YqNeFtCfQ3nfAHR8kkQpeswXF4hq57oGEEgphvlNryI8DYAAz_CBu_W_aYo4zENGgzpaW12wQ7eFdY1aTSW1VeQk1USN6jQqA1tJQ_EqVbhl8P6Wcs4pIzdtWjxKMtjA0JT0fHavnntbtjYPnrCZH1tAuHaaELWmn6pdJXP97qg8l3DyMPBakkLaAFi5b45yZMa3msyMXLo7GABpFr9di74SYT982ffHYHWmjC-MXguncNUG4" />
@@ -168,8 +188,13 @@ export default function Products() {
                     </button>
                   </div>
                 </div>
-              </article>
-              <article className="group relative bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
+              </motion.article>
+              <motion.article 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="group relative bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
                 <div className="relative h-64 overflow-hidden">
                   <div className="absolute top-0 right-0 z-10 w-24 h-full bg-primary/90 skew-x-[-20deg] translate-x-32 group-hover:translate-x-12 transition-transform duration-500 opacity-80"></div>
                   <img alt="Pottery &amp; Ceramics" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4-TwPP08Z-8t_tpfeq0Qc-ixafcHxQl1OsEyT6p3_MgrmmUbE3Kmen-Cyni9EltG3eAlrbqqt14kI_6dMghDd2QbSEVbGntH4rWTu6wehPdS3YW3QtNFWvH8bl_djdNltcd-a75NHzoxUAPdeTyLBrXRSpMvPMZ9nNWJ1F3Qam96GyIgkEKXkdSTA0b7QGvzGvD7ISowZdImGm9zJdv04eDVjAjiwyAGjZzkNWdbperTaKsCCcFptFAxQ9OKI4ePoE12ZNa3ZL-C_" />
@@ -188,8 +213,13 @@ export default function Products() {
                     </button>
                   </div>
                 </div>
-              </article>
-              <article className="group relative bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
+              </motion.article>
+              <motion.article 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="group relative bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
                 <div className="relative h-64 overflow-hidden">
                   <div className="absolute top-0 right-0 z-10 w-24 h-full bg-primary/90 skew-x-[-20deg] translate-x-32 group-hover:translate-x-12 transition-transform duration-500 opacity-80"></div>
                   <img alt="Fresh Fruits" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDElw14nR5pMvEmqElQqDACXEGT8ceFuoPs7b-62VMl7Ii4udM5AlNpuMSxDR0Qs4cLankOvBnHphBVTGLZmOwbPKLwd18DRUaQcekx9hsRDbqqIEV6QvMhezYExrBWrpv72GwMQliSgLB2Uro3kSduNOz3jHyUF7CkK4M4_aThjLMsm-wqjHqyeDMwQ496wBRKhi4x9B4Svm152QmxXxemhqqGN6Ot_dha-_jlYw2ST01Ws8BretseyNorbSJyy0kekfxQkhAojmvI" />
@@ -208,7 +238,7 @@ export default function Products() {
                     </button>
                   </div>
                 </div>
-              </article>
+              </motion.article>
             </div>
             <div className="mt-12 text-center">
               <button className="bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-[#0a192f] font-bold py-3 px-10 rounded transition-colors uppercase tracking-widest text-sm">
@@ -221,7 +251,12 @@ export default function Products() {
 
       <section className="bg-white dark:bg-card-dark py-16 border-t border-gray-200 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid md:grid-cols-3 gap-8 text-center">
             <div className="p-6">
               <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-4 text-primary">
                 <span className="material-icons-outlined text-4xl">verified_user</span>
@@ -243,7 +278,7 @@ export default function Products() {
               <h3 className="text-xl font-display font-bold text-gray-800 dark:text-white uppercase mb-2">Réseau</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">A vast global network connecting Qatar to markets worldwide for seamless trade.</p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </>
