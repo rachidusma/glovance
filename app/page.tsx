@@ -6,12 +6,16 @@ export default function Home() {
     <>
       <section className="relative h-screen flex items-center justify-center overflow-hidden" id="home">
         <div className="absolute inset-0 z-0">
-          <img
-            alt="Global logistics container ship at night"
+          <video
+            autoPlay
             className="w-full h-full object-cover"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ2XjVKkZ4H-yuEwYJ2hvRHB1dOd5YelsBesOuHEzcd26GJb7esfk4IlxzPcbrFx7Rc6cddU4wCTCjTn-GFw4jUlNu1_fvfKAgxek2rV6RE1wDHQQM9o8DeEKPl88F8M0rMKYo_2j7w5ofJISx0wHmCKtyaNX1_VnekGjGVk08YCnc-8P8TEhIpLimT-LXe8R_ZUAWRtGS8hUOLllM0XE4ANzpp8e384_Q8DWo2HZt9e9m--H14LT6NbuJxDTMztYZlDlPvdVTaNvM"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 via-secondary/70 to-transparent dark:from-background-dark/95 dark:via-background-dark/80 dark:to-transparent/50"></div>
+            loop
+            muted
+            playsInline
+          >
+            <source src="/istockphoto-2194813689-640_adpp_is.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-r from-secondary/50 via-secondary/30 to-transparent dark:from-background-dark/70 dark:via-background-dark/40 dark:to-transparent/20"></div>
           <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/40 to-transparent transform skew-x-12 translate-x-20 hidden lg:block"></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
