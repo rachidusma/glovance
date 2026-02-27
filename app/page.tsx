@@ -1,65 +1,486 @@
+import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <section className="relative h-screen flex items-center justify-center overflow-hidden" id="home">
+        <div className="absolute inset-0 z-0">
+          <img
+            alt="Global logistics container ship at night"
+            className="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ2XjVKkZ4H-yuEwYJ2hvRHB1dOd5YelsBesOuHEzcd26GJb7esfk4IlxzPcbrFx7Rc6cddU4wCTCjTn-GFw4jUlNu1_fvfKAgxek2rV6RE1wDHQQM9o8DeEKPl88F8M0rMKYo_2j7w5ofJISx0wHmCKtyaNX1_VnekGjGVk08YCnc-8P8TEhIpLimT-LXe8R_ZUAWRtGS8hUOLllM0XE4ANzpp8e384_Q8DWo2HZt9e9m--H14LT6NbuJxDTMztYZlDlPvdVTaNvM"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 via-secondary/70 to-transparent dark:from-background-dark/95 dark:via-background-dark/80 dark:to-transparent/50"></div>
+          <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/40 to-transparent transform skew-x-12 translate-x-20 hidden lg:block"></div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <div className="inline-block border-l-4 border-primary pl-4">
+                <span className="text-primary font-bold tracking-widest uppercase text-sm">
+                  Import - Export - Distribution
+                </span>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-tight">
+                CONNECTING <br />
+                <span className="text-primary">QATAR</span> TO THE <br />
+                WORLD
+              </h1>
+              <p className="text-gray-300 text-lg max-w-lg leading-relaxed">
+                Glovance Trading is an international company based in Qatar, specializing in the import and export of a wide range of products: Household Appliances, Pottery, Fruits, Dates, and Consumer Goods.
+              </p>
+              <div className="flex space-x-4 pt-4">
+                <Link
+                  className="bg-primary text-secondary hover:bg-white hover:text-secondary px-8 py-4 rounded font-bold transition-all uppercase tracking-wider shadow-[0_0_20px_rgba(163,209,49,0.4)] flex items-center"
+                  href="/products"
+                >
+                  View Catalogue 2026
+                  <span className="material-icons-outlined ml-2">arrow_forward</span>
+                </Link>
+                <Link
+                  className="border border-white text-white hover:bg-white hover:text-secondary px-8 py-4 rounded font-bold transition-all uppercase tracking-wider flex items-center"
+                  href="/contact"
+                >
+                  Contact Us
+                </Link>
+              </div>
+            </div>
+            <div className="hidden lg:block relative h-[600px]">
+              <div
+                className="absolute top-10 right-10 w-64 h-80 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-20 transform -rotate-3 hover:rotate-0 transition-transform duration-500"
+                style={{
+                  backgroundImage:
+                    "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDlL5rcs4HktBkn8Yr64IEaJHb7bHpBPdEM8gkv9zKMojhMs2w-JYUHmYPmFLPsuRmvaxB78XuNdEm8DYb325KNH5MP54TP4NVkH0XislMTlpWlUIGPJUOK8s9we7pvDeeGmQGh6VgwhgUFDuaOm287Kb2Vee4gfTBURSJ0Loiv2XwRe9WasPyXaX8FlkgzsPfgWuMfTpElPsF4oiebtGSxt4q3syepRBHzfORwW0E4_CkPvOVUyqmlSQZ5xn4Fu2wBHFsSMvxpOfBE')",
+                }}
+              >
+                <div className="absolute bottom-0 left-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
+                  Logistics
+                </div>
+              </div>
+              <div
+                className="absolute top-40 left-10 w-64 h-80 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-10 transform rotate-3 hover:rotate-0 transition-transform duration-500"
+                style={{
+                  backgroundImage:
+                    "url('https://lh3.googleusercontent.com/aida-public/AB6AXuChwd97runEygyBteJHd8I2MA48-xAkqn6794WF37gGwFmxrhPkyoLI-xfOmCgsaWfVKrsnX9Oc41_qAV1_V3lLdRRtEXwQXpjHwONY2-R2dI7zLVdcQGuKN1M3w2tI_4JdzNozFmJFOqODd-vA0mX1Zv-t_jCUk_vKw_fSLwLy7zy7iBJBHzbkJsIAMvzpKTIDwvVl7W1_-z5g0X57gFD_t4qQEndgEhcJljG6wfzfHiadO7ZZmXmCOdON3OyGjKi-ITAqjPxIoz29')",
+                }}
+              >
+                <div className="absolute bottom-0 left-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
+                  Fresh Produce
+                </div>
+              </div>
+              <div
+                className="absolute bottom-20 right-20 w-48 h-48 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-30 transform hover:scale-105 transition-transform duration-500"
+                style={{
+                  backgroundImage:
+                    "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCgJX4RK0Op-nZJX_HCWWxSFLrnmSjaPlHJt1EoWBREtnwrDT7KFjjCxc-8MkXcj09lL6Ds3y8ArzmNxUWmsD2ElxTQEEW3cAdrTuI9dcn_JcPriVPUP6FKv-f3Cn8jwKHmjerf9G9m-Lm4vQ241lMVfdifOznTvW5A0a35CtgntukflBM3bsUTwMAOdR5SA9vgcCy53fAkOROqoy_6jdgrcPsnws3U-2pI6hr4OWn6P_-6Zr4cWFYL3_Zs-MI97titjuGcETfaPmt1')",
+                }}
+              >
+                <div className="absolute bottom-0 left-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
+                  Appliances
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+          <span className="text-white text-xs uppercase tracking-widest mb-2">
+            Scroll Down
+          </span>
+          <span className="material-icons-outlined text-primary">
+            keyboard_arrow_down
+          </span>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white dark:bg-background-dark relative" id="about">
+        <div className="absolute top-0 left-0 w-2 h-full bg-primary hidden md:block"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div>
+              <h2 className="text-primary font-bold text-xl uppercase mb-2 tracking-widest">
+                About
+              </h2>
+              <h3 className="text-4xl md:text-5xl font-display font-bold text-secondary dark:text-white uppercase mb-8 border-b-4 border-secondary dark:border-primary pb-4 inline-block">
+                Glovance Trading
+              </h3>
+              <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
+                <p className="text-xl font-medium mb-6">
+                  Connecting Qatar To The World. Glovance Trading Is An
+                  International Company Based In Qatar.
+                </p>
+                <p className="mb-6">
+                  We specialize in the import and export of a wide range of
+                  products, catering to the dynamic needs of the Qatari market
+                  and beyond. From cutting-edge household appliances to
+                  traditional pottery, fresh fruits, premium dates, and
+                  essential everyday consumer goods.
+                </p>
+              </div>
+              <div className="mt-12 space-y-8">
+                <div>
+                  <h4 className="text-2xl font-display font-bold text-secondary dark:text-white uppercase mb-3 flex items-center">
+                    <span className="bg-primary text-secondary p-1 mr-3 rounded">
+                      <span className="material-icons-outlined text-xl">
+                        flag
+                      </span>
+                    </span>
+                    Our Mission
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-400 pl-11">
+                    To build strong bridges between global markets and provide
+                    reliable, carefully selected products, while ensuring smooth
+                    logistics and high-quality service.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-2xl font-display font-bold text-secondary dark:text-white uppercase mb-3 flex items-center">
+                    <span className="bg-primary text-secondary p-1 mr-3 rounded">
+                      <span className="material-icons-outlined text-xl">
+                        diamond
+                      </span>
+                    </span>
+                    Our Values
+                  </h4>
+                  <ul className="pl-11 grid grid-cols-2 gap-2 text-gray-600 dark:text-gray-400">
+                    <li className="flex items-center">
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
+                      Quality
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
+                      Reliability
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
+                      Performance
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
+                      Commitment
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
+                      Innovation
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="relative flex flex-col justify-between">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <img
+                  alt="Cargo shipping container"
+                  className="rounded-lg shadow-lg h-64 w-full object-cover"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6plu6OzHvQqjEs1WhdscdwQZnc5h1Jse72AVZcQw2M9pKvDJ8JUUzaXZmwAZuOZmpX-lYbqPvtGoGGmzhkBQN0A0ya1FAmBS44dVcxxDI62AB5Rc-1MG23YIULDCqq6t0uGfJUhs2RttMYVxAmEd303tdckTF5L1PMv_xNcodolyFQa9HzBQO_w_OvHdIsaN8PFH7BvqUqaxvlAZUiJqjdsuWPsgWjr0hJ9phlUMCsu3X1iaPOUKEuf2TNGY7Ykz5UpRbYkgBV9NC"
+                />
+                <img
+                  alt="Dates and fruits"
+                  className="rounded-lg shadow-lg h-64 w-full object-cover mt-8 md:mt-0"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLl-OXz1aQIbyH2vyi8zqMZF3M5HR9vXm31J2_fh64qXU59U_6JdUgLorWj8sq9mknNtbbiF2UZyFFxmLGMbVL6XcmKmMsyRsyyyTEuysJUF82myftgxZCzfz6qcV5hHIIPDE-2ydyQHRUsNPoiwewPNLzfNRB9NXUwejKii0il5Ev8y0IDzu06g1Iix779yauVwRhL4y8uXxVxdfPKBOyNjlaUGwh21ma84ZWM0ts29kZAdftSWPc5xMF7UKd_RjByegSX365HKGA"
+                />
+              </div>
+              <div className="bg-secondary dark:bg-accent-blue rounded-xl p-8 shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary opacity-10 rounded-full blur-2xl"></div>
+                <div className="space-y-6 relative z-10">
+                  <div className="flex items-center group">
+                    <span className="material-icons-outlined text-primary text-4xl mr-4 group-hover:scale-110 transition-transform">
+                      verified_user
+                    </span>
+                    <span className="text-2xl font-bold text-white uppercase tracking-wider">
+                      Qualité
+                    </span>
+                  </div>
+                  <div className="w-full h-px bg-white/10"></div>
+                  <div className="flex items-center group">
+                    <span className="material-icons-outlined text-primary text-4xl mr-4 group-hover:scale-110 transition-transform">
+                      handshake
+                    </span>
+                    <span className="text-2xl font-bold text-white uppercase tracking-wider">
+                      Fiabilité
+                    </span>
+                  </div>
+                  <div className="w-full h-px bg-white/10"></div>
+                  <div className="flex items-center group">
+                    <span className="material-icons-outlined text-primary text-4xl mr-4 group-hover:scale-110 transition-transform">
+                      public
+                    </span>
+                    <span className="text-2xl font-bold text-white uppercase tracking-wider">
+                      Réseau
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-gray-100 dark:bg-[#0f1826] clip-diagonal relative" id="products">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span className="text-primary font-bold text-sm tracking-[0.3em] uppercase block mb-3">
+              What we trade
+            </span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-secondary dark:text-white uppercase">
+              Catalogue <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">2026</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer">
+              <img
+                alt="Household Appliances"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnLhZ0p9PZjcB67aUc3C2UmOYyfhtH5eR61T1ag16PhG2Xhq3aW5czsJ1QT6x0jBVM4K3aa_v5b30MxL_BQl3i89pRPFduu13V7cJv7VUF4AtppWYh6MloNaOc93hUaBHyFQYeid-unClugnW3z1V6P6e8MWrx30FopeM9PAsMfPFQDh6AIrfxAmEQ87Wsdq18dhso7V42kx1_4NKfvzCWpGMMRvdzxeMBY_L-l8ZHznxrk10_qv8v3DGFj7ZLsclmMA9fBnaDcAUR"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+              <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">
+                  Appliances
+                </h3>
+                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  High-end household electronics and modern home solutions.
+                </p>
+                <span className="mt-4 inline-block text-primary text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+                  Explore →
+                </span>
+              </div>
+            </div>
+            <div className="group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer mt-0 lg:mt-12">
+              <img
+                alt="Fresh Fruits and Produce"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa8HFBLbEvFbTMKyUaMLS01Z-XSN0APxIvUgY174rQt9gW1Zs_BrUPeeFDb8abGb62bdo3bUiC_KyuRpXM_zLbtcWCzqJ7B_1VoJtwtqPpAAfdRxJW-WcDKVu92R7tq6WD88OcM0Vcw_oEJ0n4XOtSAR51rdXBxndIeC7J_bD_L3BWHq5vsy3pLEwgD_jpoIj4EN3SfTqgcF_tFkqqtKSh0GlZ5tNG3uSLWWzvHa5HZrXeAZp_7xHZoQOTgP48zc_KuA9dmcyKw3CP"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+              <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">
+                  Fruits &amp; Dates
+                </h3>
+                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Premium quality dates and seasonal fresh fruits imported
+                  globally.
+                </p>
+                <span className="mt-4 inline-block text-primary text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+                  Explore →
+                </span>
+              </div>
+            </div>
+            <div className="group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer">
+              <img
+                alt="Pottery and Ceramics"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1WktykDWR19nYDdSIbC38DBVsA4ujTxCQEHTtNj_08lzpKQHTj95zQemorWisTB_UgLCY0TeCzaMQj5A2nG_DqeJDVx0-yQN2fUeZgbbuKv-TqW-sAlAn95dzd_nYcbLQlEfOtHHqjwPRHp1lLsa9mhshadQ2pgtWYiZxGysyCXEHCt6AWE_QWEaMdOFmJuXjceOpD9ppvqbJRzQaFwjm9ApIRn5Jl_trEAwDn3G3tOs1qIePWirlcn4YZKbHL2It7J9iEv0nUxgm"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+              <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">
+                  Pottery
+                </h3>
+                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Artisanal and industrial pottery for decor and utility.
+                </p>
+                <span className="mt-4 inline-block text-primary text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+                  Explore →
+                </span>
+              </div>
+            </div>
+            <div className="group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer mt-0 lg:mt-12">
+              <img
+                alt="Consumer Goods"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfGNumi2HpldeG_aqbxhTJgheWbPVNWdpsWOHMAGoqsQFDKkNaMnAmngbjnzvvthcfyr63lJH5IS1gdFqf-NypfHDiQJFyd4yzILTuG9DCXS5VMvlLF83aigtX0GdrCdcnK8m68VOKPyl8V414AhgKCW0B8pYJZ6q0hkpx9Zi4PjNDkFDPg5Kk8hB7C4bzFvOzWD7d2EsBln7KpOFWFsYgfkf4itO3uNGQISWqsP9HDc39xoTlKgrp8WS5h22SXQYlClHkOPi3Uv64"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+              <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">
+                  Consumer Goods
+                </h3>
+                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Everyday essentials and various merchandise for retail.
+                </p>
+                <span className="mt-4 inline-block text-primary text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+                  Explore →
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="text-center mt-12">
+            <Link
+              className="inline-block border-2 border-secondary dark:border-white text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-secondary px-10 py-3 rounded-full font-bold uppercase tracking-wider transition-all duration-300"
+              href="#"
+            >
+              Download Full PDF
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-secondary relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage:
+              "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzksWcJYktHse9f4qc1YfMKnhm9KsA4Sx6G0_u6t6OU4IoiRLwoBlOgUK_SGM8dPs0Fev0cTryoUO3wgUnXPooNlSePB26RklB5pFF0-dmyDQj8u8yvg8WnHDR6C7fkETdOHiS7-pDnqCMgCiAGsVU3x4Gpt0eJwUOwxICa8hQDabQyKijq0W-AYC6j_cfl5hqORfdGoEQsBT59w1nRzQ_nXFxtCHLJcIS5nn9FTsOUVEt-ymNkcH0diRQUADJm56BNSYUgmLywBnZ')",
+          }}
+        ></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="p-6">
+              <span className="block text-5xl font-display font-bold text-white mb-2">
+                15+
+              </span>
+              <span className="text-primary text-sm font-bold uppercase tracking-widest">
+                Countries
+              </span>
+            </div>
+            <div className="p-6">
+              <span className="block text-5xl font-display font-bold text-white mb-2">
+                500+
+              </span>
+              <span className="text-primary text-sm font-bold uppercase tracking-widest">
+                Products
+              </span>
+            </div>
+            <div className="p-6">
+              <span className="block text-5xl font-display font-bold text-white mb-2">
+                24/7
+              </span>
+              <span className="text-primary text-sm font-bold uppercase tracking-widest">
+                Support
+              </span>
+            </div>
+            <div className="p-6">
+              <span className="block text-5xl font-display font-bold text-white mb-2">
+                100%
+              </span>
+              <span className="text-primary text-sm font-bold uppercase tracking-widest">
+                Reliability
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-background-light dark:bg-background-dark" id="contact">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white dark:bg-[#151f2e] rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+            <div className="w-full md:w-1/2 p-10 md:p-14">
+              <h2 className="text-3xl font-display font-bold text-secondary dark:text-white mb-6 uppercase">
+                Get In Touch
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400 mb-8">
+                Interested in partnership or have questions about our products?
+                Fill out the form below.
+              </p>
+              <form className="space-y-6">
+                <div>
+                  <label
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                    htmlFor="name"
+                  >
+                    Full Name
+                  </label>
+                  <input
+                    className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-colors dark:text-white"
+                    id="name"
+                    type="text"
+                  />
+                </div>
+                <div>
+                  <label
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                    htmlFor="email"
+                  >
+                    Email Address
+                  </label>
+                  <input
+                    className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-colors dark:text-white"
+                    id="email"
+                    type="email"
+                  />
+                </div>
+                <div>
+                  <label
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                    htmlFor="message"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-colors dark:text-white"
+                    id="message"
+                    rows={4}
+                  ></textarea>
+                </div>
+                <button
+                  className="w-full bg-secondary dark:bg-primary text-white dark:text-secondary py-4 rounded-lg font-bold uppercase tracking-wider hover:opacity-90 transition-opacity"
+                  type="submit"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+            <div className="w-full md:w-1/2 bg-secondary text-white p-10 md:p-14 flex flex-col justify-between relative overflow-hidden">
+              <div className="relative z-10">
+                <h3 className="text-2xl font-display font-bold mb-8 uppercase">
+                  Headquarters
+                </h3>
+                <div className="space-y-6">
+                  <div className="flex items-start">
+                    <span className="material-icons-outlined text-primary mr-4 mt-1">
+                      location_on
+                    </span>
+                    <p className="text-gray-300">
+                      Doha, Qatar<br />
+                      Al Dafna Financial District<br />
+                      PO Box 12345
+                    </p>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="material-icons-outlined text-primary mr-4">
+                      phone
+                    </span>
+                    <p className="text-gray-300">+974 4400 1234</p>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="material-icons-outlined text-primary mr-4">
+                      email
+                    </span>
+                    <p className="text-gray-300">info@glovancetrading.com</p>
+                  </div>
+                </div>
+              </div>
+              <div className="relative z-10 mt-12">
+                <p className="text-primary font-bold uppercase tracking-widest text-sm mb-4">
+                  Follow Us
+                </p>
+                <div className="flex space-x-4">
+                  <a
+                    className="w-10 h-10 rounded-full border border-gray-500 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-secondary transition-all"
+                    href="#"
+                  >
+                    <span className="font-display font-bold">In</span>
+                  </a>
+                  <a
+                    className="w-10 h-10 rounded-full border border-gray-500 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-secondary transition-all"
+                    href="#"
+                  >
+                    <span className="font-display font-bold">X</span>
+                  </a>
+                  <a
+                    className="w-10 h-10 rounded-full border border-gray-500 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-secondary transition-all"
+                    href="#"
+                  >
+                    <span className="font-display font-bold">Fb</span>
+                  </a>
+                </div>
+              </div>
+              <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-primary rounded-full opacity-10 z-0 pointer-events-none"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

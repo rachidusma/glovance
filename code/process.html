@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Trading Process - Glovance</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#BDD630", // Lime green from the logo
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0B1426", // Deep navy from the background
+                        "surface-dark": "#162036",
+                        "text-dark": "#E2E8F0",
+                    },
+                    fontFamily: {
+                        display: ["'Exo 2'", "sans-serif"],
+                        body: ["'Roboto'", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                    backgroundImage: {
+                        'map-pattern': "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')",
+                    }
+                },
+            },
+        };
+    </script>
+<style>.process-line {
+            transition: width 1.5s ease-out;
+        }
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        .step-icon-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 9999px;
+            border: 2px solid #BDD630;
+            opacity: 0;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-body antialiased transition-colors duration-300">
+<nav class="w-full bg-white dark:bg-background-dark border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-20 items-center">
+<div class="flex items-center space-x-3">
+<div class="relative w-10 h-10 flex items-center justify-center bg-background-dark rounded-full border-2 border-primary overflow-hidden">
+<span class="material-icons-outlined text-white text-xl">public</span>
+</div>
+<div class="flex flex-col">
+<span class="font-display font-bold text-xl text-gray-900 dark:text-white tracking-wide">GLOVANCE</span>
+<span class="font-display text-xs text-primary tracking-[0.2em] uppercase">Trading</span>
+</div>
+</div>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium uppercase tracking-wider" href="#">Home</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium uppercase tracking-wider" href="#">About</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 text-sm uppercase tracking-wider" href="#">Process</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium uppercase tracking-wider" href="#">Products</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium uppercase tracking-wider" href="#">Contact</a>
+</div>
+<div class="md:hidden flex items-center">
+<button class="text-gray-600 dark:text-white hover:text-primary focus:outline-none">
+<span class="material-icons-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="relative overflow-hidden min-h-screen">
+<div class="absolute inset-0 z-0 opacity-10 dark:opacity-20 pointer-events-none bg-map-pattern bg-cover bg-center grayscale mix-blend-multiply dark:mix-blend-overlay"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-background-light dark:to-background-dark z-0 h-full w-full"></div>
+<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+<div class="text-center mb-20">
+<h2 class="text-primary font-display font-bold tracking-widest uppercase mb-3">The Journey of a Product</h2>
+<h1 class="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white mb-6">Our Trading <span class="text-primary">Process</span></h1>
+<p class="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400 font-light">
+                    From sourcing the finest goods in Qatar to delivering them globally, we ensure transparency, quality, and reliability at every single step.
+                </p>
+<div class="w-24 h-1 bg-primary mx-auto mt-8 rounded-full"></div>
+</div>
+<div class="relative">
+<div class="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 -translate-y-1/2 rounded-full overflow-hidden">
+<div class="process-line w-full h-full bg-gradient-to-r from-primary/20 via-primary to-primary/20 animate-pulse"></div>
+</div>
+<div class="lg:hidden absolute top-0 left-8 h-full w-1 bg-gray-200 dark:bg-gray-700 -translate-x-1/2 rounded-full"></div>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8 relative">
+<div class="step-card group relative flex lg:flex-col items-center lg:items-center text-left lg:text-center">
+<div class="flex-shrink-0 relative z-10 mb-0 lg:mb-6 mr-6 lg:mr-0">
+<div class="step-icon-wrapper w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white dark:bg-surface-dark border-4 border-primary flex items-center justify-center shadow-lg group-hover:bg-primary transition-colors duration-300">
+<span class="material-icons-outlined text-3xl lg:text-4xl text-gray-800 dark:text-white group-hover:text-white">handshake</span>
+</div>
+<div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 flex items-center justify-center font-bold text-sm shadow-md border-2 border-primary">01</div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-t-4 border-primary w-full lg:min-h-[220px]">
+<h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Sourcing</h3>
+<p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                We leverage our deep local network to identify premium suppliers. We select only the finest dates, pottery, and household goods that meet international standards.
+                            </p>
+</div>
+</div>
+<div class="step-card group relative flex lg:flex-col items-center lg:items-center text-left lg:text-center lg:mt-16">
+<div class="flex-shrink-0 relative z-10 mb-0 lg:mb-6 mr-6 lg:mr-0">
+<div class="step-icon-wrapper w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white dark:bg-surface-dark border-4 border-primary flex items-center justify-center shadow-lg group-hover:bg-primary transition-colors duration-300">
+<span class="material-icons-outlined text-3xl lg:text-4xl text-gray-800 dark:text-white group-hover:text-white">verified_user</span>
+</div>
+<div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 flex items-center justify-center font-bold text-sm shadow-md border-2 border-primary">02</div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-t-4 border-primary w-full lg:min-h-[220px]">
+<h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Quality Control</h3>
+<p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+<strong>Qualité</strong> is our priority. Every batch undergoes rigorous inspection. We verify authenticity, durability, and compliance before any item is packed.
+                            </p>
+</div>
+</div>
+<div class="step-card group relative flex lg:flex-col items-center lg:items-center text-left lg:text-center">
+<div class="flex-shrink-0 relative z-10 mb-0 lg:mb-6 mr-6 lg:mr-0">
+<div class="step-icon-wrapper w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white dark:bg-surface-dark border-4 border-primary flex items-center justify-center shadow-lg group-hover:bg-primary transition-colors duration-300">
+<span class="material-icons-outlined text-3xl lg:text-4xl text-gray-800 dark:text-white group-hover:text-white">local_shipping</span>
+</div>
+<div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 flex items-center justify-center font-bold text-sm shadow-md border-2 border-primary">03</div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-t-4 border-primary w-full lg:min-h-[220px]">
+<h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Logistics</h3>
+<p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                Seamless transport via air, land, or sea. Our logistics team handles customs, documentation, and secure packaging to ensure safe transit globally.
+                            </p>
+</div>
+</div>
+<div class="step-card group relative flex lg:flex-col items-center lg:items-center text-left lg:text-center lg:mt-16">
+<div class="flex-shrink-0 relative z-10 mb-0 lg:mb-6 mr-6 lg:mr-0">
+<div class="step-icon-wrapper w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white dark:bg-surface-dark border-4 border-primary flex items-center justify-center shadow-lg group-hover:bg-primary transition-colors duration-300">
+<span class="material-icons-outlined text-3xl lg:text-4xl text-gray-800 dark:text-white group-hover:text-white">public</span>
+</div>
+<div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 flex items-center justify-center font-bold text-sm shadow-md border-2 border-primary">04</div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl shadow-md border-t-4 border-primary w-full lg:min-h-[220px]">
+<h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">Distribution</h3>
+<p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+<strong>Fiabilité</strong> in delivery. Products reach global markets and retailers on time. We bridge the gap between Qatari heritage and international consumers.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-24 text-center">
+<div class="inline-flex items-center p-1 rounded-full bg-gray-100 dark:bg-surface-dark border border-gray-200 dark:border-gray-700">
+<span class="px-4 py-2 text-sm text-gray-600 dark:text-gray-300">Ready to partner with us?</span>
+<a class="px-6 py-2 bg-primary text-black font-bold rounded-full hover:bg-opacity-90 transition transform hover:-translate-y-0.5 shadow-lg flex items-center" href="#">
+                        Contact Us <span class="material-icons-outlined text-sm ml-2">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<div class="absolute bottom-0 right-0 w-64 h-64 bg-primary opacity-5 rounded-full blur-3xl transform translate-y-1/2 translate-x-1/2"></div>
+<div class="absolute top-20 left-0 w-96 h-96 bg-blue-900 opacity-10 rounded-full blur-3xl transform -translate-x-1/2"></div>
+</main>
+<footer class="bg-white dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-center md:text-left">
+<h4 class="font-display font-bold text-lg text-gray-900 dark:text-white uppercase tracking-wider">Glovance Trading</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Import - Export - Distribution</p>
+</div>
+<div class="flex space-x-6">
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-icons-outlined">email</span></a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-icons-outlined">phone</span></a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-icons-outlined">location_on</span></a>
+</div>
+<div class="text-sm text-gray-500 dark:text-gray-400">
+                © 2026 Glovance Trading. All rights reserved.
+            </div>
+</div>
+</footer>
+<script>
+        // Simple dark mode toggle logic (optional, for testing)
+        // Checks system preference initially
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+
+</body></html>
