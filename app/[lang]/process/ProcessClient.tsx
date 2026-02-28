@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function Process() {
+export default function ProcessClient({ dict }: { dict: any }) {
   return (
     <>
       <style dangerouslySetInnerHTML={{
@@ -47,22 +47,21 @@ export default function Process() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="text-primary font-display font-bold tracking-widest uppercase mb-3">
-              The Journey of a Product
+              {dict.badge}
             </motion.h2>
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white mb-6">
-              Our Trading <span className="text-primary">Process</span>
+              {dict.title_1} <span className="text-primary">{dict.title_2}</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400 font-light">
-              From sourcing the finest goods in Qatar to delivering them globally,
-              we ensure transparency, quality, and reliability at every single step.
+              {dict.desc}
             </motion.p>
             <motion.div 
               initial={{ opacity: 0, scale: 0 }}
@@ -94,12 +93,10 @@ export default function Process() {
                 </div>
                 <div className="bg-white dark:bg-card-dark p-6 rounded-xl shadow-md border-t-4 border-primary w-full lg:min-h-[220px]">
                   <h3 className="text-xl font-display font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
-                    Sourcing
+                    {dict.step1_title}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                    We leverage our deep local network to identify premium suppliers.
-                    We select only the finest dates, pottery, and household goods
-                    that meet international standards.
+                    {dict.step1_desc}
                   </p>
                 </div>
               </motion.div>
@@ -121,12 +118,10 @@ export default function Process() {
                 </div>
                 <div className="bg-white dark:bg-card-dark p-6 rounded-xl shadow-md border-t-4 border-primary w-full lg:min-h-[220px]">
                   <h3 className="text-xl font-display font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
-                    Quality Control
+                    {dict.step2_title}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                    <strong>Qualité</strong> is our priority. Every batch undergoes
-                    rigorous inspection. We verify authenticity, durability, and
-                    compliance before any item is packed.
+                    {dict.step2_desc}
                   </p>
                 </div>
               </motion.div>
@@ -148,12 +143,10 @@ export default function Process() {
                 </div>
                 <div className="bg-white dark:bg-card-dark p-6 rounded-xl shadow-md border-t-4 border-primary w-full lg:min-h-[220px]">
                   <h3 className="text-xl font-display font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
-                    Logistics
+                    {dict.step3_title}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                    Seamless transport via air, land, or sea. Our logistics team
-                    handles customs, documentation, and secure packaging to ensure
-                    safe transit globally.
+                    {dict.step3_desc}
                   </p>
                 </div>
               </motion.div>
@@ -175,12 +168,10 @@ export default function Process() {
                 </div>
                 <div className="bg-white dark:bg-card-dark p-6 rounded-xl shadow-md border-t-4 border-primary w-full lg:min-h-[220px]">
                   <h3 className="text-xl font-display font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
-                    Distribution
+                    {dict.step4_title}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                    <strong>Fiabilité</strong> in delivery. Products reach global
-                    markets and retailers on time. We bridge the gap between
-                    Qatari heritage and international consumers.
+                    {dict.step4_desc}
                   </p>
                 </div>
               </motion.div>
@@ -194,13 +185,13 @@ export default function Process() {
             className="mt-24 text-center">
             <div className="inline-flex items-center p-1 rounded-full bg-gray-100 dark:bg-card-dark border border-gray-200 dark:border-gray-700">
               <span className="px-4 py-2 text-sm text-gray-600 dark:text-gray-300">
-                Ready to partner with us?
+                {dict.cta_text}
               </span>
               <Link
                 className="px-6 py-2 bg-primary text-black font-bold rounded-full hover:bg-opacity-90 transition transform hover:-translate-y-0.5 shadow-lg flex items-center"
                 href="/contact"
               >
-                Contact Us <span className="material-icons-outlined text-sm ml-2">arrow_forward</span>
+                {dict.contact_btn} <span className="material-icons-outlined text-sm ml-2">arrow_forward</span>
               </Link>
             </div>
           </motion.div>

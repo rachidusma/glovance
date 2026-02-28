@@ -3,7 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-export default function About() {
+export default function About({ dict }: { dict: any }) {
   return (
     <main className="w-full min-h-screen flex flex-col lg:flex-row relative">
       <div className="w-full lg:w-5/12 xl:w-1/2 relative min-h-[50vh] lg:min-h-screen bg-secondary overflow-hidden group">
@@ -21,11 +21,12 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="mb-8">
-            <h2 className="text-primary font-display font-bold text-5xl lg:text-7xl leading-tight mb-2">
-              GLOBAL<br />REACH
-            </h2>
+            <h2 
+              className="text-primary font-display font-bold text-5xl lg:text-7xl leading-tight mb-2"
+              dangerouslySetInnerHTML={{ __html: dict.global_reach }}
+            />
             <p className="text-gray-300 font-light text-lg lg:text-xl max-w-md border-l-4 border-primary pl-4">
-              Connecting markets through reliable logistics and premium sourcing.
+              {dict.connecting}
             </p>
           </motion.div>
         </div>
@@ -39,23 +40,20 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="mb-12">
             <h3 className="text-primary font-display font-bold text-2xl uppercase tracking-widest mb-2">
-              About
+              {dict.badge}
             </h3>
             <h1 className="text-secondary dark:text-white font-display font-extrabold text-4xl lg:text-5xl uppercase tracking-wide leading-tight mb-6">
-              Glovance Trading
+              {dict.title}
             </h1>
             <div className="w-24 h-1.5 bg-secondary dark:bg-white mb-8"></div>
             <h4 className="font-display font-bold text-lg lg:text-xl text-secondary dark:text-gray-300 mb-4">
-              GLOVANCE TRADING<br />
+              <span dangerouslySetInnerHTML={{ __html: dict.subtitle_1 }} />
               <span className="font-medium text-gray-500 dark:text-gray-400">
-                Import - Export - Distribution
+                {dict.subtitle_2}
               </span>
             </h4>
             <p className="text-gray-600 dark:text-gray-400 font-body leading-relaxed mb-6 text-justify">
-              Connecting Qatar To The World. Glovance Trading Is An International
-              Company Based In Qatar, Specializing In The Import And Export Of A
-              Wide Range Of Products: Household Appliances, Pottery, Fruits, Dates,
-              Everyday Consumer Goods, And Various Merchandise.
+              {dict.desc}
             </p>
           </motion.div>
           <motion.div 
@@ -65,12 +63,10 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-10">
             <h3 className="text-secondary dark:text-white font-display font-bold text-xl uppercase mb-3">
-              Our Mission
+              {dict.mission_title}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 font-body leading-relaxed">
-              To Build Strong Bridges Between Global Markets And Provide Reliable,
-              Carefully Selected Products, While Ensuring Smooth Logistics And
-              High-quality Service.
+              {dict.mission_desc}
             </p>
           </motion.div>
           <motion.div 
@@ -80,10 +76,10 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-12">
             <h3 className="text-secondary dark:text-white font-display font-bold text-xl uppercase mb-3">
-              Our Values
+              {dict.values_title}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 font-body leading-relaxed">
-              Quality • Reliability • Performance • Commitment • Innovation
+              {dict.values_desc}
             </p>
           </motion.div>
           <div className="grid gap-8 py-8 border-t border-gray-200 dark:border-gray-800">
@@ -100,10 +96,10 @@ export default function About() {
               </div>
               <div>
                 <h4 className="text-secondary dark:text-white font-display font-bold text-2xl group-hover:text-primary transition-colors">
-                  Quality
+                  {dict.quality_title}
                 </h4>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  Uncompromising standards in every product.
+                  {dict.quality_desc}
                 </p>
               </div>
             </motion.div>
@@ -120,10 +116,10 @@ export default function About() {
               </div>
               <div>
                 <h4 className="text-secondary dark:text-white font-display font-bold text-2xl group-hover:text-primary transition-colors">
-                  Reliability
+                  {dict.reliability_title}
                 </h4>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  Trust built through consistent delivery.
+                  {dict.reliability_desc}
                 </p>
               </div>
             </motion.div>
@@ -140,10 +136,10 @@ export default function About() {
               </div>
               <div>
                 <h4 className="text-secondary dark:text-white font-display font-bold text-2xl group-hover:text-primary transition-colors">
-                  Network
+                  {dict.network_title}
                 </h4>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  Extensive global connections.
+                  {dict.network_desc}
                 </p>
               </div>
             </motion.div>
@@ -153,7 +149,7 @@ export default function About() {
               className="inline-flex items-center space-x-2 text-primary font-bold hover:text-green-400 transition-colors uppercase tracking-wider text-sm"
               href="#"
             >
-              <span>Download 2026 Catalogue</span>
+              <span>{dict.download}</span>
               <span className="material-icons text-sm">arrow_forward</span>
             </Link>
           </div>

@@ -1,0 +1,80 @@
+[
+  {
+    "file": "/Users/mac/Desktop/Work/Glovence/glovance/dictionaries/en.json",
+    "lang": "en",
+    "data": {
+      "about_page": {
+        "global_reach": "GLOBAL<br />REACH",
+        "connecting": "Connecting markets through reliable logistics and premium sourcing.",
+        "badge": "About",
+        "title": "Glovance Trading",
+        "subtitle_1": "GLOVANCE TRADING<br />",
+        "subtitle_2": "Import - Export - Distribution",
+        "desc": "Connecting Qatar To The World. Glovance Trading Is An International Company Based In Qatar, Specializing In The Import And Export Of A Wide Range Of Products: Household Appliances, Pottery, Fruits, Dates, Everyday Consumer Goods, And Various Merchandise.",
+        "mission_title": "Our Mission",
+        "mission_desc": "To Build Strong Bridges Between Global Markets And Provide Reliable, Carefully Selected Products, While Ensuring Smooth Logistics And High-quality Service.",
+        "values_title": "Our Values",
+        "values_desc": "Quality • Reliability • Performance • Commitment • Innovation",
+        "quality_title": "Quality",
+        "quality_desc": "Uncompromising standards in every product.",
+        "reliability_title": "Reliability",
+        "reliability_desc": "Trust built through consistent delivery.",
+        "network_title": "Network",
+        "network_desc": "Extensive global connections.",
+        "download": "Download 2026 Catalogue"
+      }
+    }
+  },
+  {
+    "file": "/Users/mac/Desktop/Work/Glovence/glovance/dictionaries/fr.json",
+    "lang": "fr",
+    "data": {
+      "about_page": {
+        "global_reach": "PORTÉE<br />MONDIALE",
+        "connecting": "Connecter les marchés grâce à une logistique fiable et un approvisionnement de qualité supérieure.",
+        "badge": "À Propos",
+        "title": "Glovance Trading",
+        "subtitle_1": "GLOVANCE TRADING<br />",
+        "subtitle_2": "Importation - Exportation - Distribution",
+        "desc": "Connecter le Qatar au Monde. Glovance Trading est une entreprise internationale basée au Qatar, spécialisée dans l'importation et l'exportation d'une large gamme de produits : électroménager, poterie, fruits, dattes, biens de consommation courante et marchandises diverses.",
+        "mission_title": "Notre Mission",
+        "mission_desc": "Construire des ponts solides entre les marchés mondiaux et fournir des produits fiables et soigneusement sélectionnés, tout en assurant une logistique fluide et un service de haute qualité.",
+        "values_title": "Nos Valeurs",
+        "values_desc": "Qualité • Fiabilité • Performance • Engagement • Innovation",
+        "quality_title": "Qualité",
+        "quality_desc": "Des normes sans compromis pour chaque produit.",
+        "reliability_title": "Fiabilité",
+        "reliability_desc": "Une confiance bâtie sur une livraison constante.",
+        "network_title": "Réseau",
+        "network_desc": "Connexions mondiales étendues.",
+        "download": "Télécharger le Catalogue 2026"
+      }
+    }
+  },
+  {
+    "file": "/Users/mac/Desktop/Work/Glovence/glovance/dictionaries/ar.json",
+    "lang": "ar",
+    "data": {
+      "about_page": {
+        "global_reach": "نطاق<br />عالمي",
+        "connecting": "ربط الأسواق من خلال لوجستيات موثوقة ومصادر عالية الجودة.",
+        "badge": "من نحن",
+        "title": "جلوفانس للتجارة",
+        "subtitle_1": "جلوفانس للتجارة<br />",
+        "subtitle_2": "استيراد - تصدير - توزيع",
+        "desc": "ربط قطر بالعالم. جلوفانس للتجارة هي شركة دولية مقرها في قطر، متخصصة في استيراد وتصدير مجموعة واسعة من المنتجات: الأجهزة المنزلية والفخار والفواكه والتمور والسلع الاستهلاكية اليومية والسلع المتنوعة.",
+        "mission_title": "مهمتنا",
+        "mission_desc": "بناء جسور قوية بين الأسواق العالمية وتوفير منتجات موثوقة ومختارة بعناية، مع ضمان خدمات لوجستية سلسة وخدمات عالية الجودة.",
+        "values_title": "قيمنا",
+        "values_desc": "الجودة • الموثوقية • الأداء • الالتزام • الابتكار",
+        "quality_title": "الجودة",
+        "quality_desc": "معايير لا هوادة فيها في كل منتج.",
+        "reliability_title": "الموثوقية",
+        "reliability_desc": "ثقة مبنية على التسليم المستمر.",
+        "network_title": "الشبكة",
+        "network_desc": "اتصالات عالمية واسعة النطاق.",
+        "download": "تنزيل كتالوج 2026"
+      }
+    }
+  }
+]

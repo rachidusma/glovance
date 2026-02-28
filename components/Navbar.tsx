@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-export default function Navbar() {
+export default function Navbar({ dict, currentLang }: { dict: any; currentLang: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Products", href: "/products" },
-    { name: "Process", href: "/process" },
+    { name: dict.home, href: `/${currentLang}` },
+    { name: dict.about, href: `/${currentLang}/about` },
+    { name: dict.products, href: `/${currentLang}/products` },
+    { name: dict.process, href: `/${currentLang}/process` },
   ];
 
   return (
@@ -18,7 +19,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0 flex items-center space-x-2">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href={`/${currentLang}`} className="flex items-center gap-2">
               <div className="relative w-10 h-10 flex items-center justify-center bg-transparent border-2 border-primary rounded-full">
                 <span className="material-icons-outlined text-primary text-2xl transform -rotate-45">
                   flight_takeoff
@@ -26,15 +27,15 @@ export default function Navbar() {
               </div>
               <div className="flex flex-col">
                 <span className="font-display font-bold text-2xl tracking-wide text-white uppercase leading-none">
-                  Glovance
+                  {dict.brand_name}
                 </span>
                 <span className="font-sans text-xs font-semibold tracking-[0.2em] text-primary uppercase">
-                  Trading
+                  {dict.brand_desc}
                 </span>
               </div>
             </Link>
           </div>
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center">
             <div className="ml-10 flex items-baseline space-x-8">
               {navLinks.map((link) => (
                 <Link
@@ -45,15 +46,19 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <Link
-                className="bg-primary text-secondary hover:bg-white px-5 py-2 rounded-md text-sm font-bold transition-all uppercase tracking-wider shadow-lg transform hover:-translate-y-0.5"
-                href="/contact"
-              >
-                Contact Us
-              </Link>
+              <div className="pl-4 border-l border-gray-700 flex items-center gap-4">
+                <LanguageSwitcher currentLang={currentLang} />
+                <Link
+                  className="bg-primary text-secondary hover:bg-white px-5 py-2 rounded-md text-sm font-bold transition-all uppercase tracking-wider shadow-lg transform hover:-translate-y-0.5"
+                  href={`/${currentLang}/contact`}
+                >
+                  {dict.contact}
+                </Link>
+              </div>
             </div>
           </div>
-          <div className="-mr-2 flex md:hidden">
+          <div className="-mr-2 flex md:hidden items-center gap-4">
+            <LanguageSwitcher currentLang={currentLang} />
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="bg-secondary p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white transition-colors"
@@ -84,11 +89,11 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href={`/${currentLang}/contact`}
               className="bg-primary text-secondary hover:bg-white block px-3 py-2 rounded-md text-base font-bold uppercase tracking-wider transition-colors mt-4 text-center"
               onClick={() => setIsOpen(false)}
             >
-              Contact Us
+              {dict.contact}
             </Link>
           </div>
         </div>

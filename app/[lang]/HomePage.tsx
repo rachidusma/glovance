@@ -2,22 +2,231 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState, useRef, useCallback } from "react";
 
-export default function Home() {
+type Lang = "en" | "fr" | "ar";
+
+interface Category {
+  id: string;
+  nameEn: string;
+  nameFr: string;
+  nameAr: string;
+  descEn: string | null;
+  descFr: string | null;
+  descAr: string | null;
+  imageUrl: string | null;
+  _count: { products: number };
+}
+
+function getLocalizedField(obj: any, field: string, lang: Lang): string {
+  const suffixes: Record<Lang, string> = { en: "En", fr: "Fr", ar: "Ar" };
+  return obj[field + suffixes[lang]] || obj[field + "En"] || "";
+}
+
+// Fallback images for categories without an image
+const FALLBACK_IMAGES = [
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuDnLhZ0p9PZjcB67aUc3C2UmOYyfhtH5eR61T1ag16PhG2Xhq3aW5czsJ1QT6x0jBVM4K3aa_v5b30MxL_BQl3i89pRPFduu13V7cJv7VUF4AtppWYh6MloNaOc93hUaBHyFQYeid-unClugnW3z1V6P6e8MWrx30FopeM9PAsMfPFQDh6AIrfxAmEQ87Wsdq18dhso7V42kx1_4NKfvzCWpGMMRvdzxeMBY_L-l8ZHznxrk10_qv8v3DGFj7ZLsclmMA9fBnaDcAUR",
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuCa8HFBLbEvFbTMKyUaMLS01Z-XSN0APxIvUgY174rQt9gW1Zs_BrUPeeFDb8abGb62bdo3bUiC_KyuRpXM_zLbtcWCzqJ7B_1VoJtwtqPpAAfdRxJW-WcDKVu92R7tq6WD88OcM0Vcw_oEJ0n4XOtSAR51rdXBxndIeC7J_bD_L3BWHq5vsy3pLEwgD_jpoIj4EN3SfTqgcF_tFkqqtKSh0GlZ5tNG3uSLWWzvHa5HZrXeAZp_7xHZoQOTgP48zc_KuA9dmcyKw3CP",
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuD1WktykDWR19nYDdSIbC38DBVsA4ujTxCQEHTtNj_08lzpKQHTj95zQemorWisTB_UgLCY0TeCzaMQj5A2nG_DqeJDVx0-yQN2fUeZgbbuKv-TqW-sAlAn95dzd_nYcbLQlEfOtHHqjwPRHp1lLsa9mhshadQ2pgtWYiZxGysyCXEHCt6AWE_QWEaMdOFmJuXjceOpD9ppvqbJRzQaFwjm9ApIRn5Jl_trEAwDn3G3tOs1qIePWirlcn4YZKbHL2It7J9iEv0nUxgm",
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuAfGNumi2HpldeG_aqbxhTJgheWbPVNWdpsWOHMAGoqsQFDKkNaMnAmngbjnzvvthcfyr63lJH5IS1gdFqf-NypfHDiQJFyd4yzILTuG9DCXS5VMvlLF83aigtX0GdrCdcnK8m68VOKPyl8V414AhgKCW0B8pYJZ6q0hkpx9Zi4PjNDkFDPg5Kk8hB7C4bzFvOzWD7d2EsBln7KpOFWFsYgfkf4itO3uNGQISWqsP9HDc39xoTlKgrp8WS5h22SXQYlClHkOPi3Uv64",
+];
+
+function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Number of cards visible depending on screen — we simulate 3 visible for desktop
+  const VISIBLE = 3;
+
+  useEffect(() => {
+    fetch("/api/categories")
+      .then((r) => r.json())
+      .then((data) => {
+        setCategories(Array.isArray(data) ? data : []);
+        setLoading(false);
+      });
+  }, []);
+
+  const maxIndex = Math.max(0, categories.length - VISIBLE);
+
+  const next = useCallback(() => {
+    setActiveIndex((i) => (i >= maxIndex ? 0 : i + 1));
+  }, [maxIndex]);
+
+  const prev = useCallback(() => {
+    setActiveIndex((i) => (i <= 0 ? maxIndex : i - 1));
+  }, [maxIndex]);
+
+  // Auto-advance every 4s when not hovered
+  useEffect(() => {
+    if (isHovered || loading || categories.length <= VISIBLE) return;
+    timerRef.current = setTimeout(next, 4000);
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [activeIndex, isHovered, loading, categories.length, next]);
+
+  const skeletons = Array.from({ length: 4 });
+
+  return (
+    <section className="py-24 bg-gray-100 dark:bg-[#0f1826] relative overflow-hidden" id="products">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <span className="text-primary font-bold text-sm tracking-[0.3em] uppercase block mb-3">
+            {dict.badge}
+          </span>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-secondary dark:text-white uppercase">
+            {dict.title_1}{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">
+              {dict.title_2}
+            </span>
+          </h2>
+          {!loading && categories.length > 0 && (
+            <p className="text-gray-500 dark:text-gray-400 mt-3 text-sm">
+              {categories.length} {categories.length === 1 ? "category" : "categories"} available
+            </p>
+          )}
+        </div>
+
+        {/* Carousel */}
+        <div
+          className="relative"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {/* Prev Button */}
+          {!loading && categories.length > VISIBLE && (
+            <button
+              onClick={prev}
+              aria-label="Previous"
+              className="absolute -left-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group"
+            >
+              <span className="material-icons-outlined group-hover:-translate-x-0.5 transition-transform">chevron_left</span>
+            </button>
+          )}
+
+          {/* Cards */}
+          <div className="overflow-hidden">
+            <div
+              className="flex gap-6 transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(calc(-${activeIndex} * (100% / ${VISIBLE} + 8px)))` }}
+            >
+              {loading
+                ? skeletons.map((_, i) => (
+                    <div
+                      key={i}
+                      className="flex-shrink-0 rounded-xl overflow-hidden h-96 bg-gray-200 dark:bg-gray-800 animate-pulse"
+                      style={{ width: `calc(100% / ${VISIBLE} - ${(VISIBLE - 1) * 24 / VISIBLE}px)` }}
+                    />
+                  ))
+                : categories.length === 0
+                ? (
+                    <div className="w-full py-16 text-center text-gray-400 dark:text-gray-500">
+                      <span className="material-icons-outlined text-5xl mb-3 block">category</span>
+                      <p className="text-lg">No categories yet. Add them in the admin panel.</p>
+                    </div>
+                  )
+                : categories.map((cat, i) => {
+                    const name = getLocalizedField(cat, "name", lang);
+                    const desc = getLocalizedField(cat, "desc", lang);
+                    const img = cat.imageUrl || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length];
+                    return (
+                      <motion.div
+                        key={cat.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: i * 0.05 }}
+                        className="flex-shrink-0 group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer"
+                        style={{ width: `calc(100% / ${VISIBLE} - ${(VISIBLE - 1) * 24 / VISIBLE}px)` }}
+                      >
+                        <Link href={`/${lang}/products`}>
+                          <img
+                            alt={name}
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            src={img}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
+                          {/* Product count badge */}
+                          <div className="absolute top-4 right-4 bg-primary text-secondary text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
+                            {cat._count.products} {cat._count.products === 1 ? "product" : "products"}
+                          </div>
+                          <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">
+                              {name}
+                            </h3>
+                            {desc && (
+                              <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 line-clamp-2">
+                                {desc}
+                              </p>
+                            )}
+                            <span className="mt-4 inline-flex items-center text-primary text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity delay-75">
+                              {dict.explore}
+                              <span className="material-icons-outlined ml-1 text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            </span>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+            </div>
+          </div>
+
+          {/* Next Button */}
+          {!loading && categories.length > VISIBLE && (
+            <button
+              onClick={next}
+              aria-label="Next"
+              className="absolute -right-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group"
+            >
+              <span className="material-icons-outlined group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+            </button>
+          )}
+        </div>
+
+        {/* Dot Indicators */}
+        {!loading && categories.length > VISIBLE && (
+          <div className="flex justify-center gap-2 mt-8">
+            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`rounded-full transition-all duration-300 ${
+                  i === activeIndex
+                    ? "bg-primary w-8 h-2.5"
+                    : "bg-gray-300 dark:bg-gray-600 hover:bg-primary/50 w-2.5 h-2.5"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Link
+            className="inline-block border-2 border-secondary dark:border-white text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-secondary px-10 py-3 rounded-full font-bold uppercase tracking-wider transition-all duration-300"
+            href={`/${lang}/products`}
+          >
+            {dict.download_pdf}
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function Home({ dict, lang }: { dict: any; lang: string }) {
   return (
     <>
       <section className="relative h-screen flex items-center justify-center overflow-hidden" id="home">
         <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            className="w-full h-full object-cover"
-            loop
-            muted
-            playsInline
-          >
+          <video autoPlay className="absolute inset-0 w-full h-full object-cover z-0" loop muted playsInline poster="/hero-poster.jpg">
             <source src="/istockphoto-2194813689-640_adpp_is.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 via-primary/40 to-primary/20 dark:from-background-dark/90 dark:via-primary/30 dark:to-primary/10"></div>
+          <div className="absolute inset-0 bg-blue-900/60 z-10"></div>
           <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/40 to-transparent transform skew-x-12 translate-x-20 hidden lg:block"></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -25,30 +234,29 @@ export default function Home() {
             <div className="space-y-6">
               <div className="inline-block border-l-4 border-primary pl-4">
                 <span className="text-primary font-bold tracking-widest uppercase text-sm">
-                  Import - Export - Distribution
+                  {dict.hero.badge}
                 </span>
               </div>
               <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-tight">
-                CONNECTING <br />
-                <span className="text-primary">QATAR</span> TO THE <br />
-                WORLD
+                {dict.hero.title_1} <br />
+                <span className="text-primary">{dict.hero.title_qatar}</span> {dict.hero.title_2}
               </h1>
-              <p className="text-gray-300 text-lg max-w-lg leading-relaxed">
-                Glovance Trading is an international company based in Qatar, specializing in the import and export of a wide range of products: Household Appliances, Pottery, Fruits, Dates, and Consumer Goods.
+              <p className="text-gray-300 text-lg max-w-lg leading-relaxed mt-2">
+                {dict.hero.desc}
               </p>
               <div className="flex space-x-4 pt-4">
                 <Link
                   className="bg-primary text-secondary hover:bg-white hover:text-secondary px-8 py-4 rounded font-bold transition-all uppercase tracking-wider shadow-[0_0_20px_rgba(163,209,49,0.4)] flex items-center"
-                  href="/products"
+                  href={`/${lang}/products`}
                 >
-                  View Catalogue 2026
+                  {dict.hero.view_catalog}
                   <span className="material-icons-outlined ml-2">arrow_forward</span>
                 </Link>
                 <Link
                   className="border border-white text-white hover:bg-white hover:text-secondary px-8 py-4 rounded font-bold transition-all uppercase tracking-wider flex items-center"
-                  href="/contact"
+                  href={`/${lang}/contact`}
                 >
-                  Contact Us
+                  {dict.hero.contact}
                 </Link>
               </div>
             </div>
@@ -61,7 +269,7 @@ export default function Home() {
                 }}
               >
                 <div className="absolute bottom-0 left-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
-                  Food
+                  {dict.hero.food}
                 </div>
               </div>
               <div
@@ -72,7 +280,7 @@ export default function Home() {
                 }}
               >
                 <div className="absolute bottom-0 left-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
-                  Fresh Produce
+                  {dict.hero.fresh_produce}
                 </div>
               </div>
               <div
@@ -83,7 +291,7 @@ export default function Home() {
                 }}
               >
                 <div className="absolute bottom-0 left-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
-                  Appliances
+                  {dict.hero.appliances}
                 </div>
               </div>
             </div>
@@ -91,7 +299,7 @@ export default function Home() {
         </div>
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
           <span className="text-white text-xs uppercase tracking-widest mb-2">
-            Scroll Down
+            {dict.hero.scroll_down}
           </span>
           <span className="material-icons-outlined text-primary">
             keyboard_arrow_down
@@ -110,22 +318,17 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-primary font-bold text-xl uppercase mb-2 tracking-widest">
-                About
+                {dict.about.badge}
               </h2>
               <h3 className="text-4xl md:text-5xl font-display font-bold text-secondary dark:text-white uppercase mb-8 border-b-4 border-secondary dark:border-primary pb-4 inline-block">
-                Glovance Trading
+                {dict.about.title}
               </h3>
               <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
                 <p className="text-xl font-medium mb-6">
-                  Connecting Qatar To The World. Glovance Trading Is An
-                  International Company Based In Qatar.
+                  {dict.about.subtitle}
                 </p>
                 <p className="mb-6">
-                  We specialize in the import and export of a wide range of
-                  products, catering to the dynamic needs of the Qatari market
-                  and beyond. From cutting-edge household appliances to
-                  traditional pottery, fresh fruits, premium dates, and
-                  essential everyday consumer goods.
+                  {dict.about.desc}
                 </p>
               </div>
               <div className="mt-12 space-y-8">
@@ -141,12 +344,10 @@ export default function Home() {
                         flag
                       </span>
                     </span>
-                    Our Mission
+                    {dict.about.mission_title}
                   </h4>
                   <p className="text-gray-600 dark:text-gray-400 pl-11">
-                    To build strong bridges between global markets and provide
-                    reliable, carefully selected products, while ensuring smooth
-                    logistics and high-quality service.
+                    {dict.about.mission_desc}
                   </p>
                 </motion.div>
                 <motion.div
@@ -161,28 +362,28 @@ export default function Home() {
                         diamond
                       </span>
                     </span>
-                    Our Values
+                    {dict.about.values_title}
                   </h4>
                   <ul className="pl-11 grid grid-cols-2 gap-2 text-gray-600 dark:text-gray-400">
                     <li className="flex items-center">
                       <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
-                      Quality
+                      {dict.about.val_quality}
                     </li>
                     <li className="flex items-center">
                       <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
-                      Reliability
+                      {dict.about.val_reliability}
                     </li>
                     <li className="flex items-center">
                       <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
-                      Performance
+                      {dict.about.val_performance}
                     </li>
                     <li className="flex items-center">
                       <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
-                      Commitment
+                      {dict.about.val_commitment}
                     </li>
                     <li className="flex items-center">
                       <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
-                      Innovation
+                      {dict.about.val_innovation}
                     </li>
                   </ul>
                 </motion.div>
@@ -206,6 +407,13 @@ export default function Home() {
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLl-OXz1aQIbyH2vyi8zqMZF3M5HR9vXm31J2_fh64qXU59U_6JdUgLorWj8sq9mknNtbbiF2UZyFFxmLGMbVL6XcmKmMsyRsyyyTEuysJUF82myftgxZCzfz6qcV5hHIIPDE-2ydyQHRUsNPoiwewPNLzfNRB9NXUwejKii0il5Ev8y0IDzu06g1Iix779yauVwRhL4y8uXxVxdfPKBOyNjlaUGwh21ma84ZWM0ts29kZAdftSWPc5xMF7UKd_RjByegSX365HKGA"
                 />
               </div>
+              <div className="absolute -bottom-10 -right-10 w-96 h-96 overflow-hidden rounded-[40px] border-8 border-white dark:border-[#0D1B2A] shadow-2xl z-20 hidden md:block group">
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+                <img alt="Modern Home Appliances" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" src="/CF648EE9E3F7404F.jpg" />
+                <div className="absolute bottom-6 left-6 z-20">
+                  <span className="font-display font-bold text-white text-2xl drop-shadow-lg">{dict.homeAppliances}</span>
+                </div>
+              </div>
               <div className="bg-secondary dark:bg-accent-blue rounded-xl p-8 shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary opacity-10 rounded-full blur-2xl"></div>
                 <div className="space-y-6 relative z-10">
@@ -214,7 +422,7 @@ export default function Home() {
                       verified_user
                     </span>
                     <span className="text-2xl font-bold text-white uppercase tracking-wider">
-                      Qualité
+                      {dict.about.feat_qualite}
                     </span>
                   </div>
                   <div className="w-full h-px bg-white/10"></div>
@@ -223,7 +431,7 @@ export default function Home() {
                       handshake
                     </span>
                     <span className="text-2xl font-bold text-white uppercase tracking-wider">
-                      Fiabilité
+                      {dict.about.feat_fiabilite}
                     </span>
                   </div>
                   <div className="w-full h-px bg-white/10"></div>
@@ -232,7 +440,7 @@ export default function Home() {
                       public
                     </span>
                     <span className="text-2xl font-bold text-white uppercase tracking-wider">
-                      Réseau
+                      {dict.about.feat_reseau}
                     </span>
                   </div>
                 </div>
@@ -242,105 +450,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 bg-gray-100 dark:bg-[#0f1826] clip-diagonal relative" id="products">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="text-primary font-bold text-sm tracking-[0.3em] uppercase block mb-3">
-              What we trade
-            </span>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-secondary dark:text-white uppercase">
-              Catalogue <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">2026</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer">
-              <img
-                alt="Household Appliances"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnLhZ0p9PZjcB67aUc3C2UmOYyfhtH5eR61T1ag16PhG2Xhq3aW5czsJ1QT6x0jBVM4K3aa_v5b30MxL_BQl3i89pRPFduu13V7cJv7VUF4AtppWYh6MloNaOc93hUaBHyFQYeid-unClugnW3z1V6P6e8MWrx30FopeM9PAsMfPFQDh6AIrfxAmEQ87Wsdq18dhso7V42kx1_4NKfvzCWpGMMRvdzxeMBY_L-l8ZHznxrk10_qv8v3DGFj7ZLsclmMA9fBnaDcAUR"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-              <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-                <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">
-                  Appliances
-                </h3>
-                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  High-end household electronics and modern home solutions.
-                </p>
-                <span className="mt-4 inline-block text-primary text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity delay-100">
-                  Explore →
-                </span>
-              </div>
-            </div>
-            <div className="group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer mt-0 lg:mt-12">
-              <img
-                alt="Fresh Fruits and Produce"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa8HFBLbEvFbTMKyUaMLS01Z-XSN0APxIvUgY174rQt9gW1Zs_BrUPeeFDb8abGb62bdo3bUiC_KyuRpXM_zLbtcWCzqJ7B_1VoJtwtqPpAAfdRxJW-WcDKVu92R7tq6WD88OcM0Vcw_oEJ0n4XOtSAR51rdXBxndIeC7J_bD_L3BWHq5vsy3pLEwgD_jpoIj4EN3SfTqgcF_tFkqqtKSh0GlZ5tNG3uSLWWzvHa5HZrXeAZp_7xHZoQOTgP48zc_KuA9dmcyKw3CP"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-              <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-                <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">
-                  Fruits &amp; Dates
-                </h3>
-                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Premium quality dates and seasonal fresh fruits imported
-                  globally.
-                </p>
-                <span className="mt-4 inline-block text-primary text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity delay-100">
-                  Explore →
-                </span>
-              </div>
-            </div>
-            <div className="group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer">
-              <img
-                alt="Pottery and Ceramics"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1WktykDWR19nYDdSIbC38DBVsA4ujTxCQEHTtNj_08lzpKQHTj95zQemorWisTB_UgLCY0TeCzaMQj5A2nG_DqeJDVx0-yQN2fUeZgbbuKv-TqW-sAlAn95dzd_nYcbLQlEfOtHHqjwPRHp1lLsa9mhshadQ2pgtWYiZxGysyCXEHCt6AWE_QWEaMdOFmJuXjceOpD9ppvqbJRzQaFwjm9ApIRn5Jl_trEAwDn3G3tOs1qIePWirlcn4YZKbHL2It7J9iEv0nUxgm"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-              <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-                <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">
-                  Pottery
-                </h3>
-                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Artisanal and industrial pottery for decor and utility.
-                </p>
-                <span className="mt-4 inline-block text-primary text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity delay-100">
-                  Explore →
-                </span>
-              </div>
-            </div>
-            <div className="group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer mt-0 lg:mt-12">
-              <img
-                alt="Consumer Goods"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfGNumi2HpldeG_aqbxhTJgheWbPVNWdpsWOHMAGoqsQFDKkNaMnAmngbjnzvvthcfyr63lJH5IS1gdFqf-NypfHDiQJFyd4yzILTuG9DCXS5VMvlLF83aigtX0GdrCdcnK8m68VOKPyl8V414AhgKCW0B8pYJZ6q0hkpx9Zi4PjNDkFDPg5Kk8hB7C4bzFvOzWD7d2EsBln7KpOFWFsYgfkf4itO3uNGQISWqsP9HDc39xoTlKgrp8WS5h22SXQYlClHkOPi3Uv64"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-              <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-                <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">
-                  Consumer Goods
-                </h3>
-                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Everyday essentials and various merchandise for retail.
-                </p>
-                <span className="mt-4 inline-block text-primary text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity delay-100">
-                  Explore →
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="text-center mt-12">
-            <Link
-              className="inline-block border-2 border-secondary dark:border-white text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-secondary px-10 py-3 rounded-full font-bold uppercase tracking-wider transition-all duration-300"
-              href="#"
-            >
-              Download Full PDF
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CatalogueSection dict={dict.catalogue} lang={lang as Lang} />
 
       <section className="py-20 bg-secondary relative overflow-hidden">
         <div
@@ -357,7 +467,7 @@ export default function Home() {
                 15+
               </span>
               <span className="text-primary text-sm font-bold uppercase tracking-widest">
-                Countries
+                {dict.stats.countries}
               </span>
             </div>
             <div className="p-6">
@@ -365,7 +475,7 @@ export default function Home() {
                 500+
               </span>
               <span className="text-primary text-sm font-bold uppercase tracking-widest">
-                Products
+                {dict.stats.products}
               </span>
             </div>
             <div className="p-6">
@@ -373,7 +483,7 @@ export default function Home() {
                 24/7
               </span>
               <span className="text-primary text-sm font-bold uppercase tracking-widest">
-                Support
+                {dict.stats.support}
               </span>
             </div>
             <div className="p-6">
@@ -381,7 +491,7 @@ export default function Home() {
                 100%
               </span>
               <span className="text-primary text-sm font-bold uppercase tracking-widest">
-                Reliability
+                {dict.stats.reliability}
               </span>
             </div>
           </div>
@@ -391,16 +501,16 @@ export default function Home() {
       <section className="bg-primary py-16 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-5xl font-display font-black text-white uppercase italic mb-4 tracking-tight">
-            READY TO SCALE YOUR SUPPLY CHAIN?
+            {dict.cta.title}
           </h2>
           <p className="text-white text-lg md:text-xl mb-8 font-medium">
-            Partner with Algeria's most reliable export network for the 2026 season.
+            {dict.cta.desc}
           </p>
           <Link
             className="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded font-bold transition-all uppercase tracking-wider"
-            href="/contact"
+            href={`/${lang}/contact`}
           >
-            REQUEST PRICING NOW
+            {dict.cta.btn}
           </Link>
         </div>
       </section>
