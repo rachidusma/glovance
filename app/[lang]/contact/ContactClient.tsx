@@ -48,14 +48,14 @@ export default function ContactClient({ dict }: { dict: any }) {
               <div className="absolute top-10 right-10 w-20 h-20 border-4 border-primary/20 rounded-full pointer-events-none"></div>
               <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
                 {dict.get_in_touch}
-                <span className="h-1 w-12 bg-primary ml-4 inline-block"></span>
+                <span className="h-1 w-12 bg-primary ms-4 inline-block"></span>
               </h2>
               <div className="space-y-8">
                 <div className="flex items-start group">
                   <div className="bg-white/10 p-3 rounded-lg group-hover:bg-primary group-hover:text-[#0D1B2A] transition-colors duration-300">
                     <span className="material-icons text-2xl">location_on</span>
                   </div>
-                  <div className="ml-4">
+                  <div className="ms-4">
                     <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-1">{dict.hq}</p>
                     <p className="text-gray-300 leading-relaxed">
                       {dict.address_l1}<br />
@@ -68,7 +68,7 @@ export default function ContactClient({ dict }: { dict: any }) {
                   <div className="bg-white/10 p-3 rounded-lg group-hover:bg-primary group-hover:text-[#0D1B2A] transition-colors duration-300">
                     <span className="material-icons text-2xl">phone</span>
                   </div>
-                  <div className="ml-4">
+                  <div className="ms-4">
                     <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-1">{dict.phone}</p>
                     <p className="text-gray-300">+97477198295</p>
                     <p className="text-gray-400 text-sm mt-1">{dict.hours}</p>
@@ -78,7 +78,7 @@ export default function ContactClient({ dict }: { dict: any }) {
                   <div className="bg-white/10 p-3 rounded-lg group-hover:bg-primary group-hover:text-[#0D1B2A] transition-colors duration-300">
                     <span className="material-icons text-2xl">email</span>
                   </div>
-                  <div className="ml-4">
+                  <div className="ms-4">
                     <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-1">{dict.email}</p>
                     <p className="text-gray-300">Glovance.trading@gmail.com</p>
                   </div>
@@ -184,7 +184,7 @@ export default function ContactClient({ dict }: { dict: any }) {
         className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group"
         aria-label="Chat on WhatsApp"
       >
-        <span className="absolute right-full mr-4 bg-gray-900 text-white text-sm font-semibold px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
+        <span className="absolute right-full me-4 bg-gray-900 text-white text-sm font-semibold px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
           Chat with us!
         </span>
         <svg 
