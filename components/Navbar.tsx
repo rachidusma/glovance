@@ -20,19 +20,11 @@ export default function Navbar({ dict, currentLang }: { dict: any; currentLang: 
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0 flex items-center space-x-2">
             <Link href={`/${currentLang}`} className="flex items-center gap-2">
-              <div className="relative w-10 h-10 flex items-center justify-center bg-transparent border-2 border-primary rounded-full">
-                <span className="material-icons-outlined text-primary text-2xl transform -rotate-45">
-                  flight_takeoff
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-display font-bold text-2xl tracking-wide text-white uppercase leading-none">
-                  {dict.brand_name}
-                </span>
-                <span className="font-sans text-xs font-semibold tracking-[0.2em] text-primary uppercase">
-                  {dict.brand_desc}
-                </span>
-              </div>
+              <img 
+                src="/logo.png" 
+                alt="Glovance Trading Logo" 
+                className="h-12 w-auto object-contain" 
+              />
             </Link>
           </div>
           <div className="hidden md:flex items-center">
