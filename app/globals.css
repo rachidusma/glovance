@@ -12,8 +12,8 @@
   --color-text-light: #E5E7EB;
   --color-card-dark: #162235;
 
-  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-display: var(--font-oswald), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   --background-image-hero-pattern: url('https://images.unsplash.com/photo-1494412574643-35d324698427?q=80&w=2074&auto=format&fit=crop');
   --background-image-angled-shape: linear-gradient(115deg, transparent 75%, #A3D131 75%);

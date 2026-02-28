@@ -79,8 +79,6 @@ export default function ProductsClient({
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-        
         :root {
           --primary: #cce333;
         }
@@ -88,14 +86,6 @@ export default function ProductsClient({
         .dark {
           --background-dark: #0a192f;
           --card-dark: #112240;
-        }
-        
-        body {
-          font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        
-        .font-display {
-          font-family: 'Outfit', sans-serif;
         }
         
         .hero-pattern {
