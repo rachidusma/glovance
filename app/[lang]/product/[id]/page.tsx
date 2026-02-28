@@ -3,13 +3,19 @@ import { getDictionary } from "@/dictionaries/get-dictionary";
 import ProductDetailClient from "./ProductDetailClient";
 import { notFound } from "next/navigation";
 
+import { prisma } from "@/lib/prisma";
+
 async function getProduct(id: string) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/products/${id}`,
-    { cache: "no-store" }
-  );
-  if (!res.ok) return null;
-  return res.json();
+  try {
+    const product = await prisma.product.findUnique({
+      where: { id },
+      include: { category: true }
+    });
+    return product;
+  } catch (error) {
+    console.error("Failed to fetch product directly:", error);
+    return null;
+  }
 }
 
 export default async function ProductPage({
