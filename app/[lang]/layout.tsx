@@ -27,10 +27,12 @@ export default async function RootLayout({
   params
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>;
 }>) {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = langParam as Locale;
   const dict = await getDictionary(lang);
+
   
   return (
     <html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'} className="dark scroll-smooth" suppressHydrationWarning>
