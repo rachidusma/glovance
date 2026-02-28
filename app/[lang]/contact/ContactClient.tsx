@@ -14,7 +14,7 @@ export default function ContactClient({ dict }: { dict: any }) {
           }
         `
       }} />
-      <div className="relative bg-[#0D1B2A] py-16 sm:py-24">
+      <div className="relative bg-[#0D1B2A] pt-28 pb-16 sm:pt-36 sm:pb-24">
         <div className="absolute inset-0 overflow-hidden">
           <img alt="Global logistics network background" className="w-full h-full object-cover opacity-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI3ILfydM0ASQw-RlWSYqrUgO8y8juQMM0KLZbulHZB72oCbLRMrdnwukF25pP3tiJk9JT1b-DOol-VLWmgjQjffGZlC_49VGOhZ0G4AqJM9g69jqLiqeFCDmVz00xDuK7LiJQPbXmDdYVh2Yd-QdUws1w2XiTht91oQha6jWRRF72Ta7sALfar-1zoTshLAtxs-xyDO5yFmSPVFfFHiVlY6vvgixhjWcUOUPiQE0T8WP8eXWxwj3ki92zCc-NLHt1Bs4RS-POeqIs" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A] via-[#0D1B2A]/90 to-transparent"></div>
