@@ -9,7 +9,23 @@ async function getProduct(id: string) {
   try {
     const product = await prisma.product.findUnique({
       where: { id },
-      include: { category: true }
+      include: { 
+        category: {
+          include: {
+            products: {
+              where: { id: { not: id } }, // exclude current product
+              take: 4, // limit to 4 related products
+              select: {
+                id: true,
+                nameEn: true,
+                nameFr: true,
+                nameAr: true,
+                images: true,
+              }
+            }
+          }
+        } 
+      }
     });
     return product;
   } catch (error) {
