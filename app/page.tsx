@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function Home() {
@@ -15,7 +17,7 @@ export default function Home() {
           >
             <source src="/istockphoto-2194813689-640_adpp_is.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary/50 via-secondary/30 to-transparent dark:from-background-dark/70 dark:via-background-dark/40 dark:to-transparent/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 via-primary/40 to-primary/20 dark:from-background-dark/90 dark:via-primary/30 dark:to-primary/10"></div>
           <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/40 to-transparent transform skew-x-12 translate-x-20 hidden lg:block"></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -55,18 +57,18 @@ export default function Home() {
                 className="absolute top-10 right-10 w-64 h-80 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-20 transform -rotate-3 hover:rotate-0 transition-transform duration-500"
                 style={{
                   backgroundImage:
-                    "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDlL5rcs4HktBkn8Yr64IEaJHb7bHpBPdEM8gkv9zKMojhMs2w-JYUHmYPmFLPsuRmvaxB78XuNdEm8DYb325KNH5MP54TP4NVkH0XislMTlpWlUIGPJUOK8s9we7pvDeeGmQGh6VgwhgUFDuaOm287Kb2Vee4gfTBURSJ0Loiv2XwRe9WasPyXaX8FlkgzsPfgWuMfTpElPsF4oiebtGSxt4q3syepRBHzfORwW0E4_CkPvOVUyqmlSQZ5xn4Fu2wBHFsSMvxpOfBE')",
+                    "url('/chocolate.jpg')",
                 }}
               >
                 <div className="absolute bottom-0 left-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
-                  Logistics
+                  Food
                 </div>
               </div>
               <div
                 className="absolute top-40 left-10 w-64 h-80 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-10 transform rotate-3 hover:rotate-0 transition-transform duration-500"
                 style={{
                   backgroundImage:
-                    "url('https://lh3.googleusercontent.com/aida-public/AB6AXuChwd97runEygyBteJHd8I2MA48-xAkqn6794WF37gGwFmxrhPkyoLI-xfOmCgsaWfVKrsnX9Oc41_qAV1_V3lLdRRtEXwQXpjHwONY2-R2dI7zLVdcQGuKN1M3w2tI_4JdzNozFmJFOqODd-vA0mX1Zv-t_jCUk_vKw_fSLwLy7zy7iBJBHzbkJsIAMvzpKTIDwvVl7W1_-z5g0X57gFD_t4qQEndgEhcJljG6wfzfHiadO7ZZmXmCOdON3OyGjKi-ITAqjPxIoz29')",
+                    "url('/CF648EE9E3F7404F.jpg')",
                 }}
               >
                 <div className="absolute bottom-0 left-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
@@ -101,7 +103,12 @@ export default function Home() {
         <div className="absolute top-0 left-0 w-2 h-full bg-primary hidden md:block"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <h2 className="text-primary font-bold text-xl uppercase mb-2 tracking-widest">
                 About
               </h2>
@@ -122,7 +129,12 @@ export default function Home() {
                 </p>
               </div>
               <div className="mt-12 space-y-8">
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
                   <h4 className="text-2xl font-display font-bold text-secondary dark:text-white uppercase mb-3 flex items-center">
                     <span className="bg-primary text-secondary p-1 mr-3 rounded">
                       <span className="material-icons-outlined text-xl">
@@ -136,8 +148,13 @@ export default function Home() {
                     reliable, carefully selected products, while ensuring smooth
                     logistics and high-quality service.
                   </p>
-                </div>
-                <div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
                   <h4 className="text-2xl font-display font-bold text-secondary dark:text-white uppercase mb-3 flex items-center">
                     <span className="bg-primary text-secondary p-1 mr-3 rounded">
                       <span className="material-icons-outlined text-xl">
@@ -168,10 +185,15 @@ export default function Home() {
                       Innovation
                     </li>
                   </ul>
-                </div>
+                </motion.div>
               </div>
-            </div>
-            <div className="relative flex flex-col justify-between">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative flex flex-col justify-between">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                 <img
                   alt="Cargo shipping container"
@@ -215,7 +237,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -365,6 +387,24 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className="bg-primary py-16 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-5xl font-display font-black text-white uppercase italic mb-4 tracking-tight">
+            READY TO SCALE YOUR SUPPLY CHAIN?
+          </h2>
+          <p className="text-white text-lg md:text-xl mb-8 font-medium">
+            Partner with Algeria's most reliable export network for the 2026 season.
+          </p>
+          <Link
+            className="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded font-bold transition-all uppercase tracking-wider"
+            href="/contact"
+          >
+            REQUEST PRICING NOW
+          </Link>
+        </div>
+      </section>
+
 
       <section className="py-20 bg-background-light dark:bg-background-dark" id="contact">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
