@@ -109,7 +109,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
             <button
               onClick={prev}
               aria-label="Previous"
-              className={`absolute ${lang === 'ar' ? '-right-5' : '-left-5'} top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group`}
+              className={`absolute -end-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group`}
             >
               <span className={`material-icons-outlined transition-transform ${lang === 'ar' ? 'group-hover:translate-x-0.5' : 'group-hover:-translate-x-0.5'}`}>
                 {lang === 'ar' ? 'chevron_right' : 'chevron_left'}
@@ -162,10 +162,10 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
                           {/* Product count badge */}
-                          <div className="absolute top-4 right-4 bg-primary text-secondary text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
+                          <div className="absolute top-4 end-4 bg-primary text-secondary text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
                             {cat._count.products} {cat._count.products === 1 ? dict.product_count : dict.products_count}
                           </div>
-                          <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                          <div className="absolute bottom-0 start-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                             <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">
                               {name}
                             </h3>
@@ -191,7 +191,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
             <button
               onClick={next}
               aria-label="Next"
-              className={`absolute ${lang === 'ar' ? '-left-5' : '-right-5'} top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group`}
+              className={`absolute -start-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group`}
             >
               <span className={`material-icons-outlined transition-transform ${lang === 'ar' ? 'group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'}`}>
                 {lang === 'ar' ? 'chevron_left' : 'chevron_right'}
@@ -241,7 +241,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
             <source src="/istockphoto-2194813689-640_adpp_is.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-blue-900/60 z-10"></div>
-          <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-secondary/40 to-transparent transform skew-x-12 translate-x-20 hidden lg:block"></div>
+          <div className="absolute top-0 end-0 w-1/3 h-full bg-gradient-to-l from-secondary/40 to-transparent transform skew-x-12 translate-x-20 hidden lg:block"></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -276,35 +276,35 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
             </div>
             <div className="hidden lg:block relative h-[600px]">
               <div
-                className="absolute top-10 right-10 w-64 h-80 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-20 transform -rotate-3 hover:rotate-0 transition-transform duration-500"
+                className="absolute top-10 end-10 w-64 h-80 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-20 transform -rotate-3 hover:rotate-0 transition-transform duration-500"
                 style={{
                   backgroundImage:
                     "url('/chocolate.jpg')",
                 }}
               >
-                <div className="absolute bottom-0 left-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
+                <div className="absolute bottom-0 start-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
                   {dict.hero.food}
                 </div>
               </div>
               <div
-                className="absolute top-40 left-10 w-64 h-80 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-10 transform rotate-3 hover:rotate-0 transition-transform duration-500"
+                className="absolute top-40 start-10 w-64 h-80 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-10 transform rotate-3 hover:rotate-0 transition-transform duration-500"
                 style={{
                   backgroundImage:
                     "url('/CF648EE9E3F7404F.jpg')",
                 }}
               >
-                <div className="absolute bottom-0 left-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
+                <div className="absolute bottom-0 start-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
                   {dict.hero.fresh_produce}
                 </div>
               </div>
               <div
-                className="absolute bottom-20 right-20 w-48 h-48 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-30 transform hover:scale-105 transition-transform duration-500"
+                className="absolute bottom-20 end-20 w-48 h-48 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-30 transform hover:scale-105 transition-transform duration-500"
                 style={{
                   backgroundImage:
                     "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCgJX4RK0Op-nZJX_HCWWxSFLrnmSjaPlHJt1EoWBREtnwrDT7KFjjCxc-8MkXcj09lL6Ds3y8ArzmNxUWmsD2ElxTQEEW3cAdrTuI9dcn_JcPriVPUP6FKv-f3Cn8jwKHmjerf9G9m-Lm4vQ241lMVfdifOznTvW5A0a35CtgntukflBM3bsUTwMAOdR5SA9vgcCy53fAkOROqoy_6jdgrcPsnws3U-2pI6hr4OWn6P_-6Zr4cWFYL3_Zs-MI97titjuGcETfaPmt1')",
                 }}
               >
-                <div className="absolute bottom-0 left-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
+                <div className="absolute bottom-0 start-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
                   {dict.hero.appliances}
                 </div>
               </div>
@@ -322,7 +322,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
       </section>
 
       <section className="py-20 bg-white dark:bg-background-dark relative" id="about">
-        <div className="absolute top-0 left-0 w-2 h-full bg-primary hidden md:block"></div>
+        <div className="absolute top-0 start-0 w-2 h-full bg-primary hidden md:block"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <motion.div
@@ -421,15 +421,15 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLl-OXz1aQIbyH2vyi8zqMZF3M5HR9vXm31J2_fh64qXU59U_6JdUgLorWj8sq9mknNtbbiF2UZyFFxmLGMbVL6XcmKmMsyRsyyyTEuysJUF82myftgxZCzfz6qcV5hHIIPDE-2ydyQHRUsNPoiwewPNLzfNRB9NXUwejKii0il5Ev8y0IDzu06g1Iix779yauVwRhL4y8uXxVxdfPKBOyNjlaUGwh21ma84ZWM0ts29kZAdftSWPc5xMF7UKd_RjByegSX365HKGA"
                 />
               </div>
-              <div className="absolute -bottom-10 -right-10 w-96 h-96 overflow-hidden rounded-[40px] border-8 border-white dark:border-[#0D1B2A] shadow-2xl z-20 hidden md:block group">
+              <div className="absolute -bottom-10 -end-10 w-96 h-96 overflow-hidden rounded-[40px] border-8 border-white dark:border-[#0D1B2A] shadow-2xl z-20 hidden md:block group">
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                 <img alt="Modern Home Appliances" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" src="/CF648EE9E3F7404F.jpg" />
-                <div className="absolute bottom-6 left-6 z-20">
+                <div className="absolute bottom-6 start-6 z-20">
                   <span className="font-display font-bold text-white text-2xl drop-shadow-lg">{dict.homeAppliances}</span>
                 </div>
               </div>
               <div className="bg-secondary dark:bg-accent-blue rounded-xl p-8 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary opacity-10 rounded-full blur-2xl"></div>
+                <div className="absolute top-0 end-0 -mt-10 -me-10 w-40 h-40 bg-primary opacity-10 rounded-full blur-2xl"></div>
                 <div className="space-y-6 relative z-10">
                   <div className="flex items-center group">
                     <span className="material-icons-outlined text-primary text-4xl me-4 group-hover:scale-110 transition-transform">
@@ -641,7 +641,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                   </a>
                 </div>
               </div>
-              <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-primary rounded-full opacity-10 z-0 pointer-events-none"></div>
+              <div className="absolute -bottom-20 -end-20 w-80 h-80 bg-primary rounded-full opacity-10 z-0 pointer-events-none"></div>
             </div>
           </div>
         </div>
