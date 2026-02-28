@@ -166,7 +166,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
                           <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
                           {/* Product count badge */}
                           <div className="absolute top-4 right-4 bg-primary text-secondary text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
-                            {cat._count.products} {cat._count.products === 1 ? dict.catalogue.product_count : dict.catalogue.products_count}
+                            {cat._count.products} {cat._count.products === 1 ? dict.product_count : dict.products_count}
                           </div>
                           <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                             <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">
