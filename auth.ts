@@ -1,4 +1,5 @@
-import NextAuth from "next-auth";
+Failed to compile.
+Type error: Type 'typeof import("/vercel/path0/app/[lang]/layout")' does not satisfy the constraint 'LayoutConfig<"/[lang]">'.import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
