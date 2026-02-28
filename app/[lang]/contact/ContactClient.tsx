@@ -70,7 +70,7 @@ export default function ContactClient({ dict }: { dict: any }) {
                   </div>
                   <div className="ml-4">
                     <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-1">{dict.phone}</p>
-                    <p className="text-gray-300">+974 4400 1234</p>
+                    <p className="text-gray-300">+97477198295</p>
                     <p className="text-gray-400 text-sm mt-1">{dict.hours}</p>
                   </div>
                 </div>
@@ -80,8 +80,7 @@ export default function ContactClient({ dict }: { dict: any }) {
                   </div>
                   <div className="ml-4">
                     <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-1">{dict.email}</p>
-                    <p className="text-gray-300">info@glovancetrading.com</p>
-                    <p className="text-gray-300">sales@glovancetrading.com</p>
+                    <p className="text-gray-300">Glovance.trading@gmail.com</p>
                   </div>
                 </div>
               </div>
