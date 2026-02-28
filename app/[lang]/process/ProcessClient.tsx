@@ -37,38 +37,78 @@ export default function ProcessClient({ dict }: { dict: any }) {
           }
         `
       }} />
-      <main className="relative overflow-hidden min-h-screen bg-background-light dark:bg-background-dark">
-        <div className="absolute inset-0 z-0 opacity-10 dark:opacity-20 pointer-events-none bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')] bg-cover bg-center grayscale mix-blend-multiply dark:mix-blend-overlay"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background-light dark:to-background-dark z-0 h-full w-full"></div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 lg:pt-40 lg:pb-24">
-          <div className="text-center mb-20">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-primary font-display font-bold tracking-widest uppercase mb-3">
-              {dict.badge}
-            </motion.h2>
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl md:text-5xl font-display font-bold text-gray-900 dark:text-white mb-6">
-              {dict.title_1} <span className="text-primary">{dict.title_2}</span>
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400 font-light">
-              {dict.desc}
-            </motion.p>
-            <motion.div 
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="w-24 h-1 bg-primary mx-auto mt-8 rounded-full"></motion.div>
+      <main className="relative overflow-hidden min-h-screen bg-gray-50 dark:bg-background-dark transition-colors duration-300">
+        
+        {/* Modern Hero Section */}
+        <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-[#0a192f]">
+          {/* Background Elements */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-luminosity"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0a192f] via-[#0a192f]/90 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] via-transparent to-transparent"></div>
           </div>
+          
+          {/* Abstract Shapes */}
+          <div className="absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none hidden md:block">
+            <div className="absolute top-[20%] right-[10%] w-96 h-96 bg-primary rounded-full mix-blend-screen filter blur-[100px] animate-pulse"></div>
+            <div className="absolute bottom-[10%] right-[30%] w-72 h-72 bg-blue-500 rounded-full mix-blend-screen filter blur-[80px]"></div>
+          </div>
+
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-3xl">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary mb-6">
+                  <span className="material-icons-outlined text-sm">rocket_launch</span>
+                  <span className="text-sm font-bold tracking-widest uppercase">{dict.badge}</span>
+                </div>
+              </motion.div>
+              
+              <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-5xl md:text-7xl font-display font-bold text-white leading-tight mb-6 uppercase">
+                {dict.title_1} <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">
+                  {dict.title_2}
+                </span>
+              </motion.h1>
+              
+              <motion.p 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-lg md:text-xl text-gray-300 font-light leading-relaxed mb-10 max-w-2xl">
+                {dict.desc}
+              </motion.p>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-wrap gap-4"
+              >
+                <button 
+                  onClick={() => {
+                    document.getElementById('process-steps')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="bg-primary text-[#0a192f] font-bold py-4 px-8 rounded-xl shadow-lg shadow-primary/20 hover:bg-[#b8cc2e] hover:-translate-y-1 transition-all flex items-center gap-2">
+                  Explore Steps <span className="material-icons-outlined text-xl">arrow_downward</span>
+                </button>
+                <button onClick={() => window.location.href = '#contact'} className="bg-white/5 border border-white/10 text-white font-bold py-4 px-8 rounded-xl hover:bg-white/10 transition-all flex items-center gap-2 backdrop-blur-sm">
+                  {dict.contact_btn} <span className="material-icons-outlined text-xl">arrow_forward</span>
+                </button>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Process Steps */}
+        <section id="process-steps" className="py-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative">
             <div className="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 -translate-y-1/2 rounded-full overflow-hidden">
               <div className="process-line w-full h-full bg-gradient-to-r from-primary/20 via-primary to-primary/20 animate-pulse"></div>
@@ -195,7 +235,7 @@ export default function ProcessClient({ dict }: { dict: any }) {
               </Link>
             </div>
           </motion.div>
-        </div>
+        </section>
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-primary opacity-5 rounded-full blur-3xl transform translate-y-1/2 translate-x-1/2"></div>
         <div className="absolute top-20 left-0 w-96 h-96 bg-blue-900 opacity-10 rounded-full blur-3xl transform -translate-x-1/2"></div>
       </main>
