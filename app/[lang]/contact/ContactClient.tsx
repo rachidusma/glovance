@@ -1,7 +1,48 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function ContactClient({ dict }: { dict: any }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      company: formData.get("company"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        setSubmitStatus("success");
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error(error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus("idle"), 5000);
+    }
+  };
+
   return (
     <>
       <style dangerouslySetInnerHTML={{
@@ -102,11 +143,11 @@ export default function ContactClient({ dict }: { dict: any }) {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="lg:w-3/5 p-10 lg:p-12 bg-white dark:bg-card-dark">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{dict.send_msg}</h3>
-              <form action="#" className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" htmlFor="name">{dict.form_name}</label>
-                    <input className="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-white shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-3 px-4" id="name" name="name" placeholder={dict.form_name_ph} type="text" />
+                    <input className="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-white shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-3 px-4" id="name" name="name" placeholder={dict.form_name_ph} type="text" required />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" htmlFor="company">{dict.form_company}</label>
@@ -116,7 +157,7 @@ export default function ContactClient({ dict }: { dict: any }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" htmlFor="email">{dict.form_email}</label>
-                    <input className="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-white shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-3 px-4" id="email" name="email" placeholder={dict.form_email_ph} type="email" />
+                    <input className="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-white shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-3 px-4" id="email" name="email" placeholder={dict.form_email_ph} type="email" required />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" htmlFor="phone">{dict.form_phone}</label>
@@ -135,12 +176,40 @@ export default function ContactClient({ dict }: { dict: any }) {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" htmlFor="message">{dict.form_message}</label>
-                  <textarea className="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-white shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-3 px-4" id="message" name="message" placeholder={dict.form_message_ph} rows={4}></textarea>
+                  <textarea className="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-white shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-3 px-4" id="message" name="message" placeholder={dict.form_message_ph} rows={4} required></textarea>
                 </div>
+                
+                {submitStatus === "success" && (
+                  <div className="p-4 rounded-lg bg-green-50 text-green-800 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800 flex items-center">
+                    <span className="material-icons-outlined me-2">check_circle</span>
+                    Message sent successfully!
+                  </div>
+                )}
+                
+                {submitStatus === "error" && (
+                  <div className="p-4 rounded-lg bg-red-50 text-red-800 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800 flex items-center">
+                    <span className="material-icons-outlined me-2">error_outline</span>
+                    Failed to send message. Please try again.
+                  </div>
+                )}
+
                 <div className="pt-4">
-                  <button className="w-full sm:w-auto px-8 py-3 bg-primary text-[#0D1B2A] font-bold text-base rounded shadow hover:bg-opacity-90 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2" type="submit">
-                    <span>{dict.btn_send}</span>
-                    <span className="material-icons text-sm">send</span>
+                  <button 
+                    disabled={isSubmitting}
+                    className="w-full sm:w-auto px-8 py-3 bg-primary text-[#0D1B2A] font-bold text-base rounded shadow hover:bg-opacity-90 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70" 
+                    type="submit"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <span className="animate-spin h-5 w-5 border-2 border-current border-t-transparent rounded-full" />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>{dict.btn_send}</span>
+                        <span className="material-icons text-sm">send</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </form>

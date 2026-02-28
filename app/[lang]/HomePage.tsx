@@ -233,6 +233,43 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
 }
 
 export default function Home({ dict, lang }: { dict: any; lang: string }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        setSubmitStatus("success");
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error(error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus("idle"), 5000);
+    }
+  };
+
   return (
     <>
       <section className="relative h-screen flex items-center justify-center overflow-hidden" id="home">
@@ -540,7 +577,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
               <p className="text-gray-500 dark:text-gray-400 mb-8">
                 {dict.get_in_touch.desc}
               </p>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
@@ -551,7 +588,9 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                   <input
                     className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-colors dark:text-white"
                     id="name"
+                    name="name"
                     type="text"
+                    required
                   />
                 </div>
                 <div>
@@ -564,7 +603,9 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                   <input
                     className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-colors dark:text-white"
                     id="email"
+                    name="email"
                     type="email"
+                    required
                   />
                 </div>
                 <div>
@@ -577,14 +618,39 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                   <textarea
                     className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-colors dark:text-white"
                     id="message"
+                    name="message"
+                    required
                     rows={4}
                   ></textarea>
                 </div>
+                
+                {submitStatus === "success" && (
+                  <div className="p-4 rounded-lg bg-green-50 text-green-800 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800 flex items-center">
+                    <span className="material-icons-outlined me-2">check_circle</span>
+                    Message sent successfully!
+                  </div>
+                )}
+                
+                {submitStatus === "error" && (
+                  <div className="p-4 rounded-lg bg-red-50 text-red-800 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800 flex items-center">
+                    <span className="material-icons-outlined me-2">error_outline</span>
+                    Failed to send message. Please try again.
+                  </div>
+                )}
+
                 <button
-                  className="w-full bg-secondary dark:bg-primary text-white dark:text-secondary py-4 rounded-lg font-bold uppercase tracking-wider hover:opacity-90 transition-opacity"
+                  className="w-full bg-secondary dark:bg-primary text-white dark:text-secondary py-4 rounded-lg font-bold uppercase tracking-wider hover:opacity-90 transition-opacity disabled:opacity-70 flex items-center justify-center gap-2"
                   type="submit"
+                  disabled={isSubmitting}
                 >
-                  {dict.get_in_touch.btn_send}
+                  {isSubmitting ? (
+                    <>
+                      <span className="animate-spin h-5 w-5 border-2 border-current border-t-transparent rounded-full" />
+                      Sending...
+                    </>
+                  ) : (
+                    dict.get_in_touch.btn_send
+                  )}
                 </button>
               </form>
             </div>
