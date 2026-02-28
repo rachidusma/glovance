@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { nameEn, nameFr, nameAr, descEn, descFr, descAr, images, categoryId } =
+    const { nameEn, nameFr, nameAr, descEn, descFr, descAr, images, inStock, categoryId } =
       await request.json();
 
     if (!nameEn || !nameFr || !nameAr || !categoryId) {
@@ -44,6 +44,7 @@ export async function POST(request: NextRequest) {
         descFr,
         descAr,
         images: images || [],
+        inStock: inStock ?? true,
         categoryId,
       },
       include: { category: true },

@@ -23,6 +23,7 @@ interface Product {
   descFr: string | null;
   descAr: string | null;
   images: string[];
+  inStock: boolean;
   category: {
     id: string;
     nameEn: string;
@@ -149,9 +150,14 @@ export default function ProductDetailClient({
             className="mt-10 px-2 sm:px-0 sm:mt-16 lg:mt-0"
           >
             <div className="mb-6">
-              <span className="text-xs font-semibold text-primary uppercase tracking-widest mb-2 block">
-                {catName}
-              </span>
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-xs font-semibold text-primary uppercase tracking-widest block">
+                  {catName}
+                </span>
+                <span className={`text-xs font-bold px-2.5 py-1 rounded uppercase tracking-wide ${product.inStock ? "bg-green-100/10 text-green-600 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800" : "bg-red-100/10 text-red-600 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800"}`}>
+                  {product.inStock ? "In Stock" : "Out of Stock"}
+                </span>
+              </div>
               <h1 className="text-3xl md:text-4xl font-display font-bold text-[#0b1121] dark:text-white tracking-tight mb-4">
                 {name}
               </h1>

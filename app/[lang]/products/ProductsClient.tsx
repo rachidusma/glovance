@@ -20,6 +20,7 @@ interface Product {
   descFr: string | null;
   descAr: string | null;
   images: string[];
+  inStock: boolean;
   category: { id: string; nameEn: string; nameFr: string; nameAr: string };
 }
 
@@ -357,11 +358,16 @@ export default function ProductsClient({
                             className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                             src={thumb}
                           />
-                          <div className="absolute bottom-4 left-4 z-20">
-                            <span className="bg-primary text-[#0a192f] text-xs font-bold px-2 py-1 rounded mb-2 inline-block uppercase tracking-wide">
+                          <div className="absolute bottom-4 left-4 z-20 flex flex-col gap-2 items-start">
+                            <span className="bg-primary text-[#0a192f] text-xs font-bold px-2 py-1 rounded inline-block uppercase tracking-wide">
                               {catName}
                             </span>
-                            <h3 className="text-2xl font-display font-bold text-white uppercase line-clamp-2">
+                            {!product.inStock && (
+                              <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-red-400/50 inline-block uppercase tracking-wide">
+                                Out of Stock
+                              </span>
+                            )}
+                            <h3 className="text-2xl font-display font-bold text-white uppercase line-clamp-2 mt-1">
                               {name}
                             </h3>
                           </div>

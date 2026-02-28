@@ -16,12 +16,14 @@ interface ProductForm {
   descEn: string; descFr: string; descAr: string;
   categoryId: string;
   images: string[];
+  inStock: boolean;
 }
 
 const empty: ProductForm = {
   nameEn: "", nameFr: "", nameAr: "",
   descEn: "", descFr: "", descAr: "",
   categoryId: "", images: [],
+  inStock: true,
 };
 
 export default function NewProductPage() {
@@ -196,6 +198,21 @@ export default function NewProductPage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* inStock toggle */}
+            <div className="bg-[#112240] rounded-2xl p-6 border border-gray-800 flex items-center justify-between">
+              <div>
+                <h2 className="text-white font-semibold flex items-center gap-2">
+                  <span className="material-icons-outlined text-primary">inventory_2</span>
+                  Availability
+                </h2>
+                <p className="text-gray-400 text-sm mt-1">If turned off, product will show as "Out of stock"</p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" className="sr-only peer" checked={form.inStock} onChange={(e) => setForm(f => ({ ...f, inStock: e.target.checked }))} />
+                <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              </label>
             </div>
 
             <div className="flex gap-3">

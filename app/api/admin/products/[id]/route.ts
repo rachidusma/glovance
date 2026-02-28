@@ -32,12 +32,12 @@ export async function PUT(
     }
 
     const { id } = await params;
-    const { nameEn, nameFr, nameAr, descEn, descFr, descAr, images, categoryId } =
+    const { nameEn, nameFr, nameAr, descEn, descFr, descAr, images, inStock, categoryId } =
       await request.json();
 
     const product = await prisma.product.update({
       where: { id },
-      data: { nameEn, nameFr, nameAr, descEn, descFr, descAr, images, categoryId },
+      data: { nameEn, nameFr, nameAr, descEn, descFr, descAr, images, inStock, categoryId },
       include: { category: true },
     });
     return NextResponse.json(product);
