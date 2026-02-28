@@ -49,6 +49,7 @@ export default function LanguageSwitcher({ currentLang }: { currentLang: string 
               <Link
                 key={lang.code}
                 href={redirectedPathName(lang.code)}
+                scroll={false}
                 className={`block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors ${
                   currentLang === lang.code ? "text-primary font-bold" : "text-gray-300"
                 }`}
