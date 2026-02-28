@@ -289,9 +289,6 @@ export default function ProductsClient({
                 <h2 className="text-3xl font-display font-bold uppercase text-gray-800 dark:text-white">
                   {dict.featured}
                 </h2>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
-                  {loading ? "Loading..." : `${filtered.length} products`}
-                </div>
               </div>
 
               {loading ? (

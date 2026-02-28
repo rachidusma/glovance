@@ -96,11 +96,6 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
               {dict.title_2}
             </span>
           </h2>
-          {!loading && categories.length > 0 && (
-            <p className="text-gray-500 dark:text-gray-400 mt-3 text-sm">
-              {categories.length} {categories.length === 1 ? "category" : "categories"} available
-            </p>
-          )}
         </div>
 
         {/* Carousel */}
