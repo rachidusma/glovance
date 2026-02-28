@@ -81,6 +81,17 @@
       "title": "READY TO SCALE YOUR SUPPLY CHAIN?",
       "desc": "Partner with Algeria's most reliable export network for the 2026 season.",
       "btn": "REQUEST PRICING NOW"
+    },
+    "get_in_touch": {
+      "title": "Get In Touch",
+      "desc": "Interested in partnership or have questions about our products? Fill out the form below.",
+      "label_name": "Full Name",
+      "label_email": "Email Address",
+      "label_message": "Message",
+      "btn_send": "Send Message",
+      "hq": "Headquarters",
+      "address": "Doha, Qatar\nAl Dafna Financial District\nPO Box 12345",
+      "follow_us": "Follow Us"
     }
   },
   "about_page": {

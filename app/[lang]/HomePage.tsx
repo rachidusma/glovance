@@ -521,11 +521,10 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
           <div className="bg-white dark:bg-[#151f2e] rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
             <div className="w-full md:w-1/2 p-10 md:p-14">
               <h2 className="text-3xl font-display font-bold text-secondary dark:text-white mb-6 uppercase">
-                Get In Touch
+                {dict.home.get_in_touch.title}
               </h2>
               <p className="text-gray-500 dark:text-gray-400 mb-8">
-                Interested in partnership or have questions about our products?
-                Fill out the form below.
+                {dict.home.get_in_touch.desc}
               </p>
               <form className="space-y-6">
                 <div>
@@ -533,7 +532,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                     htmlFor="name"
                   >
-                    Full Name
+                    {dict.home.get_in_touch.label_name}
                   </label>
                   <input
                     className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-colors dark:text-white"
@@ -546,7 +545,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                     htmlFor="email"
                   >
-                    Email Address
+                    {dict.home.get_in_touch.label_email}
                   </label>
                   <input
                     className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-colors dark:text-white"
@@ -559,7 +558,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                     htmlFor="message"
                   >
-                    Message
+                    {dict.home.get_in_touch.label_message}
                   </label>
                   <textarea
                     className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-colors dark:text-white"
@@ -571,24 +570,22 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                   className="w-full bg-secondary dark:bg-primary text-white dark:text-secondary py-4 rounded-lg font-bold uppercase tracking-wider hover:opacity-90 transition-opacity"
                   type="submit"
                 >
-                  Send Message
+                  {dict.home.get_in_touch.btn_send}
                 </button>
               </form>
             </div>
             <div className="w-full md:w-1/2 bg-secondary text-white p-10 md:p-14 flex flex-col justify-between relative overflow-hidden">
               <div className="relative z-10">
                 <h3 className="text-2xl font-display font-bold mb-8 uppercase">
-                  Headquarters
+                  {dict.home.get_in_touch.hq}
                 </h3>
                 <div className="space-y-6">
                   <div className="flex items-start">
                     <span className="material-icons-outlined text-primary mr-4 mt-1">
                       location_on
                     </span>
-                    <p className="text-gray-300">
-                      Doha, Qatar<br />
-                      Al Dafna Financial District<br />
-                      PO Box 12345
+                    <p className="text-gray-300" style={{ whiteSpace: "pre-line" }}>
+                      {dict.home.get_in_touch.address}
                     </p>
                   </div>
                   <div className="flex items-center">
@@ -607,7 +604,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
               </div>
               <div className="relative z-10 mt-12">
                 <p className="text-primary font-bold uppercase tracking-widest text-sm mb-4">
-                  Follow Us
+                  {dict.home.get_in_touch.follow_us}
                 </p>
                 <div className="flex space-x-4">
                   <a

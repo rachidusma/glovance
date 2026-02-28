@@ -81,6 +81,17 @@
       "title": "PRÊT À DÉVELOPPER VOTRE CHAÎNE D'APPROVISIONNEMENT ?",
       "desc": "Associez-vous au réseau d'exportation le plus fiable d'Algérie pour la saison 2026.",
       "btn": "DEMANDER UN DEVIS MAINTENANT"
+    },
+    "get_in_touch": {
+      "title": "Nous Contacter",
+      "desc": "Intéressé par un partenariat ou vous avez des questions sur nos produits ? Remplissez le formulaire ci-dessous.",
+      "label_name": "Nom Complet",
+      "label_email": "Adresse Email",
+      "label_message": "Message",
+      "btn_send": "Envoyer le Message",
+      "hq": "Siège Social",
+      "address": "Doha, Qatar\nQuartier Financier Al Dafna\nBP 12345",
+      "follow_us": "Suivez-Nous"
     }
   },
   "about_page": {
