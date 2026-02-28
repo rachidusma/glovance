@@ -38,8 +38,19 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
   const [isHovered, setIsHovered] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Number of cards visible depending on screen — we simulate 3 visible for desktop
-  const VISIBLE = 3;
+  // Number of cards visible depending on screen
+  const [visibleItems, setVisibleItems] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setVisibleItems(1);
+      else if (window.innerWidth < 1024) setVisibleItems(2);
+      else setVisibleItems(3);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     fetch("/api/categories")
@@ -50,7 +61,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
       });
   }, []);
 
-  const maxIndex = Math.max(0, categories.length - VISIBLE);
+  const maxIndex = Math.max(0, categories.length - visibleItems);
 
   const next = useCallback(() => {
     setActiveIndex((i) => (i >= maxIndex ? 0 : i + 1));
@@ -62,10 +73,10 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
 
   // Auto-advance every 4s when not hovered
   useEffect(() => {
-    if (isHovered || loading || categories.length <= VISIBLE) return;
+    if (isHovered || loading || categories.length <= visibleItems) return;
     timerRef.current = setTimeout(next, 4000);
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [activeIndex, isHovered, loading, categories.length, next]);
+  }, [activeIndex, isHovered, loading, categories.length, next, visibleItems]);
 
   const skeletons = Array.from({ length: 4 });
 
@@ -97,7 +108,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
           onMouseLeave={() => setIsHovered(false)}
         >
           {/* Prev Button */}
-          {!loading && categories.length > VISIBLE && (
+          {!loading && categories.length > visibleItems && (
             <button
               onClick={prev}
               aria-label="Previous"
@@ -111,14 +122,14 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
           <div className="overflow-hidden">
             <div
               className="flex gap-6 transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(calc(-${activeIndex} * (100% / ${VISIBLE} + 8px)))` }}
+              style={{ transform: `translateX(calc(-${activeIndex} * (100% / ${visibleItems} + 8px)))` }}
             >
               {loading
                 ? skeletons.map((_, i) => (
                     <div
                       key={i}
                       className="flex-shrink-0 rounded-xl overflow-hidden h-96 bg-gray-200 dark:bg-gray-800 animate-pulse"
-                      style={{ width: `calc(100% / ${VISIBLE} - ${(VISIBLE - 1) * 24 / VISIBLE}px)` }}
+                      style={{ width: `calc(100% / ${visibleItems} - ${(visibleItems - 1) * 24 / visibleItems}px)` }}
                     />
                   ))
                 : categories.length === 0
@@ -140,7 +151,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: i * 0.05 }}
                         className="flex-shrink-0 group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer"
-                        style={{ width: `calc(100% / ${VISIBLE} - ${(VISIBLE - 1) * 24 / VISIBLE}px)` }}
+                        style={{ width: `calc(100% / ${visibleItems} - ${(visibleItems - 1) * 24 / visibleItems}px)` }}
                       >
                         <Link href={`/${lang}/products`}>
                           <img
@@ -175,7 +186,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
           </div>
 
           {/* Next Button */}
-          {!loading && categories.length > VISIBLE && (
+          {!loading && categories.length > visibleItems && (
             <button
               onClick={next}
               aria-label="Next"
@@ -187,7 +198,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
         </div>
 
         {/* Dot Indicators */}
-        {!loading && categories.length > VISIBLE && (
+        {!loading && categories.length > visibleItems && (
           <div className="flex justify-center gap-2 mt-8">
             {Array.from({ length: maxIndex + 1 }).map((_, i) => (
               <button
