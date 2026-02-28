@@ -176,7 +176,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
                             )}
                             <span className="mt-4 inline-flex items-center text-primary text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity delay-75">
                               {dict.explore}
-                              <span className="material-icons-outlined ml-1 text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                              <span className="material-icons-outlined ms-1 text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
                             </span>
                           </div>
                         </Link>
@@ -264,7 +264,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                   href={`/${lang}/products`}
                 >
                   {dict.hero.view_catalog}
-                  <span className="material-icons-outlined ml-2">arrow_forward</span>
+                  <span className="material-icons-outlined ms-2">arrow_forward</span>
                 </Link>
                 <Link
                   className="border border-white text-white hover:bg-white hover:text-secondary px-8 py-4 rounded font-bold transition-all uppercase tracking-wider flex items-center"
@@ -595,7 +595,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                 </h3>
                 <div className="space-y-6">
                   <div className="flex items-start">
-                    <span className="material-icons-outlined text-primary mr-4 mt-1">
+                    <span className="material-icons-outlined text-primary me-4 mt-1">
                       location_on
                     </span>
                     <p className="text-gray-300" style={{ whiteSpace: "pre-line" }}>
@@ -603,16 +603,16 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                     </p>
                   </div>
                   <div className="flex items-center">
-                    <span className="material-icons-outlined text-primary mr-4">
+                    <span className="material-icons-outlined text-primary me-4">
                       phone
                     </span>
-                    <p className="text-gray-300">+974 4400 1234</p>
+                    <p className="text-gray-300">+97477198295</p>
                   </div>
                   <div className="flex items-center">
-                    <span className="material-icons-outlined text-primary mr-4">
+                    <span className="material-icons-outlined text-primary me-4">
                       email
                     </span>
-                    <p className="text-gray-300">info@glovancetrading.com</p>
+                    <p className="text-gray-300">Glovance.trading@gmail.com</p>
                   </div>
                 </div>
               </div>

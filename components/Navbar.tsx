@@ -36,7 +36,7 @@ export default function Navbar({ dict, currentLang }: { dict: any; currentLang: 
             </Link>
           </div>
           <div className="hidden md:flex items-center">
-            <div className="ml-10 flex items-baseline space-x-8">
+            <div className="ms-10 flex items-baseline space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -46,7 +46,7 @@ export default function Navbar({ dict, currentLang }: { dict: any; currentLang: 
                   {link.name}
                 </Link>
               ))}
-              <div className="pl-4 border-l border-gray-700 flex items-center gap-4">
+              <div className="ps-4 border-s border-gray-700 flex items-center gap-4">
                 <LanguageSwitcher currentLang={currentLang} />
                 <Link
                   className="bg-primary text-secondary hover:bg-white px-5 py-2 rounded-md text-sm font-bold transition-all uppercase tracking-wider shadow-lg transform hover:-translate-y-0.5"
@@ -57,7 +57,7 @@ export default function Navbar({ dict, currentLang }: { dict: any; currentLang: 
               </div>
             </div>
           </div>
-          <div className="-mr-2 flex md:hidden items-center gap-4">
+          <div className="-me-2 flex md:hidden items-center gap-4">
             <LanguageSwitcher currentLang={currentLang} />
             <button
               onClick={() => setIsOpen(!isOpen)}
