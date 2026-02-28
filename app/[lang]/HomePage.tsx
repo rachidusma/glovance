@@ -114,9 +114,11 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
             <button
               onClick={prev}
               aria-label="Previous"
-              className="absolute -left-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group"
+              className={`absolute ${lang === 'ar' ? '-right-5' : '-left-5'} top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group`}
             >
-              <span className="material-icons-outlined group-hover:-translate-x-0.5 transition-transform">chevron_left</span>
+              <span className={`material-icons-outlined transition-transform ${lang === 'ar' ? 'group-hover:translate-x-0.5' : 'group-hover:-translate-x-0.5'}`}>
+                {lang === 'ar' ? 'chevron_right' : 'chevron_left'}
+              </span>
             </button>
           )}
 
@@ -124,7 +126,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
           <div className="overflow-hidden">
             <div
               className="flex gap-6 transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(calc(-${activeIndex} * (100% / ${visibleItems} + 8px)))` }}
+              style={{ transform: `translateX(calc(${lang === 'ar' ? '' : '-'}${activeIndex} * (100% / ${visibleItems} + 8px)))` }}
             >
               {loading
                 ? skeletons.map((_, i) => (
@@ -194,9 +196,11 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
             <button
               onClick={next}
               aria-label="Next"
-              className="absolute -right-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group"
+              className={`absolute ${lang === 'ar' ? '-left-5' : '-right-5'} top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group`}
             >
-              <span className="material-icons-outlined group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+              <span className={`material-icons-outlined transition-transform ${lang === 'ar' ? 'group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'}`}>
+                {lang === 'ar' ? 'chevron_left' : 'chevron_right'}
+              </span>
             </button>
           )}
         </div>
