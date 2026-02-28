@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { prisma } from '@/lib/prisma';
 
 export async function POST(request: Request) {
   try {
@@ -12,6 +13,18 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // Save message to database
+    await prisma.contactMessage.create({
+      data: {
+        name,
+        email,
+        phone,
+        company,
+        subject,
+        message,
+      },
+    });
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
