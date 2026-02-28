@@ -23,6 +23,11 @@
   .clip-diagonal {
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   }
+
+  .hero-pattern {
+    background-image: radial-gradient(rgba(204, 227, 51, 0.1) 2px, transparent 2px);
+    background-size: 30px 30px;
+  }
 }
 
 /* Custom Scrollbar */

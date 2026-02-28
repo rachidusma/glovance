@@ -76,25 +76,7 @@ export default function ProductsClient({
 
   return (
     <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        :root {
-          --primary: #cce333;
-        }
 
-        .dark {
-          --background-dark: #0a192f;
-          --card-dark: #112240;
-        }
-        
-        .hero-pattern {
-          background-image: radial-gradient(rgba(204, 227, 51, 0.1) 2px, transparent 2px);
-          background-size: 30px 30px;
-        }
-      `,
-        }}
-      />
 
       <div className="min-h-screen bg-gray-50 dark:bg-background-dark transition-colors duration-300">
         {/* Hero */}

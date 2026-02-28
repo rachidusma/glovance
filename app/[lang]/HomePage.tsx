@@ -432,7 +432,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                 <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary opacity-10 rounded-full blur-2xl"></div>
                 <div className="space-y-6 relative z-10">
                   <div className="flex items-center group">
-                    <span className="material-icons-outlined text-primary text-4xl mr-4 group-hover:scale-110 transition-transform">
+                    <span className="material-icons-outlined text-primary text-4xl me-4 group-hover:scale-110 transition-transform">
                       verified_user
                     </span>
                     <span className="text-2xl font-bold text-white uppercase tracking-wider">
@@ -441,7 +441,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                   </div>
                   <div className="w-full h-px bg-white/10"></div>
                   <div className="flex items-center group">
-                    <span className="material-icons-outlined text-primary text-4xl mr-4 group-hover:scale-110 transition-transform">
+                    <span className="material-icons-outlined text-primary text-4xl me-4 group-hover:scale-110 transition-transform">
                       handshake
                     </span>
                     <span className="text-2xl font-bold text-white uppercase tracking-wider">
@@ -450,7 +450,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                   </div>
                   <div className="w-full h-px bg-white/10"></div>
                   <div className="flex items-center group">
-                    <span className="material-icons-outlined text-primary text-4xl mr-4 group-hover:scale-110 transition-transform">
+                    <span className="material-icons-outlined text-primary text-4xl me-4 group-hover:scale-110 transition-transform">
                       public
                     </span>
                     <span className="text-2xl font-bold text-white uppercase tracking-wider">
