@@ -57,11 +57,13 @@
       "feat_reseau": "Réseau"
     },
     "catalogue": {
-      "badge": "Ce que nous échangeons",
-      "title_1": "Catalogue",
-      "title_2": "2026",
+      "badge": "Notre Collection",
+      "title_1": "Explorez",
+      "title_2": "Notre Vaste Gamme",
+      "product_count": "produit",
+      "products_count": "produits",
       "cat_appliances": "Électroménager",
-      "cat_appliances_desc": "Électronique haut de gamme et solutions modernes pour la maison.",
+      "cat_appliances_desc": "Appareils électroménagers haut de gamme et solutions modernes pour la maison.",
       "cat_fruits": "Fruits & Dattes",
       "cat_fruits_desc": "Dattes de première qualité et fruits frais de saison importés du monde entier.",
       "cat_pottery": "Poterie",

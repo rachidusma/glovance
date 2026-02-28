@@ -56,7 +56,9 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
     fetch("/api/categories")
       .then((r) => r.json())
       .then((data) => {
-        setCategories(Array.isArray(data) ? data : []);
+        const cats = Array.isArray(data) ? data : [];
+        console.log("Categories in HomePage:", cats.length, cats);
+        setCategories(cats);
         setLoading(false);
       });
   }, []);
@@ -140,7 +142,9 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
                     </div>
                   )
                 : categories.map((cat, i) => {
-                    const name = getLocalizedField(cat, "name", lang);
+                    let name = getLocalizedField(cat, "name", lang);
+                    // Fallback to English if the Arabic/French name is just whitespace or empty
+                    if (!name.trim()) name = cat.nameEn || "Unnamed Category";
                     const desc = getLocalizedField(cat, "desc", lang);
                     const img = cat.imageUrl || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length];
                     return (
@@ -153,7 +157,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
                         className="flex-shrink-0 group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer"
                         style={{ width: `calc(100% / ${visibleItems} - ${(visibleItems - 1) * 24 / visibleItems}px)` }}
                       >
-                        <Link href={`/${lang}/products`}>
+                        <Link href={`/${lang}/products`} prefetch={false}>
                           <img
                             alt={name}
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -162,7 +166,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
                           <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
                           {/* Product count badge */}
                           <div className="absolute top-4 right-4 bg-primary text-secondary text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
-                            {cat._count.products} {cat._count.products === 1 ? "product" : "products"}
+                            {cat._count.products} {cat._count.products === 1 ? dict.catalogue.product_count : dict.catalogue.products_count}
                           </div>
                           <div className="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                             <h3 className="text-2xl font-display font-bold text-white mb-2 uppercase">

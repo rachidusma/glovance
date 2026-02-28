@@ -255,7 +255,7 @@ export default function ProductsClient({
                                 </span>
                               )}
                             </span>
-                            <span>{getLocalizedField(cat, "name", l)}</span>
+                            <span>{getLocalizedField(cat, "name", l).trim() || cat.nameEn || "Unnamed Category"}</span>
                             <span className="ml-auto text-xs text-gray-400">
                               ({cat._count.products})
                             </span>
@@ -333,15 +333,15 @@ export default function ProductsClient({
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {filtered.map((product, index) => {
-                    const name = getLocalizedField(product, "name", l);
+                    let name = getLocalizedField(product, "name", l);
+                    if (!name.trim()) name = product.nameEn || "Unnamed Product";
+                    
                     const desc = getLocalizedField(product, "desc", l);
-                    const catName = getLocalizedField(
-                      product.category,
-                      "name",
-                      l
-                    );
-                    const thumb =
-                      product.images[0] || "/CF648EE9E3F7404F.jpg";
+                    
+                    let catName = getLocalizedField(product.category, "name", l);
+                    if (!catName.trim()) catName = product.category.nameEn || "Unnamed Category";
+                    
+                    const thumb = product.images[0] || "/CF648EE9E3F7404F.jpg";
 
                     return (
                       <motion.div

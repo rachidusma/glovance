@@ -57,11 +57,13 @@
       "feat_reseau": "Network"
     },
     "catalogue": {
-      "badge": "What we trade",
-      "title_1": "Catalogue",
-      "title_2": "2026",
+      "badge": "Our Collection",
+      "title_1": "Explore",
+      "title_2": "Our Wide Range",
+      "product_count": "product",
+      "products_count": "products",
       "cat_appliances": "Appliances",
-      "cat_appliances_desc": "High-end household electronics and modern home solutions.",
+      "cat_appliances_desc": "High-end home electronics and modern solutions for the house.",
       "cat_fruits": "Fruits & Dates",
       "cat_fruits_desc": "Premium quality dates and seasonal fresh fruits imported globally.",
       "cat_pottery": "Pottery",
