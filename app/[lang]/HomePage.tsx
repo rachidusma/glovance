@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState, useRef, useCallback } from "react";
 
@@ -21,6 +21,41 @@ interface Category {
 function getLocalizedField(obj: any, field: string, lang: Lang): string {
   const suffixes: Record<Lang, string> = { en: "En", fr: "Fr", ar: "Ar" };
   return obj[field + suffixes[lang]] || obj[field + "En"] || "";
+}
+
+function AnimatedCounter({ to, duration = 2, suffix = '' }: { to: number, duration?: number, suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+
+  useEffect(() => {
+    if (!inView) return;
+
+    let startTime: number | null = null;
+    let animationFrameId: number;
+
+    const animate = (time: number) => {
+      if (!startTime) startTime = time;
+      const progress = Math.min((time - startTime) / (duration * 1000), 1);
+      
+      // easeOutExpo for smooth deceleration
+      const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const current = Math.floor(ease * to);
+      
+      if (ref.current) {
+        ref.current.textContent = current + suffix;
+      }
+      
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+    
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [inView, to, duration, suffix]);
+
+  return <span ref={ref}>0{suffix}</span>;
 }
 
 // Fallback images for categories without an image
@@ -493,7 +528,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="p-6">
               <span className="block text-5xl font-display font-bold text-white mb-2">
-                15+
+                <AnimatedCounter to={15} suffix="+" duration={2} />
               </span>
               <span className="text-primary text-sm font-bold uppercase tracking-widest">
                 {dict.stats.countries}
@@ -501,7 +536,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
             </div>
             <div className="p-6">
               <span className="block text-5xl font-display font-bold text-white mb-2">
-                500+
+                <AnimatedCounter to={500} suffix="+" duration={2} />
               </span>
               <span className="text-primary text-sm font-bold uppercase tracking-widest">
                 {dict.stats.products}
@@ -509,7 +544,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
             </div>
             <div className="p-6">
               <span className="block text-5xl font-display font-bold text-white mb-2">
-                24/7
+                <AnimatedCounter to={24} suffix="/7" duration={2} />
               </span>
               <span className="text-primary text-sm font-bold uppercase tracking-widest">
                 {dict.stats.support}
@@ -517,7 +552,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
             </div>
             <div className="p-6">
               <span className="block text-5xl font-display font-bold text-white mb-2">
-                100%
+                <AnimatedCounter to={100} suffix="%" duration={2} />
               </span>
               <span className="text-primary text-sm font-bold uppercase tracking-widest">
                 {dict.stats.reliability}
