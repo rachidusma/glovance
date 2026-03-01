@@ -51,17 +51,33 @@ export default function EditCategoryPage() {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
+    setError("");
     const reader = new FileReader();
     reader.onloadend = async () => {
       const dataUrl = reader.result as string;
       setPreview(dataUrl);
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ dataUrl, folder: "glovance/categories" }),
-      });
-      const data = await res.json();
-      setForm((f) => ({ ...f, imageUrl: data.url }));
+      try {
+        const res = await fetch("/api/upload", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ dataUrl, folder: "glovance/categories" }),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.url) {
+          setError(data.error || "Image upload failed");
+          setPreview("");
+        } else {
+          setForm((f) => ({ ...f, imageUrl: data.url }));
+        }
+      } catch {
+        setError("Image upload failed – check your connection");
+        setPreview("");
+      } finally {
+        setUploading(false);
+      }
+    };
+    reader.onerror = () => {
+      setError("Failed to read image file");
       setUploading(false);
     };
     reader.readAsDataURL(file);
