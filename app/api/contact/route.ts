@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, company, subject, message } = body;
+    const { name, email, phone, company, subject, message, productUrl } = body;
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -50,6 +50,7 @@ Email: ${email}
 Phone: ${phone || 'N/A'}
 Company: ${company || 'N/A'}
 Subject: ${subject || 'N/A'}
+${productUrl ? `Product URL: ${productUrl}` : ''}
 
 Message:
 ${message}
@@ -61,6 +62,7 @@ ${message}
             <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
             <p><strong>Company:</strong> ${company || 'N/A'}</p>
             <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
+            ${productUrl ? `<p><strong>Product URL:</strong> <a href="${productUrl}">${productUrl}</a></p>` : ''}
             <p><strong>Message:</strong></p>
             <p>${message.replace(/\n/g, '<br>')}</p>
           `,

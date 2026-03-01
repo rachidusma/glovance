@@ -97,7 +97,7 @@ export default function ProcessClient({ dict }: { dict: any }) {
                     document.getElementById('process-steps')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                   className="bg-primary text-[#0a192f] font-bold py-4 px-8 rounded-xl shadow-lg shadow-primary/20 hover:bg-[#b8cc2e] hover:-translate-y-1 transition-all flex items-center gap-2">
-                  Explore Steps <span className="material-icons-outlined text-xl">arrow_downward</span>
+                  {dict.explore_steps} <span className="material-icons-outlined text-xl">arrow_downward</span>
                 </button>
                 <button onClick={() => window.location.href = '#contact'} className="bg-white/5 border border-white/10 text-white font-bold py-4 px-8 rounded-xl hover:bg-white/10 transition-all flex items-center gap-2 backdrop-blur-sm">
                   {dict.contact_btn} <span className="material-icons-outlined text-xl">arrow_forward</span>

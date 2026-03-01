@@ -318,13 +318,13 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
           </video>
           <div className={`absolute inset-0 z-10 ${
             lang === 'ar' 
-              ? 'bg-gradient-to-l from-transparent via-blue-900/50 to-blue-900/90' 
+              ? 'bg-gradient-to-l from-blue-900/90 via-blue-900/50 to-transparent' 
               : 'bg-gradient-to-r from-blue-900/90 via-blue-900/50 to-transparent'
           }`}></div>
-          <div className={`absolute top-0 end-0 w-1/3 h-full hidden lg:block ${
+          <div className={`absolute top-0 w-1/3 h-full hidden lg:block ${
             lang === 'ar'
-              ? 'bg-gradient-to-r from-transparent to-secondary/40 transform -skew-x-12 -translate-x-20'
-              : 'bg-gradient-to-l from-secondary/40 to-transparent transform skew-x-12 translate-x-20'
+              ? 'start-0 bg-gradient-to-r from-secondary/40 to-transparent transform -skew-x-12 -translate-x-20'
+              : 'end-0 bg-gradient-to-l from-secondary/40 to-transparent transform skew-x-12 translate-x-20'
           }`}></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">

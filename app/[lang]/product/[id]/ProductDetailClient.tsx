@@ -155,7 +155,7 @@ export default function ProductDetailClient({
                   {catName}
                 </span>
                 <span className={`text-xs font-bold px-2.5 py-1 rounded uppercase tracking-wide ${product.inStock ? "bg-green-100/10 text-green-600 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800" : "bg-red-100/10 text-red-600 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800"}`}>
-                  {product.inStock ? "In Stock" : "Out of Stock"}
+                {product.inStock ? dict.product_detail_page?.in_stock : dict.product_detail_page?.out_of_stock}
                 </span>
               </div>
               <h1 className="text-3xl md:text-4xl font-display font-bold text-[#0b1121] dark:text-white tracking-tight mb-4">
@@ -171,17 +171,17 @@ export default function ProductDetailClient({
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-4 mb-10 pt-6 border-t border-gray-200 dark:border-gray-700">
               <Link
-                href={`/${lang}/contact`}
+                href={`/${lang}/contact?product=${encodeURIComponent(name)}`}
                 className="flex-1 bg-primary hover:bg-[#a8c425] text-[#0b1121] font-bold py-4 px-8 rounded-xl shadow-lg shadow-primary/20 transform transition hover:-translate-y-1 flex justify-center items-center group"
               >
-                REQUEST A QUOTE
+                {dict.product_detail_page?.request_quote}
                 <span className="material-icons-outlined ml-2 group-hover:translate-x-1 transition-transform">
                   arrow_forward
                 </span>
               </Link>
               <button className="flex-1 bg-white dark:bg-card-dark border-2 border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white font-semibold py-4 px-8 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex justify-center items-center">
                 <span className="material-icons-outlined mr-2">download</span>
-                Download Spec Sheet
+                {dict.product_detail_page?.download_spec}
               </button>
             </div>
 
@@ -191,23 +191,23 @@ export default function ProductDetailClient({
                 {
                   key: "logistics",
                   icon: "local_shipping",
-                  label: "Logistics & Shipping Details",
+                  label: dict.product_detail_page?.logistics_title,
                   content: (
                     <ul className="space-y-2 list-disc list-inside text-sm text-gray-500 dark:text-gray-400">
-                      <li><strong>Minimum Order Quantity:</strong> 1 × 20ft Container</li>
-                      <li><strong>Port of Loading:</strong> Hamad Port, Qatar</li>
-                      <li><strong>Lead Time:</strong> 15–20 days after confirmation</li>
-                      <li><strong>Packaging:</strong> Reinforced export-grade carton</li>
+                      <li><strong>{dict.product_detail_page?.moq}:</strong> {dict.product_detail_page?.moq_value}</li>
+                      <li><strong>{dict.product_detail_page?.port}:</strong> {dict.product_detail_page?.port_value}</li>
+                      <li><strong>{dict.product_detail_page?.lead_time}:</strong> {dict.product_detail_page?.lead_time_value}</li>
+                      <li><strong>{dict.product_detail_page?.packaging}:</strong> {dict.product_detail_page?.packaging_value}</li>
                     </ul>
                   ),
                 },
                 {
                   key: "qa",
                   icon: "security",
-                  label: "Quality Assurance",
+                  label: dict.product_detail_page?.qa_title,
                   content: (
                     <div className="text-sm text-gray-500 dark:text-gray-400">
-                      <p className="mb-3">Every unit undergoes rigorous testing before shipment.</p>
+                      <p className="mb-3">{dict.product_detail_page?.qa_desc}</p>
                       <div className="flex gap-3 flex-wrap">
                         {["ISO 9001", "CE Certified", "RoHS"].map((badge) => (
                           <span key={badge} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
@@ -253,7 +253,7 @@ export default function ProductDetailClient({
             className="mt-20 border-t border-gray-200 dark:border-gray-800 pt-10"
           >
             <h2 className="text-2xl font-display font-bold text-[#0b1121] dark:text-white mb-8">
-              Related Products from {catName}
+              {dict.product_detail_page?.related_title} {catName}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {related.map((rel) => {
@@ -279,7 +279,7 @@ export default function ProductDetailClient({
                         </Link>
                       </h3>
                       <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{catName}</p>
-                      <p className="mt-2 text-sm font-bold text-primary">View Details</p>
+                      <p className="mt-2 text-sm font-bold text-primary">{dict.product_detail_page?.view_details}</p>
                     </div>
                   </div>
                 );

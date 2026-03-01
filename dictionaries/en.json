@@ -164,7 +164,11 @@
     "feat_reliability": "Reliability",
     "feat_reliability_desc": "Reliable logistics and transparent processes define our commitment to our partners and clients.",
     "feat_network": "Network",
-    "feat_network_desc": "A vast global network connecting Qatar to markets worldwide for seamless trade."
+    "feat_network_desc": "A vast global network connecting Qatar to markets worldwide for seamless trade.",
+    "no_products": "No products found",
+    "clear_filters": "Clear filters",
+    "out_of_stock": "Out of Stock",
+    "edition": "Edition"
   },
   "process_page": {
     "badge": "The Journey of a Product",
@@ -180,7 +184,8 @@
     "step4_title": "Distribution",
     "step4_desc": "Reliability in delivery. Products reach global markets and retailers on time. We bridge the gap between Qatari heritage and international consumers.",
     "cta_text": "Ready to partner with us?",
-    "contact_btn": "Contact Us"
+    "contact_btn": "Contact Us",
+    "explore_steps": "Explore Steps"
   },
   "contact_page": {
     "title_1": "Let's Build",
@@ -217,5 +222,24 @@
     "office_hours_title": "Office Hours",
     "office_hours_1": "Sun - Thu: 08:00 - 17:00",
     "office_hours_2": "Closed on Fridays"
+  },
+  "product_detail_page": {
+    "in_stock": "In Stock",
+    "out_of_stock": "Out of Stock",
+    "request_quote": "REQUEST A QUOTE",
+    "download_spec": "Download Spec Sheet",
+    "logistics_title": "Logistics & Shipping Details",
+    "moq": "Minimum Order Quantity",
+    "moq_value": "1 × 20ft Container",
+    "port": "Port of Loading",
+    "port_value": "Hamad Port, Qatar",
+    "lead_time": "Lead Time",
+    "lead_time_value": "15–20 days after confirmation",
+    "packaging": "Packaging",
+    "packaging_value": "Reinforced export-grade carton",
+    "qa_title": "Quality Assurance",
+    "qa_desc": "Every unit undergoes rigorous testing before shipment.",
+    "related_title": "Related Products from",
+    "view_details": "View Details"
   }
 }

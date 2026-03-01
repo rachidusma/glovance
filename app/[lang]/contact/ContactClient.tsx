@@ -1,10 +1,22 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 
 export default function ContactClient({ dict }: { dict: any }) {
+  const searchParams = useSearchParams();
+  const productParam = searchParams.get("product");
+  const [message, setMessage] = useState("");
+  const [productUrl, setProductUrl] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  useEffect(() => {
+    if (productParam) {
+      setMessage(`I would like to request a quote for the following product:\n\n${productParam}\n\nPlease provide pricing and availability details.`);
+      setProductUrl(window.location.href);
+    }
+  }, [productParam]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,6 +31,7 @@ export default function ContactClient({ dict }: { dict: any }) {
       phone: formData.get("phone"),
       subject: formData.get("subject"),
       message: formData.get("message"),
+      productUrl: productUrl || undefined,
     };
 
     try {
@@ -176,7 +189,7 @@ export default function ContactClient({ dict }: { dict: any }) {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" htmlFor="message">{dict.form_message}</label>
-                  <textarea className="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-white shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-3 px-4" id="message" name="message" placeholder={dict.form_message_ph} rows={4} required></textarea>
+                  <textarea className="block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-background-dark dark:text-white shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 py-3 px-4" id="message" name="message" placeholder={dict.form_message_ph} rows={5} required value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
                 </div>
                 
                 {submitStatus === "success" && (

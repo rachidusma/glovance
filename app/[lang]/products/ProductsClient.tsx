@@ -159,8 +159,8 @@ export default function ProductsClient({
                       {dict.year}
                     </span>
                     <span className="block text-xs font-bold uppercase tracking-widest text-[#0a192f]/80">
-                      Edition
-                    </span>
+                        {dict.edition}
+                      </span>
                   </div>
                 </div>
               </div>
@@ -296,7 +296,7 @@ export default function ProductsClient({
                     inventory_2
                   </span>
                   <p className="text-gray-500 dark:text-gray-400 text-lg font-medium">
-                    No products found
+                    {dict.no_products}
                   </p>
                   {(search || selectedCategory) && (
                     <button
@@ -306,7 +306,7 @@ export default function ProductsClient({
                       }}
                       className="mt-4 text-primary hover:underline text-sm"
                     >
-                      Clear filters
+                      {dict.clear_filters}
                     </button>
                   )}
                 </div>
@@ -344,7 +344,7 @@ export default function ProductsClient({
                             </span>
                             {!product.inStock && (
                               <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-red-400/50 inline-block uppercase tracking-wide">
-                                Out of Stock
+                                {dict.out_of_stock}
                               </span>
                             )}
                             <h3 className="text-2xl font-display font-bold text-white uppercase line-clamp-2 mt-1">

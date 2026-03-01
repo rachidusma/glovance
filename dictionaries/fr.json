@@ -164,7 +164,11 @@
     "feat_reliability": "Fiabilité",
     "feat_reliability_desc": "Une logistique fiable et des processus transparents définissent notre engagement envers nos partenaires et nos clients.",
     "feat_network": "Réseau",
-    "feat_network_desc": "Un vaste réseau mondial reliant le Qatar aux marchés du monde entier pour un commerce fluide."
+    "feat_network_desc": "Un vaste réseau mondial reliant le Qatar aux marchés du monde entier pour un commerce fluide.",
+    "no_products": "Aucun produit trouvé",
+    "clear_filters": "Effacer les filtres",
+    "out_of_stock": "Rupture de stock",
+    "edition": "Édition"
   },
   "process_page": {
     "badge": "Le Voyage d'un Produit",
@@ -180,7 +184,8 @@
     "step4_title": "Distribution",
     "step4_desc": "Fiabilité de la livraison. Les produits atteignent les marchés mondiaux et les détaillants à temps. Nous comblons le fossé entre le patrimoine qatari et les consommateurs internationaux.",
     "cta_text": "Prêt à faire un partenariat avec nous ?",
-    "contact_btn": "Nous Contacter"
+    "contact_btn": "Nous Contacter",
+    "explore_steps": "Explorer les Étapes"
   },
   "contact_page": {
     "title_1": "Construisons des",
@@ -217,5 +222,24 @@
     "office_hours_title": "Heures d'Ouverture",
     "office_hours_1": "Dim - Jeu : 08:00 - 17:00",
     "office_hours_2": "Fermé le Vendredi"
+  },
+  "product_detail_page": {
+    "in_stock": "En Stock",
+    "out_of_stock": "Rupture de Stock",
+    "request_quote": "DEMANDER UN DEVIS",
+    "download_spec": "Télécharger la Fiche Technique",
+    "logistics_title": "Détails Logistiques & Expédition",
+    "moq": "Quantité Minimale de Commande",
+    "moq_value": "1 × Conteneur 20 pieds",
+    "port": "Port de Chargement",
+    "port_value": "Port Hamad, Qatar",
+    "lead_time": "Délai de Livraison",
+    "lead_time_value": "15–20 jours après confirmation",
+    "packaging": "Emballage",
+    "packaging_value": "Carton renforcé de qualité export",
+    "qa_title": "Assurance Qualité",
+    "qa_desc": "Chaque unité subit des tests rigoureux avant expédition.",
+    "related_title": "Produits Associés de",
+    "view_details": "Voir les Détails"
   }
 }
