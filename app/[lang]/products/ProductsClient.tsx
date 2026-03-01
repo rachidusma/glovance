@@ -267,7 +267,7 @@ export default function ProductsClient({
             </div>
 
             {/* Products Grid */}
-            <div className="lg:w-3/4">
+            <div className="lg:w-3/4" id="products">
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-3xl font-display font-bold uppercase text-gray-800 dark:text-white">
                   {dict.featured}
