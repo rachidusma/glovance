@@ -154,7 +154,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
                         className="flex-shrink-0 group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer"
                         style={{ width: `calc(100% / ${visibleItems} - ${(visibleItems - 1) * 24 / visibleItems}px)` }}
                       >
-                        <Link href={`/${lang}/products`} prefetch={false}>
+                        <Link href={`/${lang}/products?category=${cat.id}`} prefetch={false}>
                           <img
                             alt={name}
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"

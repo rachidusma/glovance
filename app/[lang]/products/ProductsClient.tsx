@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 
 interface Category {
   id: string;
@@ -39,12 +40,22 @@ export default function ProductsClient({
   lang?: string;
 }) {
   const l = (lang as Lang) || "en";
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get("category");
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(initialCategory);
+
+  useEffect(() => {
+    // If URL param changes (e.g. forward/back navigation), update the state
+    const catParam = searchParams.get("category");
+    if (catParam !== selectedCategory) {
+      setSelectedCategory(catParam);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     Promise.all([
