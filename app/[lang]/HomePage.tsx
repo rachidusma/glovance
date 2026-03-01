@@ -270,16 +270,32 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
     <>
       <section className="relative h-screen flex items-center justify-center overflow-hidden" id="home">
         <div className="absolute inset-0 z-0">
-          <video autoPlay className="absolute inset-0 w-full h-full object-cover z-0" loop muted playsInline poster="/hero-poster.jpg">
-            <source src="/istockphoto-2194813689-640_adpp_is.mp4" type="video/mp4" />
+          <video 
+            ref={(el) => { if (el) el.playbackRate = 0.5; }}
+            autoPlay 
+            className="absolute inset-0 w-full h-full object-cover z-0" 
+            loop 
+            muted 
+            playsInline 
+            poster="/hero-poster.jpg"
+          >
+            <source src="/Untitled3.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-blue-900/60 z-10"></div>
-          <div className="absolute top-0 end-0 w-1/3 h-full bg-gradient-to-l from-secondary/40 to-transparent transform skew-x-12 translate-x-20 hidden lg:block"></div>
+          <div className={`absolute inset-0 z-10 ${
+            lang === 'ar' 
+              ? 'bg-gradient-to-l from-transparent via-blue-900/50 to-blue-900/90' 
+              : 'bg-gradient-to-r from-blue-900/90 via-blue-900/50 to-transparent'
+          }`}></div>
+          <div className={`absolute top-0 end-0 w-1/3 h-full hidden lg:block ${
+            lang === 'ar'
+              ? 'bg-gradient-to-r from-transparent to-secondary/40 transform -skew-x-12 -translate-x-20'
+              : 'bg-gradient-to-l from-secondary/40 to-transparent transform skew-x-12 translate-x-20'
+          }`}></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="inline-block border-l-4 border-primary pl-4">
+          <div className="grid grid-cols-1 gap-12 items-center text-center lg:text-start">
+            <div className="space-y-6 flex flex-col items-center lg:items-start text-center lg:text-start">
+              <div className="inline-block border-s-4 border-primary ps-4 mx-auto lg:mx-0">
                 <span className="text-primary font-bold tracking-widest uppercase text-sm">
                   {dict.hero.badge}
                 </span>
@@ -291,13 +307,13 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
               <p className="text-gray-300 text-lg max-w-lg leading-relaxed mt-2">
                 {dict.hero.desc}
               </p>
-              <div className="flex space-x-4 pt-4">
+              <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 pt-4">
                 <Link
                   className="bg-primary text-secondary hover:bg-white hover:text-secondary px-8 py-4 rounded font-bold transition-all uppercase tracking-wider shadow-[0_0_20px_rgba(163,209,49,0.4)] flex items-center"
                   href={`/${lang}/products`}
                 >
                   {dict.hero.view_catalog}
-                  <span className="material-icons-outlined ms-2">arrow_forward</span>
+                  <span className={`material-icons-outlined ms-2 transition-transform ${lang === 'ar' ? 'rotate-180' : ''}`}>arrow_forward</span>
                 </Link>
                 <Link
                   className="border border-white text-white hover:bg-white hover:text-secondary px-8 py-4 rounded font-bold transition-all uppercase tracking-wider flex items-center"
@@ -307,41 +323,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                 </Link>
               </div>
             </div>
-            <div className="hidden lg:block relative h-[600px]">
-              <div
-                className="absolute top-10 end-10 w-64 h-80 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-20 transform -rotate-3 hover:rotate-0 transition-transform duration-500"
-                style={{
-                  backgroundImage:
-                    "url('/chocolate.jpg')",
-                }}
-              >
-                <div className="absolute bottom-0 start-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
-                  {dict.hero.food}
-                </div>
-              </div>
-              <div
-                className="absolute top-40 start-10 w-64 h-80 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-10 transform rotate-3 hover:rotate-0 transition-transform duration-500"
-                style={{
-                  backgroundImage:
-                    "url('/CF648EE9E3F7404F.jpg')",
-                }}
-              >
-                <div className="absolute bottom-0 start-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
-                  {dict.hero.fresh_produce}
-                </div>
-              </div>
-              <div
-                className="absolute bottom-20 end-20 w-48 h-48 bg-cover bg-center rounded shadow-2xl border-4 border-secondary dark:border-background-dark z-30 transform hover:scale-105 transition-transform duration-500"
-                style={{
-                  backgroundImage:
-                    "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCgJX4RK0Op-nZJX_HCWWxSFLrnmSjaPlHJt1EoWBREtnwrDT7KFjjCxc-8MkXcj09lL6Ds3y8ArzmNxUWmsD2ElxTQEEW3cAdrTuI9dcn_JcPriVPUP6FKv-f3Cn8jwKHmjerf9G9m-Lm4vQ241lMVfdifOznTvW5A0a35CtgntukflBM3bsUTwMAOdR5SA9vgcCy53fAkOROqoy_6jdgrcPsnws3U-2pI6hr4OWn6P_-6Zr4cWFYL3_Zs-MI97titjuGcETfaPmt1')",
-                }}
-              >
-                <div className="absolute bottom-0 start-0 bg-primary text-secondary text-xs font-bold px-3 py-1 uppercase">
-                  {dict.hero.appliances}
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">

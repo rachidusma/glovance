@@ -13,16 +13,14 @@ export default function Footer({ dict, currentLang }: { dict: any; currentLang: 
           transition={{ duration: 0.6 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="material-icons text-primary text-3xl">public</span>
-              <div className="flex flex-col">
-                <span className="text-white font-bold text-lg tracking-wider leading-none">
-                  {dict.brand_name}
-                </span>
-                <span className="text-primary text-[10px] tracking-[0.2em] font-medium leading-none">
-                  {dict.brand_desc}
-                </span>
-              </div>
+            <div className="mb-6">
+              <Link href={`/${currentLang}`} className="flex items-center gap-2">
+                <img 
+                  src="/logo.png" 
+                  alt="Glovance Trading Logo" 
+                  className="h-16 w-auto object-contain" 
+                />
+              </Link>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               {dict.description}
