@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export default function Footer({ dict }: { dict: any }) {
+export default function Footer({ dict, currentLang }: { dict: any; currentLang: string }) {
   return (
     <footer className="bg-[#0b1221] border-t border-gray-800 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,17 +32,17 @@ export default function Footer({ dict }: { dict: any }) {
             <h4 className="text-white font-bold mb-4">{dict.quick_links}</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <Link className="hover:text-primary transition-colors" href="/about">
+                <Link className="hover:text-primary transition-colors" href={`/${currentLang}/about`}>
                   {dict.about}
                 </Link>
               </li>
               <li>
-                <Link className="hover:text-primary transition-colors" href="/process">
+                <Link className="hover:text-primary transition-colors" href={`/${currentLang}/process`}>
                   {dict.process}
                 </Link>
               </li>
               <li>
-                <Link className="hover:text-primary transition-colors" href="/products">
+                <Link className="hover:text-primary transition-colors" href={`/${currentLang}/products`}>
                   {dict.products}
                 </Link>
               </li>
