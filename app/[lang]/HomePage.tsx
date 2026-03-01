@@ -390,14 +390,14 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
                   <h4 className="text-2xl font-display font-bold text-secondary dark:text-white uppercase mb-3 flex items-center">
-                    <span className="bg-primary text-secondary p-1 mr-3 rounded">
+                    <span className="bg-primary text-secondary p-1 me-3 rounded">
                       <span className="material-icons-outlined text-xl">
                         flag
                       </span>
                     </span>
                     {dict.about.mission_title}
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-400 pl-11">
+                  <p className="text-gray-600 dark:text-gray-400 ps-11">
                     {dict.about.mission_desc}
                   </p>
                 </motion.div>
@@ -408,32 +408,32 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
                   <h4 className="text-2xl font-display font-bold text-secondary dark:text-white uppercase mb-3 flex items-center">
-                    <span className="bg-primary text-secondary p-1 mr-3 rounded">
+                    <span className="bg-primary text-secondary p-1 me-3 rounded">
                       <span className="material-icons-outlined text-xl">
                         diamond
                       </span>
                     </span>
                     {dict.about.values_title}
                   </h4>
-                  <ul className="pl-11 grid grid-cols-2 gap-2 text-gray-600 dark:text-gray-400">
+                  <ul className="ps-11 grid grid-cols-2 gap-2 text-gray-600 dark:text-gray-400">
                     <li className="flex items-center">
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full me-2"></span>
                       {dict.about.val_quality}
                     </li>
                     <li className="flex items-center">
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full me-2"></span>
                       {dict.about.val_reliability}
                     </li>
                     <li className="flex items-center">
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full me-2"></span>
                       {dict.about.val_performance}
                     </li>
                     <li className="flex items-center">
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full me-2"></span>
                       {dict.about.val_commitment}
                     </li>
                     <li className="flex items-center">
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></span>
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full me-2"></span>
                       {dict.about.val_innovation}
                     </li>
                   </ul>
