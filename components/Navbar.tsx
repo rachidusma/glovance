@@ -32,7 +32,7 @@ export default function Navbar({ dict, currentLang }: { dict: any; currentLang: 
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
-                  className="text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors uppercase tracking-wider"
+                  className={`text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm transition-colors uppercase tracking-wider ${currentLang === 'ar' ? 'font-bold' : 'font-medium'}`}
                   href={link.href}
                 >
                   {link.name}
@@ -74,7 +74,7 @@ export default function Navbar({ dict, currentLang }: { dict: any; currentLang: 
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium uppercase tracking-wider transition-colors"
+                className={`text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base uppercase tracking-wider transition-colors ${currentLang === 'ar' ? 'font-bold' : 'font-medium'}`}
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}

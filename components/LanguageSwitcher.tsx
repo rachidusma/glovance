@@ -29,13 +29,13 @@ export default function LanguageSwitcher({ currentLang }: { currentLang: string 
       <div>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="inline-flex justify-center w-full px-3 py-2 text-sm font-medium text-gray-300 bg-transparent rounded-md hover:text-primary transition-colors focus:outline-none"
+          className="inline-flex justify-center items-center w-full px-3 py-2 text-sm font-medium text-gray-300 bg-transparent rounded-md hover:text-primary transition-colors focus:outline-none"
           id="options-menu"
           aria-haspopup="true"
           aria-expanded={isOpen}
         >
-          <span className="material-icons-outlined text-lg mr-1">language</span>
-          {currentLanguage.display}
+          <span className="material-icons-outlined text-lg me-2">language</span>
+          <span>{currentLanguage.display}</span>
         </button>
       </div>
 
