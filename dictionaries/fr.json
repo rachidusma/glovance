@@ -94,6 +94,16 @@
       "hq": "Siège Social",
       "address": "Doha, Qatar\nQuartier Financier Al Dafna\nBP 12345",
       "follow_us": "Suivez-Nous"
+    },
+    "export_process": {
+      "title": "Notre Processus d'Exportation",
+      "subtitle": "Chez GLOVANCE TRADING, nous avons établi un processus clair et structuré pour assurer une exportation fluide et sécurisée.",
+      "step_1": "Contact et étude de votre demande",
+      "step_2": "Analyse technique et commerciale",
+      "step_3": "Devis",
+      "step_4": "Préparation des produits",
+      "step_5": "Gestion des formalités douanières",
+      "step_6": "Expédition vers votre destination"
     }
   },
   "about_page": {
@@ -124,6 +134,7 @@
     "desc": "Connecter le Qatar au monde. Spécialisés dans l'importation et l'exportation d'appareils électroménagers, de poteries, de fruits, de dattes et de biens de consommation courants.",
     "download_pdf": "Télécharger le PDF",
     "our_mission": "Notre Mission",
+    "discover_products": "Découvrir Nos Produits",
     "logistics": "Logistique",
     "quality_goods": "Produits de Qualité",
     "search_placeholder": "Rechercher des produits...",

@@ -6,10 +6,10 @@ import { signOut } from "next-auth/react";
 
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: "dashboard" },
-  { label: "Users", href: "/admin/users", icon: "people" },
   { label: "Categories", href: "/admin/categories", icon: "category" },
   { label: "Products", href: "/admin/products", icon: "inventory_2" },
   { label: "Inbox", href: "/admin/messages", icon: "inbox" },
+  { label: "Admins", href: "/admin/admins", icon: "admin_panel_settings" },
 ];
 
 export default function AdminSidebar() {
@@ -63,6 +63,13 @@ export default function AdminSidebar() {
         >
           <span className="material-icons-outlined text-xl">open_in_new</span>
           View Site
+        </Link>
+        <Link
+          href="/admin/profile"
+          className="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-gray-400 hover:text-white hover:bg-white/5 transition"
+        >
+          <span className="material-icons-outlined text-xl">person</span>
+          Profile
         </Link>
         <button
           onClick={() => signOut({ callbackUrl: "/admin/login" })}

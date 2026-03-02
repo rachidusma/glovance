@@ -6,7 +6,7 @@ export async function GET() {
   try {
     const categories = await prisma.category.findMany({
       include: { _count: { select: { products: true } } },
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: "asc" },
     });
     return NextResponse.json(categories);
   } catch (error) {
@@ -17,7 +17,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const session = await auth();
-    if (!session || session.user?.role !== "ADMIN") {
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -32,7 +32,15 @@ export async function POST(request: NextRequest) {
     }
 
     const category = await prisma.category.create({
-      data: { nameEn, nameFr, nameAr, descEn, descFr, descAr, imageUrl },
+      data: { 
+        name: nameEn, 
+        name_fr: nameFr, 
+        name_ar: nameAr, 
+        description: descEn, 
+        description_fr: descFr, 
+        description_ar: descAr, 
+        image: imageUrl 
+      },
     });
     return NextResponse.json(category, { status: 201 });
   } catch (error) {

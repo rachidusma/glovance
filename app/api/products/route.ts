@@ -10,10 +10,10 @@ export async function GET(request: NextRequest) {
       where: categoryId ? { categoryId } : undefined,
       include: {
         category: {
-          select: { id: true, nameEn: true, nameFr: true, nameAr: true },
+          select: { id: true, name: true, name_fr: true, name_ar: true },
         },
       },
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: "asc" },
     });
 
     return NextResponse.json(products);

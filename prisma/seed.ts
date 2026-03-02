@@ -1,24 +1,18 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
 import bcrypt from "bcryptjs";
 
-const connectionString = process.env.DATABASE_URL ||
-  "postgresql://postgres.icsiaoaqcdyzluotmigw:kuj%40Mg%2349nNzEM@aws-1-eu-west-3.pooler.supabase.com:5432/postgres";
-
-const adapter = new PrismaPg({ connectionString });
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient();
 
 async function main() {
   // Create admin user
   const password = await bcrypt.hash("admin123", 12);
-  const admin = await prisma.user.upsert({
+  const admin = await prisma.admin.upsert({
     where: { email: "admin@glovance.com" },
     update: {},
     create: {
       name: "Admin",
       email: "admin@glovance.com",
       password,
-      role: "ADMIN",
     },
   });
 
@@ -31,12 +25,12 @@ async function main() {
       update: {},
       create: {
         id: "cat-appliances",
-        nameEn: "Household Appliances",
-        nameFr: "Appareils Ménagers",
-        nameAr: "الأجهزة المنزلية",
-        descEn: "Premium household appliances for modern living",
-        descFr: "Appareils ménagers haut de gamme pour la vie moderne",
-        descAr: "أجهزة منزلية متميزة للحياة العصرية",
+        name: "Household Appliances",
+        name_fr: "Appareils Ménagers",
+        name_ar: "الأجهزة المنزلية",
+        description: "Premium household appliances for modern living",
+        description_fr: "Appareils ménagers haut de gamme pour la vie moderne",
+        description_ar: "أجهزة منزلية متميزة للحياة العصرية",
       },
     }),
     prisma.category.upsert({
@@ -44,12 +38,12 @@ async function main() {
       update: {},
       create: {
         id: "cat-pottery",
-        nameEn: "Pottery & Ceramics",
-        nameFr: "Poterie et Céramiques",
-        nameAr: "الفخار والسيراميك",
-        descEn: "Handcrafted pottery and ceramic art pieces",
-        descFr: "Pièces d'art en poterie et céramique artisanales",
-        descAr: "قطع فنية مصنوعة يدوياً من الفخار والسيراميك",
+        name: "Pottery & Ceramics",
+        name_fr: "Poterie et Céramiques",
+        name_ar: "الفخار والسيراميك",
+        description: "Handcrafted pottery and ceramic art pieces",
+        description_fr: "Pièces d'art en poterie et céramique artisanales",
+        description_ar: "قطع فنية مصنوعة يدوياً من الفخار والسيراميك",
       },
     }),
     prisma.category.upsert({
@@ -57,12 +51,12 @@ async function main() {
       update: {},
       create: {
         id: "cat-dates",
-        nameEn: "Premium Dates",
-        nameFr: "Dattes Premium",
-        nameAr: "التمور الفاخرة",
-        descEn: "Finest quality dates from the Gulf region",
-        descFr: "Dattes de la meilleure qualité de la région du Golfe",
-        descAr: "تمور بأعلى جودة من منطقة الخليج",
+        name: "Premium Dates",
+        name_fr: "Dattes Premium",
+        name_ar: "التمور الفاخرة",
+        description: "Finest quality dates from the Gulf region",
+        description_fr: "Dattes de la meilleure qualité de la région du Golfe",
+        description_ar: "تمور بأعلى جودة من منطقة الخليج",
       },
     }),
   ]);

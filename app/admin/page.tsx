@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 interface Stats {
-  users: number;
   categories: number;
   products: number;
   messages: number;
@@ -18,7 +17,7 @@ interface Stats {
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [stats, setStats] = useState<Stats>({ users: 0, categories: 0, products: 0, messages: 0, unreadMessages: 0 });
+  const [stats, setStats] = useState<Stats>({ categories: 0, products: 0, messages: 0, unreadMessages: 0 });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,20 +31,17 @@ export default function AdminDashboard() {
 
   const fetchStats = async () => {
     try {
-      const [usersRes, catRes, prodRes, msgRes] = await Promise.all([
-        fetch("/api/admin/users"),
+      const [catRes, prodRes, msgRes] = await Promise.all([
         fetch("/api/admin/categories"),
         fetch("/api/admin/products"),
         fetch("/api/admin/messages"),
       ]);
-      const [users, categories, products, messages] = await Promise.all([
-        usersRes.json(),
+      const [categories, products, messages] = await Promise.all([
         catRes.json(),
         prodRes.json(),
         msgRes.json(),
       ]);
       setStats({
-        users: users.length,
         categories: categories.length,
         products: products.length,
         messages: Array.isArray(messages) ? messages.length : 0,
@@ -69,7 +65,6 @@ export default function AdminDashboard() {
   if (status === "unauthenticated") return null;
 
   const statCards = [
-    { label: "Total Users", value: stats.users, icon: "people", color: "text-blue-400", href: "/admin/users" },
     { label: "Categories", value: stats.categories, icon: "category", color: "text-purple-400", href: "/admin/categories" },
     { label: "Products", value: stats.products, icon: "inventory_2", color: "text-primary", href: "/admin/products" },
     { label: "Messages", value: stats.messages, badge: stats.unreadMessages, icon: "inbox", color: "text-orange-400", href: "/admin/messages" },
@@ -123,13 +118,6 @@ export default function AdminDashboard() {
               >
                 <span className="material-icons-outlined">add_circle</span>
                 New Product
-              </Link>
-              <Link
-                href="/admin/users/new"
-                className="flex items-center gap-3 px-4 py-3 bg-primary/10 border border-primary/20 rounded-xl text-primary hover:bg-primary/20 transition"
-              >
-                <span className="material-icons-outlined">person_add</span>
-                New User
               </Link>
             </div>
           </div>

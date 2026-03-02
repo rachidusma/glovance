@@ -132,10 +132,10 @@ export default function Product() {
                 REQUEST A QUOTE
                 <span className="material-icons-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </Link>
-              <button className="flex-1 bg-white dark:bg-card-dark border-2 border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white font-semibold py-4 px-8 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex justify-center items-center">
+              <a href="/GLOVANCE CATALOGUE.pdf" download target="_blank" rel="noopener noreferrer" className="flex-1 bg-white dark:bg-card-dark border-2 border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white font-semibold py-4 px-8 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex justify-center items-center">
                 <span className="material-icons-outlined mr-2">download</span>
                 Download Spec Sheet
-              </button>
+              </a>
             </div>
             <div className="space-y-4">
               <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">

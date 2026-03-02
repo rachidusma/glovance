@@ -10,10 +10,10 @@ import Image from "next/image";
 
 interface Category {
   id: string;
-  nameEn: string;
-  nameFr: string;
-  nameAr: string;
-  imageUrl?: string;
+  name: string;
+  name_fr: string;
+  name_ar: string;
+  image?: string;
   _count: { products: number };
   createdAt: string;
 }
@@ -81,8 +81,8 @@ export default function CategoriesPage() {
                   className="bg-[#112240] rounded-2xl border border-gray-800 overflow-hidden group hover:border-gray-600 transition"
                 >
                   <div className="relative h-40 bg-[#0a192f]">
-                    {cat.imageUrl ? (
-                      <img src={cat.imageUrl} alt={cat.nameEn} className="w-full h-full object-cover" />
+                    {cat.image ? (
+                      <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
                         <span className="material-icons-outlined text-gray-700 text-5xl">category</span>
@@ -96,8 +96,8 @@ export default function CategoriesPage() {
                     </div>
                   </div>
                   <div className="p-4">
-                    <h3 className="text-white font-bold text-lg">{cat.nameEn}</h3>
-                    <p className="text-gray-400 text-sm">{cat.nameFr} · {cat.nameAr}</p>
+                    <h3 className="text-white font-bold text-lg">{cat.name}</h3>
+                    <p className="text-gray-400 text-sm">{cat.name_fr} · {cat.name_ar}</p>
                     <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-800">
                       <span className="text-gray-500 text-xs">
                         {new Date(cat.createdAt).toLocaleDateString()}
@@ -110,7 +110,7 @@ export default function CategoriesPage() {
                           <span className="material-icons-outlined text-base">edit</span>
                         </Link>
                         <button
-                          onClick={() => handleDelete(cat.id, cat.nameEn)}
+                          onClick={() => handleDelete(cat.id, cat.name)}
                           disabled={deletingId === cat.id}
                           className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition"
                         >

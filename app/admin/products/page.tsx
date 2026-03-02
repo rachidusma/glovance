@@ -9,17 +9,17 @@ import Link from "next/link";
 
 interface Product {
   id: string;
-  nameEn: string;
-  nameFr: string;
-  nameAr: string;
-  images: string[];
-  category: { id: string; nameEn: string };
+  name: string;
+  name_fr: string;
+  name_ar: string;
+  image: string | null;
+  category: { id: string; name: string };
   createdAt: string;
 }
 
 interface Category {
   id: string;
-  nameEn: string;
+  name: string;
 }
 
 export default function ProductsPage() {
@@ -30,6 +30,12 @@ export default function ProductsPage() {
   const [filter, setFilter] = useState("");
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filter]);
 
   useEffect(() => {
     if (status === "unauthenticated") router.push("/admin/login");
@@ -61,6 +67,21 @@ export default function ProductsPage() {
     ? products.filter((p) => p.category.id === filter)
     : products;
 
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+  const paginatedProducts = filtered.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    const element = document.getElementById("products-table");
+    if (element) {
+      const y = element.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   if (status === "loading" || loading) {
     return (
       <div className="min-h-screen bg-[#0a192f] flex items-center justify-center">
@@ -83,7 +104,7 @@ export default function ProductsPage() {
             >
               <option value="">All Categories</option>
               {categories.map((c) => (
-                <option key={c.id} value={c.id}>{c.nameEn}</option>
+                <option key={c.id} value={c.id}>{c.name}</option>
               ))}
             </select>
             <Link
@@ -95,7 +116,7 @@ export default function ProductsPage() {
             </Link>
           </div>
 
-          <div className="bg-[#112240] rounded-2xl border border-gray-800 overflow-hidden">
+          <div id="products-table" className="bg-[#112240] rounded-2xl border border-gray-800 overflow-hidden">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-800 text-gray-400 text-xs uppercase tracking-wider">
@@ -107,30 +128,30 @@ export default function ProductsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-800">
-                {filtered.map((product) => (
+                {paginatedProducts.map((product) => (
                   <tr key={product.id} className="hover:bg-white/5 transition">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        {product.images[0] ? (
-                          <img src={product.images[0]} alt={product.nameEn} className="w-10 h-10 rounded-lg object-cover border border-gray-700" />
+                        {product.image ? (
+                          <img src={product.image} alt={product.name} className="w-10 h-10 rounded-lg object-cover border border-gray-700" />
                         ) : (
                           <div className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center">
                             <span className="material-icons-outlined text-gray-600 text-base">image</span>
                           </div>
                         )}
                         <div>
-                          <p className="text-white font-medium">{product.nameEn}</p>
-                          <p className="text-gray-500 text-xs">{product.nameFr} · {product.nameAr}</p>
+                          <p className="text-white font-medium">{product.name}</p>
+                          <p className="text-gray-500 text-xs">{product.name_fr} · {product.name_ar}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <span className="bg-primary/10 text-primary text-xs font-semibold px-2 py-1 rounded">
-                        {product.category.nameEn}
+                        {product.category.name}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-gray-400">
-                      {product.images.length} image{product.images.length !== 1 ? "s" : ""}
+                      {product.image ? "1 image" : "0 images"}
                     </td>
                     <td className="px-6 py-4 text-gray-400">
                       {new Date(product.createdAt).toLocaleDateString()}
@@ -144,7 +165,7 @@ export default function ProductsPage() {
                           <span className="material-icons-outlined text-base">edit</span>
                         </Link>
                         <button
-                          onClick={() => handleDelete(product.id, product.nameEn)}
+                          onClick={() => handleDelete(product.id, product.name)}
                           disabled={deletingId === product.id}
                           className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition"
                         >
@@ -166,6 +187,41 @@ export default function ProductsPage() {
                 )}
               </tbody>
             </table>
+
+            {totalPages > 1 && (
+              <div className="flex items-center justify-between bg-[#112240] px-6 py-4 border-t border-gray-800 text-sm text-gray-400">
+                <div>
+                  Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, filtered.length)} of {filtered.length} products
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1.5 rounded-lg border border-gray-700 hover:bg-white/5 disabled:opacity-50 transition"
+                  >
+                    Prev
+                  </button>
+                  {Array.from({ length: totalPages }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => handlePageChange(i + 1)}
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center transition ${
+                        currentPage === i + 1 ? "bg-primary text-[#0a192f] font-bold" : "border border-gray-700 hover:bg-white/5"
+                      }`}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1.5 rounded-lg border border-gray-700 hover:bg-white/5 disabled:opacity-50 transition"
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </main>
       </div>

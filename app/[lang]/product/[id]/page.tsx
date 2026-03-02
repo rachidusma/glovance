@@ -17,10 +17,10 @@ async function getProduct(id: string) {
               take: 4, // limit to 4 related products
               select: {
                 id: true,
-                nameEn: true,
-                nameFr: true,
-                nameAr: true,
-                images: true,
+                name: true,
+                name_fr: true,
+                name_ar: true,
+                image: true,
               }
             }
           }

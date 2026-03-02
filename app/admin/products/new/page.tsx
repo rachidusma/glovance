@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 interface Category {
   id: string;
-  nameEn: string;
+  name: string;
 }
 
 interface ProductForm {
@@ -133,7 +133,7 @@ export default function NewProductPage() {
               >
                 <option value="">Select a category</option>
                 {categories.map((c) => (
-                  <option key={c.id} value={c.id}>{c.nameEn}</option>
+                  <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
               </select>
             </div>

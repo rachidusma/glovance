@@ -8,19 +8,19 @@ type Lang = "en" | "fr" | "ar";
 
 interface Category {
   id: string;
-  nameEn: string;
-  nameFr: string;
-  nameAr: string;
-  descEn: string | null;
-  descFr: string | null;
-  descAr: string | null;
-  imageUrl: string | null;
+  name: string;
+  name_fr: string;
+  name_ar: string;
+  description: string | null;
+  description_fr: string | null;
+  description_ar: string | null;
+  image: string | null;
   _count: { products: number };
 }
 
 function getLocalizedField(obj: any, field: string, lang: Lang): string {
-  const suffixes: Record<Lang, string> = { en: "En", fr: "Fr", ar: "Ar" };
-  return obj[field + suffixes[lang]] || obj[field + "En"] || "";
+  const suffixes: Record<Lang, string> = { en: "", fr: "_fr", ar: "_ar" };
+  return obj[field + suffixes[lang]] || obj[field] || "";
 }
 
 function AnimatedCounter({ to, duration = 2, suffix = '' }: { to: number, duration?: number, suffix?: string }) {
@@ -144,7 +144,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
             <button
               onClick={prev}
               aria-label="Previous"
-              className={`absolute -end-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group`}
+              className={`absolute -start-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group`}
             >
               <span className={`material-icons-outlined transition-transform ${lang === 'ar' ? 'group-hover:translate-x-0.5' : 'group-hover:-translate-x-0.5'}`}>
                 {lang === 'ar' ? 'chevron_right' : 'chevron_left'}
@@ -176,9 +176,9 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
                 : categories.map((cat, i) => {
                     let name = getLocalizedField(cat, "name", lang);
                     // Fallback to English if the Arabic/French name is just whitespace or empty
-                    if (!name.trim()) name = cat.nameEn || "Unnamed Category";
-                    const desc = getLocalizedField(cat, "desc", lang);
-                    const img = cat.imageUrl || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length];
+                    if (!name.trim()) name = cat.name || "Unnamed Category";
+                    const desc = getLocalizedField(cat, "description", lang);
+                    const img = cat.image || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length];
                     return (
                       <motion.div
                         key={cat.id}
@@ -222,7 +222,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
             <button
               onClick={next}
               aria-label="Next"
-              className={`absolute -start-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group`}
+              className={`absolute -end-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white dark:bg-[#112240] shadow-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-white dark:hover:text-secondary transition-all duration-300 group`}
             >
               <span className={`material-icons-outlined transition-transform ${lang === 'ar' ? 'group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'}`}>
                 {lang === 'ar' ? 'chevron_left' : 'chevron_right'}
@@ -251,12 +251,15 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <Link
+          <a
             className="inline-block border-2 border-secondary dark:border-white text-secondary dark:text-white hover:bg-primary hover:border-primary hover:text-secondary px-10 py-3 rounded-full font-bold uppercase tracking-wider transition-all duration-300"
-            href={`/${lang}/products`}
+            href="/GLOVANCE CATALOGUE.pdf"
+            download
+            target="_blank"
+            rel="noopener noreferrer"
           >
             {dict.download_pdf}
-          </Link>
+          </a>
         </div>
       </div>
     </section>
@@ -579,6 +582,48 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
         </div>
       </section>
 
+      {/* Export Process Section */}
+      <section className="py-24 bg-[#0f1826] text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+              {dict.export_process.title}
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+              {dict.export_process.subtitle}
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { num: "01", title: dict.export_process.step_1 },
+              { num: "02", title: dict.export_process.step_2 },
+              { num: "03", title: dict.export_process.step_3 },
+              { num: "04", title: dict.export_process.step_4 },
+              { num: "05", title: dict.export_process.step_5 },
+              { num: "06", title: dict.export_process.step_6 }
+            ].map((step, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group bg-[#1b2638] p-8 rounded-xl border border-gray-700/50 hover:border-gray-600 hover:shadow-2xl transition-all"
+                dir={lang === "ar" ? "rtl" : "ltr"}
+              >
+                <div className={`text-6xl font-display font-black text-primary mb-6 select-none transition-colors duration-300 group-hover:text-primary/70 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {step.num}
+                </div>
+                <h3 className={`text-xl font-bold text-white mb-6 min-h-[56px] flex items-center ${lang === 'ar' ? 'justify-end text-right' : 'justify-start text-left'}`}>
+                  {step.title}
+                </h3>
+                <div className={`w-12 h-1 bg-primary rounded transition-all duration-300 group-hover:w-full ${lang === 'ar' ? 'ml-auto' : ''}`}></div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="py-20 bg-background-light dark:bg-background-dark" id="contact">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -702,21 +747,27 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
                 <div className="flex space-x-4">
                   <a
                     className="w-10 h-10 rounded-full border border-gray-500 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-secondary transition-all"
-                    href="#"
+                    href="https://www.facebook.com/share/1CMEnrebE2/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <span className="font-display font-bold">In</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                   </a>
                   <a
                     className="w-10 h-10 rounded-full border border-gray-500 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-secondary transition-all"
-                    href="#"
+                    href="https://www.instagram.com/glovance_trading1"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <span className="font-display font-bold">X</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M11.999 7.377a4.623 4.623 0 1 0 0 9.248 4.623 4.623 0 0 0 0-9.248zm0 7.627a3.004 3.004 0 1 1 0-6.008 3.004 3.004 0 0 1 0 6.008z"/><circle cx="16.806" cy="7.207" r="1.078"/><path d="M20.533 6.111A4.605 4.605 0 0 0 17.9 3.479a6.606 6.606 0 0 0-2.186-.42c-.963-.042-1.268-.054-3.71-.054s-2.755 0-3.71.054a6.554 6.554 0 0 0-2.184.42 4.6 4.6 0 0 0-2.633 2.632 6.585 6.585 0 0 0-.419 2.186c-.043.962-.056 1.267-.056 3.71 0 2.442 0 2.753.056 3.71.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632 6.584 6.584 0 0 0 2.185.45c.963.042 1.268.055 3.71.055s2.755 0 3.71-.055a6.615 6.615 0 0 0 2.186-.419 4.613 4.613 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.186.043-.962.056-1.267.056-3.71s0-2.753-.056-3.71a6.581 6.581 0 0 0-.421-2.217zm-1.218 9.532a5.043 5.043 0 0 1-.311 1.688 2.987 2.987 0 0 1-1.712 1.711 4.985 4.985 0 0 1-1.67.311c-.95.044-1.218.055-3.654.055-2.438 0-2.687 0-3.655-.055a4.96 4.96 0 0 1-1.669-.311 2.985 2.985 0 0 1-1.719-1.711 5.08 5.08 0 0 1-.311-1.669c-.043-.95-.053-1.218-.053-3.654 0-2.437 0-2.686.053-3.655a5.038 5.038 0 0 1 .311-1.687c.305-.789.93-1.41 1.719-1.712a5.01 5.01 0 0 1 1.669-.311c.952-.043 1.218-.055 3.655-.055s2.687 0 3.654.055a4.96 4.96 0 0 1 1.67.311 2.991 2.991 0 0 1 1.712 1.712 5.08 5.08 0 0 1 .311 1.669c.043.951.054 1.218.054 3.655 0 2.436 0 2.698-.043 3.654h-.011z"/></svg>
                   </a>
                   <a
                     className="w-10 h-10 rounded-full border border-gray-500 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-secondary transition-all"
-                    href="#"
+                    href="https://www.tiktok.com/@glovance.trading?_r=1&_t=ZS-94Le802quua"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <span className="font-display font-bold">Fb</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 15.68a6.34 6.34 0 0 0 6.26 6.32 6.33 6.33 0 0 0 6.31-6.24v-5.92a8.08 8.08 0 0 0 4.38 1.2V7.63a4.96 4.96 0 0 1-2.36-.94z"/></svg>
                   </a>
                 </div>
               </div>

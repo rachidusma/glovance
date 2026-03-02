@@ -27,7 +27,7 @@ export async function PUT(
 ) {
   try {
     const session = await auth();
-    if (!session || session.user?.role !== "ADMIN") {
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -37,7 +37,15 @@ export async function PUT(
 
     const category = await prisma.category.update({
       where: { id },
-      data: { nameEn, nameFr, nameAr, descEn, descFr, descAr, imageUrl },
+      data: { 
+        name: nameEn, 
+        name_fr: nameFr, 
+        name_ar: nameAr, 
+        description: descEn, 
+        description_fr: descFr, 
+        description_ar: descAr, 
+        image: imageUrl 
+      },
     });
     return NextResponse.json(category);
   } catch (error) {
@@ -51,7 +59,7 @@ export async function DELETE(
 ) {
   try {
     const session = await auth();
-    if (!session || session.user?.role !== "ADMIN") {
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 

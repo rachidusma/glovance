@@ -9,8 +9,8 @@ export async function GET(request: NextRequest) {
 
     const products = await prisma.product.findMany({
       where: categoryId ? { categoryId } : undefined,
-      include: { category: { select: { id: true, nameEn: true, nameFr: true, nameAr: true } } },
-      orderBy: { createdAt: "desc" },
+      include: { category: { select: { id: true, name: true, name_fr: true, name_ar: true } } },
+      orderBy: { createdAt: "asc" },
     });
     return NextResponse.json(products);
   } catch (error) {
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const session = await auth();
-    if (!session || session.user?.role !== "ADMIN") {
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -37,14 +37,14 @@ export async function POST(request: NextRequest) {
 
     const product = await prisma.product.create({
       data: {
-        nameEn,
-        nameFr,
-        nameAr,
-        descEn,
-        descFr,
-        descAr,
-        images: images || [],
-        inStock: inStock ?? true,
+        name: nameEn,
+        name_fr: nameFr,
+        name_ar: nameAr,
+        description: descEn,
+        description_fr: descFr,
+        description_ar: descAr,
+        image: images && images.length > 0 ? images[0] : null,
+        isAvailable: inStock ?? true,
         categoryId,
       },
       include: { category: true },

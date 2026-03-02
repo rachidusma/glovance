@@ -6,30 +6,30 @@ import { useSearchParams } from "next/navigation";
 
 interface Category {
   id: string;
-  nameEn: string;
-  nameFr: string;
-  nameAr: string;
+  name: string;
+  name_fr: string;
+  name_ar: string;
   _count: { products: number };
 }
 
 interface Product {
   id: string;
-  nameEn: string;
-  nameFr: string;
-  nameAr: string;
-  descEn: string | null;
-  descFr: string | null;
-  descAr: string | null;
-  images: string[];
-  inStock: boolean;
-  category: { id: string; nameEn: string; nameFr: string; nameAr: string };
+  name: string;
+  name_fr: string;
+  name_ar: string;
+  description: string | null;
+  description_fr: string | null;
+  description_ar: string | null;
+  image: string | null;
+  isAvailable: boolean;
+  category: { id: string; name: string; name_fr: string; name_ar: string };
 }
 
 type Lang = "en" | "fr" | "ar";
 
 function getLocalizedField(obj: any, field: string, lang: Lang): string {
-  const suffixes: Record<Lang, string> = { en: "En", fr: "Fr", ar: "Ar" };
-  return obj[field + suffixes[lang]] || obj[field + "En"] || "";
+  const suffixes: Record<Lang, string> = { en: "", fr: "_fr", ar: "_ar" };
+  return obj[field + suffixes[lang]] || obj[field] || "";
 }
 
 export default function ProductsClient({
@@ -48,6 +48,8 @@ export default function ProductsClient({
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(initialCategory);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   useEffect(() => {
     // If URL param changes (e.g. forward/back navigation), update the state
@@ -77,13 +79,32 @@ export default function ProductsClient({
       const q = search.toLowerCase();
       result = result.filter(
         (p) =>
-          p.nameEn.toLowerCase().includes(q) ||
-          p.nameFr.toLowerCase().includes(q) ||
-          p.nameAr.toLowerCase().includes(q)
+          p.name.toLowerCase().includes(q) ||
+          p.name_fr?.toLowerCase().includes(q) ||
+          p.name_ar?.toLowerCase().includes(q)
       );
     }
     return result;
   }, [products, selectedCategory, search]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, selectedCategory]);
+
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+  const paginatedProducts = filtered.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    const element = document.getElementById("products");
+    if (element) {
+      const y = element.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -114,15 +135,15 @@ export default function ProductsClient({
                   {dict.desc}
                 </p>
                 <div className="flex space-x-4">
-                  <button className="bg-primary hover:bg-[#a3b826] text-[#0a192f] font-bold py-3 px-8 rounded transition-all transform hover:-translate-y-1 shadow-lg shadow-primary/30 flex items-center">
+                  <a href="/GLOVANCE CATALOGUE.pdf" download target="_blank" rel="noopener noreferrer" className="bg-primary hover:bg-[#a3b826] text-[#0a192f] font-bold py-3 px-8 rounded transition-all transform hover:-translate-y-1 shadow-lg shadow-primary/30 flex items-center">
                     {dict.download_pdf}
                     <span className="material-icons-outlined ml-2 text-xl">
                       download
                     </span>
-                  </button>
-                  <button className="border border-white/30 hover:border-white text-white font-medium py-3 px-8 rounded transition-all hover:bg-white/5">
-                    {dict.our_mission}
-                  </button>
+                  </a>
+                  <a onClick={(e) => { e.preventDefault(); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }); }} href="#products" className="border border-white/30 hover:border-white text-white font-medium py-3 px-8 rounded transition-all hover:bg-white/10 flex items-center cursor-pointer">
+                    {dict.discover_products || "Discover Our Products"}
+                  </a>
                 </div>
               </div>
 
@@ -238,7 +259,7 @@ export default function ProductsClient({
                                 </span>
                               )}
                             </span>
-                            <span>{getLocalizedField(cat, "name", l).trim() || cat.nameEn || "Unnamed Category"}</span>
+                            <span>{getLocalizedField(cat, "name", l).trim() || cat.name || "Unnamed Category"}</span>
                             <span className="ml-auto text-xs text-gray-400">
                               ({cat._count.products})
                             </span>
@@ -249,7 +270,7 @@ export default function ProductsClient({
               </div>
 
               {/* Download CTA */}
-              <div className="bg-gradient-to-br from-[#112240] to-black p-6 rounded-lg text-white relative overflow-hidden group cursor-pointer">
+              <a href="/GLOVANCE CATALOGUE.pdf" download target="_blank" rel="noopener noreferrer" className="block bg-gradient-to-br from-[#112240] to-black p-6 rounded-lg text-white relative overflow-hidden group cursor-pointer">
                 <div className="absolute -right-4 -top-4 w-20 h-20 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-all"></div>
                 <h4 className="font-display font-bold text-xl mb-2 relative z-10">
                   {dict.full_catalog}
@@ -263,7 +284,7 @@ export default function ProductsClient({
                     arrow_forward
                   </span>
                 </div>
-              </div>
+              </a>
             </div>
 
             {/* Products Grid */}
@@ -312,16 +333,16 @@ export default function ProductsClient({
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {filtered.map((product, index) => {
+                  {paginatedProducts.map((product, index) => {
                     let name = getLocalizedField(product, "name", l);
-                    if (!name.trim()) name = product.nameEn || "Unnamed Product";
+                    if (!name.trim()) name = product.name || "Unnamed Product";
                     
-                    const desc = getLocalizedField(product, "desc", l);
+                    const desc = getLocalizedField(product, "description", l);
                     
                     let catName = getLocalizedField(product.category, "name", l);
-                    if (!catName.trim()) catName = product.category.nameEn || "Unnamed Category";
+                    if (!catName.trim()) catName = product.category.name || "Unnamed Category";
                     
-                    const thumb = product.images[0] || "/CF648EE9E3F7404F.jpg";
+                    const thumb = product.image || "/CF648EE9E3F7404F.jpg";
 
                     return (
                       <motion.div
@@ -342,7 +363,7 @@ export default function ProductsClient({
                             <span className="bg-primary text-[#0a192f] text-xs font-bold px-2 py-1 rounded inline-block uppercase tracking-wide">
                               {catName}
                             </span>
-                            {!product.inStock && (
+                            {!product.isAvailable && (
                               <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-red-400/50 inline-block uppercase tracking-wide">
                                 {dict.out_of_stock}
                               </span>
@@ -375,6 +396,38 @@ export default function ProductsClient({
                       </motion.div>
                     );
                   })}
+                </div>
+              )}
+
+              {totalPages > 1 && (
+                <div className="flex justify-center mt-12 gap-2">
+                  <button
+                    onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 disabled:opacity-50 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition flex items-center justify-center"
+                  >
+                    <span className="material-icons-outlined">chevron_left</span>
+                  </button>
+                  {Array.from({ length: totalPages }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => handlePageChange(i + 1)}
+                      className={`w-10 h-10 rounded-lg font-semibold transition flex items-center justify-center ${
+                        currentPage === i + 1
+                          ? "bg-primary text-[#0a192f]"
+                          : "border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      }`}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 disabled:opacity-50 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition flex items-center justify-center"
+                  >
+                    <span className="material-icons-outlined">chevron_right</span>
+                  </button>
                 </div>
               )}
             </div>

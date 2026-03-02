@@ -8,7 +8,7 @@ import { useRouter, useParams } from "next/navigation";
 
 interface Category {
   id: string;
-  nameEn: string;
+  name: string;
 }
 
 interface ProductForm {
@@ -52,17 +52,17 @@ export default function EditProductPage() {
     const [prod, cats] = await Promise.all([prodRes.json(), catRes.json()]);
     setCategories(cats);
     setForm({
-      nameEn: prod.nameEn || "",
-      nameFr: prod.nameFr || "",
-      nameAr: prod.nameAr || "",
-      descEn: prod.descEn || "",
-      descFr: prod.descFr || "",
-      descAr: prod.descAr || "",
+      nameEn: prod.name || "",
+      nameFr: prod.name_fr || "",
+      nameAr: prod.name_ar || "",
+      descEn: prod.description || "",
+      descFr: prod.description_fr || "",
+      descAr: prod.description_ar || "",
       categoryId: prod.categoryId || "",
-      images: prod.images || [],
-      inStock: prod.inStock ?? true,
+      images: prod.image ? [prod.image] : [],
+      inStock: prod.isAvailable ?? true,
     });
-    setPreviews(prod.images || []);
+    setPreviews(prod.image ? [prod.image] : []);
     setLoading(false);
   };
 
@@ -157,7 +157,7 @@ export default function EditProductPage() {
               >
                 <option value="">Select a category</option>
                 {categories.map((c) => (
-                  <option key={c.id} value={c.id}>{c.nameEn}</option>
+                  <option key={c.id} value={c.id}>{c.name}</option>
                 ))}
               </select>
             </div>

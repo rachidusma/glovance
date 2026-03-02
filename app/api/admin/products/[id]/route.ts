@@ -27,7 +27,7 @@ export async function PUT(
 ) {
   try {
     const session = await auth();
-    if (!session || session.user?.role !== "ADMIN") {
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -37,7 +37,17 @@ export async function PUT(
 
     const product = await prisma.product.update({
       where: { id },
-      data: { nameEn, nameFr, nameAr, descEn, descFr, descAr, images, inStock, categoryId },
+      data: { 
+        name: nameEn, 
+        name_fr: nameFr, 
+        name_ar: nameAr, 
+        description: descEn, 
+        description_fr: descFr, 
+        description_ar: descAr, 
+        image: images && images.length > 0 ? images[0] : null, 
+        isAvailable: inStock, 
+        categoryId 
+      },
       include: { category: true },
     });
     return NextResponse.json(product);
@@ -52,7 +62,7 @@ export async function DELETE(
 ) {
   try {
     const session = await auth();
-    if (!session || session.user?.role !== "ADMIN") {
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 

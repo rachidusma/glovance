@@ -8,34 +8,34 @@ type Lang = "en" | "fr" | "ar";
 
 interface RelatedProduct {
   id: string;
-  nameEn: string;
-  nameFr: string;
-  nameAr: string;
-  images: string[];
+  name: string;
+  name_fr: string | null;
+  name_ar: string | null;
+  image: string | null;
 }
 
 interface Product {
   id: string;
-  nameEn: string;
-  nameFr: string;
-  nameAr: string;
-  descEn: string | null;
-  descFr: string | null;
-  descAr: string | null;
-  images: string[];
-  inStock: boolean;
+  name: string;
+  name_fr: string | null;
+  name_ar: string | null;
+  description: string | null;
+  description_fr: string | null;
+  description_ar: string | null;
+  image: string | null;
+  isAvailable: boolean;
   category: {
     id: string;
-    nameEn: string;
-    nameFr: string;
-    nameAr: string;
+    name: string;
+    name_fr: string | null;
+    name_ar: string | null;
     products: RelatedProduct[];
   };
 }
 
 function getLocalizedField(obj: any, field: string, lang: Lang): string {
-  const suffixes: Record<Lang, string> = { en: "En", fr: "Fr", ar: "Ar" };
-  return obj[field + suffixes[lang]] || obj[field + "En"] || "";
+  const suffixes: Record<Lang, string> = { en: "", fr: "_fr", ar: "_ar" };
+  return obj[field + suffixes[lang]] || obj[field] || "";
 }
 
 export default function ProductDetailClient({
@@ -52,9 +52,9 @@ export default function ProductDetailClient({
   const [openSection, setOpenSection] = useState<string | null>("logistics");
 
   const name = getLocalizedField(product, "name", l);
-  const desc = getLocalizedField(product, "desc", l);
+  const desc = getLocalizedField(product, "description", l);
   const catName = getLocalizedField(product.category, "name", l);
-  const images = product.images.length > 0 ? product.images : ["/CF648EE9E3F7404F.jpg"];
+  const images = product.image ? [product.image] : ["/CF648EE9E3F7404F.jpg"];
   const related = product.category.products || [];
 
   return (
@@ -154,8 +154,8 @@ export default function ProductDetailClient({
                 <span className="text-xs font-semibold text-primary uppercase tracking-widest block">
                   {catName}
                 </span>
-                <span className={`text-xs font-bold px-2.5 py-1 rounded uppercase tracking-wide ${product.inStock ? "bg-green-100/10 text-green-600 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800" : "bg-red-100/10 text-red-600 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800"}`}>
-                {product.inStock ? dict.product_detail_page?.in_stock : dict.product_detail_page?.out_of_stock}
+                <span className={`text-xs font-bold px-2.5 py-1 rounded uppercase tracking-wide ${product.isAvailable ? "bg-green-100/10 text-green-600 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800" : "bg-red-100/10 text-red-600 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800"}`}>
+                {product.isAvailable ? dict.product_detail_page?.in_stock : dict.product_detail_page?.out_of_stock}
                 </span>
               </div>
               <h1 className="text-3xl md:text-4xl font-display font-bold text-[#0b1121] dark:text-white tracking-tight mb-4">
@@ -179,10 +179,10 @@ export default function ProductDetailClient({
                   arrow_forward
                 </span>
               </Link>
-              <button className="flex-1 bg-white dark:bg-card-dark border-2 border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white font-semibold py-4 px-8 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex justify-center items-center">
+              <a href="/GLOVANCE CATALOGUE.pdf" download target="_blank" rel="noopener noreferrer" className="flex-1 bg-white dark:bg-card-dark border-2 border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white font-semibold py-4 px-8 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex justify-center items-center">
                 <span className="material-icons-outlined mr-2">download</span>
                 {dict.product_detail_page?.download_spec}
-              </button>
+              </a>
             </div>
 
             {/* Accordion */}
@@ -258,7 +258,7 @@ export default function ProductDetailClient({
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {related.map((rel) => {
                 const relName = getLocalizedField(rel, "name", l);
-                const relThumb = rel.images[0] || "/CF648EE9E3F7404F.jpg";
+                const relThumb = rel.image || "/CF648EE9E3F7404F.jpg";
                 return (
                   <div
                     key={rel.id}

@@ -38,12 +38,18 @@ export default function EditCategoryPage() {
   const fetchCategory = async () => {
     const res = await fetch(`/api/admin/categories/${id}`);
     const data = await res.json();
-    setForm({
-      nameEn: data.nameEn || "", nameFr: data.nameFr || "", nameAr: data.nameAr || "",
-      descEn: data.descEn || "", descFr: data.descFr || "", descAr: data.descAr || "",
-      imageUrl: data.imageUrl || "",
-    });
-    if (data.imageUrl) setPreview(data.imageUrl);
+    if (res.ok) {
+      setForm({
+        nameEn: data.name || "",
+        nameFr: data.name_fr || "",
+        nameAr: data.name_ar || "",
+        descEn: data.description || "",
+        descFr: data.description_fr || "",
+        descAr: data.description_ar || "",
+        imageUrl: data.image || "",
+      });
+      if (data.image) setPreview(data.image);
+    }
     setFetching(false);
   };
 

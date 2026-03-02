@@ -94,6 +94,16 @@
       "hq": "Headquarters",
       "address": "Doha, Qatar\nAl Dafna Financial District\nPO Box 12345",
       "follow_us": "Follow Us"
+    },
+    "export_process": {
+      "title": "Our Export Process",
+      "subtitle": "At GLOVANCE TRADING, we have established a clear and structured process to ensure a smooth and secure export.",
+      "step_1": "Contact and study of your request",
+      "step_2": "Technical and commercial analysis",
+      "step_3": "Quoting",
+      "step_4": "Product preparation",
+      "step_5": "Customs formalities management",
+      "step_6": "Shipping to your destination"
     }
   },
   "about_page": {
@@ -124,6 +134,7 @@
     "desc": "Connecting Qatar to the world. Specializing in the import and export of household appliances, pottery, fruits, dates, and everyday consumer goods.",
     "download_pdf": "Download PDF",
     "our_mission": "Our Mission",
+    "discover_products": "Discover Our Products",
     "logistics": "Logistics",
     "quality_goods": "Quality Goods",
     "search_placeholder": "Search products...",
