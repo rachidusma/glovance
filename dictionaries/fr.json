@@ -179,6 +179,7 @@
     "no_products": "Aucun produit trouvé",
     "clear_filters": "Effacer les filtres",
     "out_of_stock": "Rupture de stock",
+    "in_stock": "En stock",
     "edition": "Édition"
   },
   "process_page": {

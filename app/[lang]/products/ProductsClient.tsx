@@ -52,23 +52,29 @@ export default function ProductsClient({
   const itemsPerPage = 6;
 
   useEffect(() => {
-    // If URL param changes (e.g. forward/back navigation), update the state
-    const catParam = searchParams.get("category");
-    if (catParam !== selectedCategory) {
-      setSelectedCategory(catParam);
-    }
-  }, [searchParams]);
-
-  useEffect(() => {
     Promise.all([
       fetch("/api/categories").then((r) => r.json()),
       fetch("/api/products").then((r) => r.json()),
     ]).then(([cats, prods]) => {
-      setCategories(Array.isArray(cats) ? cats : []);
+      const fetchedCats = Array.isArray(cats) ? cats : [];
+      setCategories(fetchedCats);
       setProducts(Array.isArray(prods) ? prods : []);
       setLoading(false);
+      
+      if (!initialCategory && fetchedCats.length > 0) {
+        setSelectedCategory(fetchedCats[0].id);
+      }
     });
-  }, []);
+  }, [initialCategory]);
+
+  useEffect(() => {
+    const catParam = searchParams.get("category");
+    if (catParam) {
+      if (catParam !== selectedCategory) setSelectedCategory(catParam);
+    } else if (categories.length > 0 && selectedCategory === null) {
+      setSelectedCategory(categories[0].id);
+    }
+  }, [searchParams, categories, selectedCategory]);
 
   const filtered = useMemo(() => {
     let result = products;
@@ -214,26 +220,7 @@ export default function ProductsClient({
                   {dict.categories}
                 </h3>
                 <ul className="space-y-2">
-                  <li>
-                    <button
-                      onClick={() => setSelectedCategory(null)}
-                      className={`flex items-center space-x-3 cursor-pointer group w-full text-left ${!selectedCategory ? "text-primary font-semibold" : "text-gray-600 dark:text-gray-300 hover:text-primary"} transition-colors`}
-                    >
-                      <span
-                        className={`w-5 h-5 rounded border flex items-center justify-center flex-shrink-0 transition-colors ${!selectedCategory ? "border-primary bg-primary/20" : "border-gray-300 dark:border-gray-600"}`}
-                      >
-                        {!selectedCategory && (
-                          <span className="material-icons-outlined text-xs text-primary">
-                            check
-                          </span>
-                        )}
-                      </span>
-                      <span>{dict.cat_all}</span>
-                      <span className="ml-auto text-xs text-gray-400">
-                        ({products.length})
-                      </span>
-                    </button>
-                  </li>
+                  {/* All products option removed */}
                   {loading
                     ? Array.from({ length: 3 }).map((_, i) => (
                         <li key={i}>
@@ -363,8 +350,14 @@ export default function ProductsClient({
                             <span className="bg-primary text-[#0a192f] text-xs font-bold px-2 py-1 rounded inline-block uppercase tracking-wide">
                               {catName}
                             </span>
-                            {!product.isAvailable && (
-                              <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-red-400/50 inline-block uppercase tracking-wide">
+                            {product.isAvailable ? (
+                              <span className="bg-green-500/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-md shadow-lg border border-green-400/50 inline-block uppercase tracking-wider flex items-center gap-1 w-max">
+                                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                                {dict.in_stock || "In Stock"}
+                              </span>
+                            ) : (
+                              <span className="bg-red-500/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-md shadow-lg border border-red-400/50 inline-block uppercase tracking-wider flex items-center gap-1 w-max">
+                                <span className="material-icons-outlined text-[10px]">close</span>
                                 {dict.out_of_stock}
                               </span>
                             )}
