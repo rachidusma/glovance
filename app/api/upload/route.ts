@@ -4,14 +4,6 @@ import { auth } from "@/auth";
 
 export const maxDuration = 60; // Set up to 60 seconds of execution for Vercel
 // Vercel serverless functions have a hard 4.5 MB payload limit.
-// We allow up to 4mb to be safe for base64 strings.
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '4mb',
-    },
-  },
-};
 
 
 export async function POST(request: NextRequest) {
