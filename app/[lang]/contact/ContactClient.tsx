@@ -265,7 +265,7 @@ export default function ContactClient({ dict }: { dict: any }) {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="w-full h-96 bg-gray-300 dark:bg-gray-800 rounded-xl overflow-hidden shadow-inner map-container relative">
-            <iframe allowFullScreen height="100%" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115408.0970347856!2d51.4429994625!3d25.285447299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45c534ffdce87f%3A0x4419e918974a67af!2sDoha%2C%20Qatar!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus" style={{ border: 0 }} width="100%">
+            <iframe allowFullScreen height="100%" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Al%20Jazeera%20Tower,%20Al%20Dafna%20St,%20West%20Bay,%20Doha,%20Qatar&t=&z=15&ie=UTF8&iwloc=&output=embed" style={{ border: 0 }} width="100%">
             </iframe>
             <div className="absolute top-4 right-4 bg-white dark:bg-card-dark p-4 rounded shadow-lg max-w-xs hidden sm:block">
               <p className="text-xs font-bold text-gray-500 uppercase">{dict.office_hours_title}</p>
