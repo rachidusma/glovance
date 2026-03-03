@@ -339,11 +339,11 @@ export default function ProductsClient({
                         transition={{ duration: 0.4, delay: index * 0.05 }}
                         className="bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-800 group"
                       >
-                        <div className="relative h-64 overflow-hidden">
+                        <div className="relative aspect-square overflow-hidden bg-white">
                           <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
                           <img
                             alt={name}
-                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                            className="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-700"
                             src={thumb}
                           />
                           <div className="absolute bottom-4 left-4 z-20 flex flex-col gap-2 items-start">

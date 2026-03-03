@@ -14,7 +14,7 @@ export async function uploadImage(
     folder,
     resource_type: "image",
     transformation: [
-      { width: 800, height: 600, crop: "pad", background: "white" }
+      { width: 800, height: 800, crop: "pad", background: "white" }
     ]
   });
   return result.secure_url;
