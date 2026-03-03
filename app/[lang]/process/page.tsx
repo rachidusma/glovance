@@ -6,5 +6,5 @@ export default async function Process({ params }: { params: Promise<{ lang: Loca
   const { lang } = await params;
   const dict = await getDictionary(lang);
   
-  return <ProcessClient dict={dict.process_page} />;
+  return <ProcessClient dict={dict.process_page} lang={lang} />;
 }

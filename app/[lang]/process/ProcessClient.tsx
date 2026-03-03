@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function ProcessClient({ dict }: { dict: any }) {
+export default function ProcessClient({ dict, lang }: { dict: any; lang: string }) {
   return (
     <>
       <style dangerouslySetInnerHTML={{
@@ -229,7 +229,7 @@ export default function ProcessClient({ dict }: { dict: any }) {
               </span>
               <Link
                 className="px-6 py-2 bg-primary text-black font-bold rounded-full hover:bg-opacity-90 transition transform hover:-translate-y-0.5 shadow-lg flex items-center"
-                href="/contact"
+                href={`/${lang}/contact`}
               >
                 {dict.contact_btn} <span className="material-icons-outlined text-sm ml-2">arrow_forward</span>
               </Link>
