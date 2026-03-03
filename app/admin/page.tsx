@@ -12,12 +12,13 @@ interface Stats {
   products: number;
   messages: number;
   unreadMessages: number;
+  subscribers: number;
 }
 
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [stats, setStats] = useState<Stats>({ categories: 0, products: 0, messages: 0, unreadMessages: 0 });
+  const [stats, setStats] = useState<Stats>({ categories: 0, products: 0, messages: 0, unreadMessages: 0, subscribers: 0 });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,21 +32,24 @@ export default function AdminDashboard() {
 
   const fetchStats = async () => {
     try {
-      const [catRes, prodRes, msgRes] = await Promise.all([
+      const [catRes, prodRes, msgRes, subRes] = await Promise.all([
         fetch("/api/admin/categories"),
         fetch("/api/admin/products"),
         fetch("/api/admin/messages"),
+        fetch("/api/admin/subscribers"),
       ]);
-      const [categories, products, messages] = await Promise.all([
+      const [categories, products, messages, subscribers] = await Promise.all([
         catRes.json(),
         prodRes.json(),
         msgRes.json(),
+        subRes.json(),
       ]);
       setStats({
         categories: categories.length,
         products: products.length,
         messages: Array.isArray(messages) ? messages.length : 0,
         unreadMessages: Array.isArray(messages) ? messages.filter((m: any) => !m.isRead).length : 0,
+        subscribers: Array.isArray(subscribers) ? subscribers.length : 0,
       });
     } catch (e) {
       console.error(e);
@@ -68,6 +72,7 @@ export default function AdminDashboard() {
     { label: "Categories", value: stats.categories, icon: "category", color: "text-purple-400", href: "/admin/categories" },
     { label: "Products", value: stats.products, icon: "inventory_2", color: "text-primary", href: "/admin/products" },
     { label: "Messages", value: stats.messages, badge: stats.unreadMessages, icon: "inbox", color: "text-orange-400", href: "/admin/messages" },
+    { label: "Subscribers", value: stats.subscribers, icon: "people", color: "text-green-400", href: "/admin/subscribers" },
   ];
 
   return (

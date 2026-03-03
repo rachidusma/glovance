@@ -9,6 +9,7 @@ const navItems = [
   { label: "Categories", href: "/admin/categories", icon: "category" },
   { label: "Products", href: "/admin/products", icon: "inventory_2" },
   { label: "Inbox", href: "/admin/messages", icon: "inbox" },
+  { label: "Subscribers", href: "/admin/subscribers", icon: "people" },
   { label: "Admins", href: "/admin/admins", icon: "admin_panel_settings" },
 ];
 

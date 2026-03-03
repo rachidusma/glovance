@@ -1,8 +1,43 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Footer({ dict, currentLang }: { dict: any; currentLang: string }) {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setStatus("success");
+        setMessage(dict.subscribe_success || "Thank you for subscribing!");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error || dict.subscribe_error || "Failed to subscribe. Please try again.");
+      }
+    } catch (error) {
+      setStatus("error");
+      setMessage(dict.subscribe_error || "An error occurred. Please try again.");
+    }
+  };
+
   return (
     <footer className="bg-[#0b1221] border-t border-gray-800 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,16 +91,32 @@ export default function Footer({ dict, currentLang }: { dict: any; currentLang: 
             <p className="text-gray-400 text-sm mb-4">
               {dict.newsletter_desc}
             </p>
-            <div className="flex">
-              <input
-                className="bg-gray-800 text-white text-sm border-none rounded-l-md focus:ring-1 focus:ring-primary w-full px-4 py-2 outline-none"
-                placeholder={dict.email_placeholder}
-                type="email"
-              />
-              <button className="bg-primary text-secondary font-bold px-4 py-2 rounded-r-md hover:bg-white transition-colors">
-                {dict.ok}
-              </button>
-            </div>
+            <form onSubmit={handleSubscribe} className="flex flex-col gap-2">
+              <div className="flex">
+                <input
+                  className="bg-gray-800 text-white text-sm border-none rounded-l-md focus:ring-1 focus:ring-primary w-full px-4 py-2 outline-none disabled:opacity-50"
+                  placeholder={dict.email_placeholder || "Enter your email"}
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={status === "loading"}
+                  required
+                />
+                <button 
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="bg-primary text-secondary font-bold px-4 py-2 rounded-r-md hover:bg-white transition-colors disabled:opacity-50"
+                >
+                  {status === "loading" ? "..." : (dict.ok || "OK")}
+                </button>
+              </div>
+              {message && (
+                <p className={`text-sm ${status === "success" ? "text-green-400" : "text-red-400"}`}>
+                  {message}
+                </p>
+              )}
+            </form>
+
           </div>
         </motion.div>
         <motion.div 
