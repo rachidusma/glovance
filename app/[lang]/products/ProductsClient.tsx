@@ -74,7 +74,24 @@ export default function ProductsClient({
     } else if (categories.length > 0 && selectedCategory === null) {
       setSelectedCategory(categories[0].id);
     }
-  }, [searchParams, categories, selectedCategory]);
+  }, [searchParams, categories]);
+
+  const handleCategorySelect = (categoryId: string | null) => {
+    setSelectedCategory(categoryId);
+    
+    // Update the URL without reloading the page so it stays in sync
+    const newParams = new URLSearchParams(searchParams.toString());
+    if (categoryId) {
+      newParams.set("category", categoryId);
+    } else {
+      newParams.delete("category");
+    }
+    
+    // Using window.history to avoid unwanted full re-renders that next/navigation might trigger 
+    // if not using shallow routing properly in app router, though router.replace works too.
+    const newPathname = `${window.location.pathname}?${newParams.toString()}`;
+    window.history.pushState(null, "", newPathname);
+  };
 
   const filtered = useMemo(() => {
     let result = products;
@@ -230,11 +247,7 @@ export default function ProductsClient({
                     : categories.map((cat) => (
                         <li key={cat.id}>
                           <button
-                            onClick={() =>
-                              setSelectedCategory(
-                                selectedCategory === cat.id ? null : cat.id
-                              )
-                            }
+                            onClick={() => handleCategorySelect(selectedCategory === cat.id ? null : cat.id)}
                             className={`flex items-center space-x-3 cursor-pointer group w-full text-left ${selectedCategory === cat.id ? "text-primary font-semibold" : "text-gray-600 dark:text-gray-300 hover:text-primary"} transition-colors`}
                           >
                             <span
@@ -310,7 +323,7 @@ export default function ProductsClient({
                     <button
                       onClick={() => {
                         setSearch("");
-                        setSelectedCategory(null);
+                        handleCategorySelect(null);
                       }}
                       className="mt-4 text-primary hover:underline text-sm"
                     >
