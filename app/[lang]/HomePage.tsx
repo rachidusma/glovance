@@ -189,7 +189,7 @@ function CatalogueSection({ dict, lang }: { dict: any; lang: Lang }) {
                         className="flex-shrink-0 group relative overflow-hidden rounded-xl shadow-lg h-96 cursor-pointer"
                         style={{ width: `calc(100% / ${visibleItems} - ${(visibleItems - 1) * 24 / visibleItems}px)` }}
                       >
-                        <Link href={`/${lang}/products?category=${cat.id}#products`} prefetch={false}>
+                        <Link href={`/${lang}/products?category=${cat.id}#products`}>
                           <img
                             alt={name}
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -539,7 +539,7 @@ export default function Home({ dict, lang }: { dict: any; lang: string }) {
             </div>
             <div className="p-6">
               <span className="block text-5xl font-display font-bold text-white mb-2">
-                <AnimatedCounter to={500} suffix="+" duration={2} />
+                <AnimatedCounter to={100} suffix="+" duration={2} />
               </span>
               <span className="text-primary text-sm font-bold uppercase tracking-widest">
                 {dict.stats.products}
