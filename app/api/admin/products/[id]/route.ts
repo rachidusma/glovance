@@ -32,7 +32,7 @@ export async function PUT(
     }
 
     const { id } = await params;
-    const { nameEn, nameFr, nameAr, descEn, descFr, descAr, images, inStock, categoryId } =
+    const { nameEn, nameFr, nameAr, descEn, descFr, descAr, images, inStock, categoryId, order } =
       await request.json();
 
     const product = await prisma.product.update({
@@ -46,6 +46,7 @@ export async function PUT(
         description_ar: descAr, 
         image: images && images.length > 0 ? images[0] : null, 
         isAvailable: inStock, 
+        order: order ? parseInt(order, 10) : 0,
         categoryId 
       },
       include: { category: true },

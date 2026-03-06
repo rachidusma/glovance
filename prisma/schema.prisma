@@ -39,6 +39,7 @@ model Product {
   description_ar String?  @db.Text
   image          String?
   isAvailable    Boolean  @default(true)
+  order          Int      @default(0)
   category       Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId     String
   createdAt      DateTime @default(now())

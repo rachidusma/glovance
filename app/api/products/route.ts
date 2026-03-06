@@ -13,7 +13,10 @@ export async function GET(request: NextRequest) {
           select: { id: true, name: true, name_fr: true, name_ar: true },
         },
       },
-      orderBy: { createdAt: "asc" },
+      orderBy: [
+        { order: "asc" },
+        { createdAt: "desc" }
+      ],
     });
 
     return NextResponse.json(products);

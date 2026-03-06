@@ -14,6 +14,7 @@ interface Product {
   name_ar: string;
   image: string | null;
   category: { id: string; name: string };
+  order: number;
   createdAt: string;
 }
 
@@ -123,6 +124,7 @@ export default function ProductsPage() {
                   <th className="text-left px-6 py-4">Product</th>
                   <th className="text-left px-6 py-4">Category</th>
                   <th className="text-left px-6 py-4">Images</th>
+                  <th className="text-left px-6 py-4">Order</th>
                   <th className="text-left px-6 py-4">Added</th>
                   <th className="text-right px-6 py-4">Actions</th>
                 </tr>
@@ -152,6 +154,9 @@ export default function ProductsPage() {
                     </td>
                     <td className="px-6 py-4 text-gray-400">
                       {product.image ? "1 image" : "0 images"}
+                    </td>
+                    <td className="px-6 py-4 text-gray-400">
+                      {product.order}
                     </td>
                     <td className="px-6 py-4 text-gray-400">
                       {new Date(product.createdAt).toLocaleDateString()}

@@ -10,7 +10,10 @@ export async function GET(request: NextRequest) {
     const products = await prisma.product.findMany({
       where: categoryId ? { categoryId } : undefined,
       include: { category: { select: { id: true, name: true, name_fr: true, name_ar: true } } },
-      orderBy: { createdAt: "asc" },
+      orderBy: [
+        { order: "asc" },
+        { createdAt: "desc" }
+      ],
     });
     return NextResponse.json(products);
   } catch (error) {
@@ -25,7 +28,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { nameEn, nameFr, nameAr, descEn, descFr, descAr, images, inStock, categoryId } =
+    const { nameEn, nameFr, nameAr, descEn, descFr, descAr, images, inStock, categoryId, order } =
       await request.json();
 
     if (!nameEn || !nameFr || !nameAr || !categoryId) {
@@ -45,6 +48,7 @@ export async function POST(request: NextRequest) {
         description_ar: descAr,
         image: images && images.length > 0 ? images[0] : null,
         isAvailable: inStock ?? true,
+        order: order ? parseInt(order, 10) : 0,
         categoryId,
       },
       include: { category: true },

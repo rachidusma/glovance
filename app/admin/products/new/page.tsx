@@ -17,6 +17,7 @@ interface ProductForm {
   categoryId: string;
   images: string[];
   inStock: boolean;
+  order: string;
 }
 
 const empty: ProductForm = {
@@ -24,6 +25,7 @@ const empty: ProductForm = {
   descEn: "", descFr: "", descAr: "",
   categoryId: "", images: [],
   inStock: true,
+  order: "0",
 };
 
 export default function NewProductPage() {
@@ -125,17 +127,29 @@ export default function NewProductPage() {
             {/* Category */}
             <div className="bg-[#112240] rounded-2xl p-6 border border-gray-800">
               <h2 className="text-white font-semibold mb-4">Category</h2>
-              <select
-                value={form.categoryId}
-                onChange={set("categoryId")}
-                required
-                className="w-full bg-[#0a192f] border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-primary outline-none transition"
-              >
-                <option value="">Select a category</option>
-                {categories.map((c) => (
-                  <option key={c.id} value={c.id}>{c.name}</option>
-                ))}
-              </select>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <select
+                  value={form.categoryId}
+                  onChange={set("categoryId")}
+                  required
+                  className="w-full bg-[#0a192f] border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-primary outline-none transition"
+                >
+                  <option value="">Select a category</option>
+                  {categories.map((c) => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
+                <div>
+                  <input
+                    type="number"
+                    value={form.order}
+                    onChange={set("order")}
+                    placeholder="Display Order (e.g., 1, 2, 3)"
+                    className="w-full bg-[#0a192f] border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-primary outline-none transition"
+                  />
+                  <p className="text-gray-400 text-xs mt-1">Lower numbers appear first. Default is 0.</p>
+                </div>
+              </div>
             </div>
 
             {/* Images */}
