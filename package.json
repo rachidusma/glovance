@@ -24,7 +24,8 @@
     "pg": "^8.19.0",
     "prisma": "5.22.0",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "recharts": "^3.8.0"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"

@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 
 import { getDictionary } from "@/dictionaries/get-dictionary";
 import type { Locale } from "@/i18n-config";
+import VisitTracker from "@/components/VisitTracker";
 
 export default async function RootLayout({
   children,
@@ -44,6 +45,7 @@ export default async function RootLayout({
       <body
         className={`${plusJakartaSans.variable} ${outfit.variable} antialiased bg-background-light dark:bg-background-dark text-text-dark dark:text-text-light font-sans transition-colors duration-300 min-h-screen flex flex-col`}
       >
+        <VisitTracker />
         <Navbar dict={dict.navbar} currentLang={lang} />
         <main className="flex-grow">
           {children}

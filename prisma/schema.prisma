@@ -64,3 +64,10 @@ model Subscriber {
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
 }
+
+model Visit {
+  id        String   @id @default(cuid())
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+}

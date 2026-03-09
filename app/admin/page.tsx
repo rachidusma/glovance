@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminHeader from "@/components/admin/AdminHeader";
+import VisitCharts from "@/components/admin/VisitCharts";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -13,12 +14,14 @@ interface Stats {
   messages: number;
   unreadMessages: number;
   subscribers: number;
+  visits: number;
 }
 
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [stats, setStats] = useState<Stats>({ categories: 0, products: 0, messages: 0, unreadMessages: 0, subscribers: 0 });
+  const [stats, setStats] = useState<Stats>({ categories: 0, products: 0, messages: 0, unreadMessages: 0, subscribers: 0, visits: 0 });
+  const [chartData, setChartData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,17 +35,19 @@ export default function AdminDashboard() {
 
   const fetchStats = async () => {
     try {
-      const [catRes, prodRes, msgRes, subRes] = await Promise.all([
+      const [catRes, prodRes, msgRes, subRes, visitRes] = await Promise.all([
         fetch("/api/admin/categories"),
         fetch("/api/admin/products"),
         fetch("/api/admin/messages"),
         fetch("/api/admin/subscribers"),
+        fetch("/api/admin/visits"),
       ]);
-      const [categories, products, messages, subscribers] = await Promise.all([
+      const [categories, products, messages, subscribers, visits] = await Promise.all([
         catRes.json(),
         prodRes.json(),
         msgRes.json(),
         subRes.json(),
+        visitRes.json(),
       ]);
       setStats({
         categories: categories.length,
@@ -50,7 +55,9 @@ export default function AdminDashboard() {
         messages: Array.isArray(messages) ? messages.length : 0,
         unreadMessages: Array.isArray(messages) ? messages.filter((m: any) => !m.isRead).length : 0,
         subscribers: Array.isArray(subscribers) ? subscribers.length : 0,
+        visits: visits.count || 0,
       });
+      setChartData(visits.chartData || null);
     } catch (e) {
       console.error(e);
     } finally {
@@ -73,6 +80,7 @@ export default function AdminDashboard() {
     { label: "Products", value: stats.products, icon: "inventory_2", color: "text-primary", href: "/admin/products" },
     { label: "Messages", value: stats.messages, badge: stats.unreadMessages, icon: "inbox", color: "text-orange-400", href: "/admin/messages" },
     { label: "Subscribers", value: stats.subscribers, icon: "people", color: "text-green-400", href: "/admin/subscribers" },
+    { label: "Visits", value: stats.visits, icon: "visibility", color: "text-blue-400", href: "#" },
   ];
 
   return (
@@ -106,10 +114,12 @@ export default function AdminDashboard() {
             ))}
           </div>
 
-          {/* Quick Actions */}
-          <div className="bg-[#112240] rounded-2xl p-6 border border-gray-800">
-            <h2 className="text-white font-semibold mb-4">Quick Actions</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <VisitCharts data={chartData} />
+
+            {/* Quick Actions */}
+            <div className="bg-[#112240] rounded-2xl p-6 border border-gray-800 flex flex-col justify-center gap-4 col-span-1">
+              <h2 className="text-white font-semibold mb-2">Quick Actions</h2>
               <Link
                 href="/admin/categories/new"
                 className="flex items-center gap-3 px-4 py-3 bg-primary/10 border border-primary/20 rounded-xl text-primary hover:bg-primary/20 transition"
