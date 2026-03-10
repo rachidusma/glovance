@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminHeader from "@/components/admin/AdminHeader";
 import VisitCharts from "@/components/admin/VisitCharts";
+import VisitCountries from "@/components/admin/VisitCountries";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -22,6 +23,7 @@ export default function AdminDashboard() {
   const router = useRouter();
   const [stats, setStats] = useState<Stats>({ categories: 0, products: 0, messages: 0, unreadMessages: 0, subscribers: 0, visits: 0 });
   const [chartData, setChartData] = useState<any>(null);
+  const [countriesData, setCountriesData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -58,6 +60,7 @@ export default function AdminDashboard() {
         visits: visits.count || 0,
       });
       setChartData(visits.chartData || null);
+      setCountriesData(visits.countries || null);
     } catch (e) {
       console.error(e);
     } finally {
@@ -135,6 +138,10 @@ export default function AdminDashboard() {
                 New Product
               </Link>
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <VisitCountries data={countriesData} />
           </div>
         </main>
       </div>

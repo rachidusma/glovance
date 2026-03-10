@@ -69,5 +69,6 @@ model Visit {
   id        String   @id @default(cuid())
   ip        String?
   userAgent String?
+  country   String?  @default("Unknown")
   createdAt DateTime @default(now())
 }
