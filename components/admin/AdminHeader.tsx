@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 interface AdminHeaderProps {
   title: string;
@@ -16,7 +17,15 @@ export default function AdminHeader({ title, subtitle }: AdminHeaderProps) {
         <h1 className="text-lg font-bold text-white">{title}</h1>
         {subtitle && <p className="text-xs text-gray-400">{subtitle}</p>}
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-2 mr-2">
+          <Link href="/admin/categories/new" className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-lg text-primary text-sm hover:bg-primary/20 transition">
+            <span className="material-icons-outlined text-[18px]">add</span> Category
+          </Link>
+          <Link href="/admin/products/new" className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-lg text-primary text-sm hover:bg-primary/20 transition">
+            <span className="material-icons-outlined text-[18px]">add</span> Product
+          </Link>
+        </div>
         <div className="text-right">
           <p className="text-sm font-medium text-white">{session?.user?.name}</p>
           <p className="text-xs text-primary font-semibold">Administrator</p>

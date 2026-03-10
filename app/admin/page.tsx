@@ -119,28 +119,6 @@ export default function AdminDashboard() {
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <VisitCharts data={chartData} />
-
-            {/* Quick Actions */}
-            <div className="bg-[#112240] rounded-2xl p-6 border border-gray-800 flex flex-col justify-center gap-4 col-span-1">
-              <h2 className="text-white font-semibold mb-2">Quick Actions</h2>
-              <Link
-                href="/admin/categories/new"
-                className="flex items-center gap-3 px-4 py-3 bg-primary/10 border border-primary/20 rounded-xl text-primary hover:bg-primary/20 transition"
-              >
-                <span className="material-icons-outlined">add_circle</span>
-                New Category
-              </Link>
-              <Link
-                href="/admin/products/new"
-                className="flex items-center gap-3 px-4 py-3 bg-primary/10 border border-primary/20 rounded-xl text-primary hover:bg-primary/20 transition"
-              >
-                <span className="material-icons-outlined">add_circle</span>
-                New Product
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <VisitCountries data={countriesData} />
           </div>
         </main>

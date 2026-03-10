@@ -23,7 +23,12 @@ export async function POST(request: Request) {
     console.log("Visit tracking info:", { ip, vercelCountry, userAgent });
 
     if (vercelCountry) {
-      country = vercelCountry;
+      try {
+        const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+        country = regionNames.of(vercelCountry) || vercelCountry;
+      } catch (e) {
+        country = vercelCountry;
+      }
     } else if (ip && ip !== "unknown" && ip !== "127.0.0.1" && ip !== "::1") {
       try {
         const response = await fetch(`http://ip-api.com/json/${ip}`);
