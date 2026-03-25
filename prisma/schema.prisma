@@ -58,13 +58,16 @@ model Subscriber {
 }
 
 model ContactMessage {
-  id        String   @id @default(cuid())
-  name      String
-  email     String
-  phone     String?
-  message   String
-  isRead    Boolean  @default(false)
-  createdAt DateTime @default(now())
+  id         String   @id @default(cuid())
+  name       String
+  email      String
+  phone      String?
+  company    String?
+  subject    String?
+  message    String
+  productUrl String?
+  isRead     Boolean  @default(false)
+  createdAt  DateTime @default(now())
 }
 
 model Visit {

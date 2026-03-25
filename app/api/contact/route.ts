@@ -23,6 +23,7 @@ export async function POST(request: Request) {
         company,
         subject,
         message,
+        productUrl,
       },
     });
 
