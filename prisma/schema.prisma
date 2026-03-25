@@ -74,7 +74,7 @@ model Visit {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   userAgent String?
-  ipAddress String?
+  ip        String?
   path      String?
   country   String?
 }
