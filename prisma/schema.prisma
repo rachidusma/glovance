@@ -1,5 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -11,7 +11,7 @@ datasource db {
 model Admin {
   id       String  @id @default(cuid())
   email    String  @unique
-  password String  // Hashed
+  password String
   name     String?
 }
 
@@ -19,31 +19,41 @@ model Category {
   id             String    @id @default(cuid())
   name           String
   name_fr        String?
-  name_ar        String?
-  description    String?   @db.Text
-  description_fr String?   @db.Text
-  description_ar String?   @db.Text
+  description    String?
+  description_fr String?
   image          String?
-  products       Product[]
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+  description_pt String?
+  name_pt        String?
+  description_ar String?
+  name_ar        String?
+  products       Product[]
 }
 
 model Product {
   id             String   @id @default(cuid())
   name           String
   name_fr        String?
-  name_ar        String?
-  description    String?  @db.Text
-  description_fr String?  @db.Text
-  description_ar String?  @db.Text
+  description    String?
+  description_fr String?
   image          String?
-  isAvailable    Boolean  @default(true)
-  order          Int      @default(0)
-  category       Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId     String
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  isAvailable    Boolean  @default(true)
+  order          Int      @default(0)
+  description_pt String?
+  name_pt        String?
+  description_ar String?
+  name_ar        String?
+  category       Category @relation(fields: [categoryId], references: [id])
+}
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
 }
 
 model ContactMessage {
@@ -51,24 +61,33 @@ model ContactMessage {
   name      String
   email     String
   phone     String?
-  company   String?
-  subject   String?
-  message   String   @db.Text
-  isRead    Boolean  @default(false)
-  createdAt DateTime @default(now())
-}
-
-model Subscriber {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  isActive  Boolean  @default(true)
+  message   String
   createdAt DateTime @default(now())
 }
 
 model Visit {
   id        String   @id @default(cuid())
-  ip        String?
-  userAgent String?
-  country   String?  @default("Unknown")
   createdAt DateTime @default(now())
+  userAgent String?
+  ipAddress String?
+  path      String?
+  country   String?
+}
+
+model visits_numidex {
+  id        String   @id
+  date      DateTime @default(now())
+  userAgent String?
+  ipAddress String?
+  path      String?
+  country   String?
+}
+
+model madeinbladi_site_visits {
+  id        String   @id
+  date      DateTime @default(now())
+  userAgent String?
+  ipAddress String?
+  path      String?
+  country   String?
 }
